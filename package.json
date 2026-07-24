@@ -1,0 +1,47 @@
+{
+  "name": "sastre",
+  "version": "0.3.0",
+  "description": "A tool for creating clothing patterns using a domain-specific language, with geometric representation and SVG export",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/cli/index.ts",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest --run --coverage",
+    "lint": "eslint src/**/*.ts",
+    "typecheck": "tsc --noEmit",
+    "validate:kanban": "tsx scripts/validate-kanban.ts",
+    "kanban": "tsx src/cli/index.ts kanban"
+  },
+  "keywords": [
+    "dsl",
+    "patterns",
+    "clothing",
+    "svg",
+    "geometry"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^12.0.0",
+    "svgo": "^3.3.0",
+    "yaml": "^2.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0",
+    "fast-check": "^3.17.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.4.0",
+    "@vitest/coverage-v8": "^1.4.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

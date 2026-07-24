@@ -162,6 +162,15 @@
       "status": "backlog",
       "vertical_slice": "VS-10",
       "blocks": []
+    },
+    {
+      "id": "PHASE-KANBAN",
+      "title": "AI Kanban Operations",
+      "description": "Kanban Engine, CLI, Query API, Mutation API, Context Builder, OpenCode Skill for AI agents",
+      "order": 12,
+      "status": "backlog",
+      "vertical_slice": "VS-KANBAN",
+      "blocks": []
     }
   ],
   "tasks": [
@@ -5109,6 +5118,726 @@
       "estimated_complexity": "small",
       "can_parallelize": false,
       "notes": []
+    },
+    {
+      "id": "KANBAN-001",
+      "parent_id": null,
+      "phase": "PHASE-KANBAN",
+      "title": "Kanban Engine Core — Loader, Model, Repository",
+      "description": "Create src/kanban/engine/core.ts: KanbanLoader (loads/parses kanban.json), KanbanModel (in-memory representation with Task, Phase, Milestone, Decision types), KanbanRepository (CRUD operations, query interface). Pure TypeScript, no CLI dependencies.",
+      "status": "backlog",
+      "priority": "critical",
+      "type": "feature",
+      "vertical_slice": "VS-KANBAN",
+      "parallel_group": "kanban-engine",
+      "dependencies": [
+        "FND-004"
+      ],
+      "children": [
+        "KANBAN-001T"
+      ],
+      "acceptance_criteria": [
+        "KanbanLoader loads and parses kanban.json",
+        "KanbanModel provides type-safe access to all entities",
+        "KanbanRepository provides getTask, getPhase, getMilestone, getAllTasks, getAllPhases",
+        "All types exported from src/kanban/engine/index.ts",
+        "Zero dependencies on CLI or file system in core"
+      ],
+      "deliverables": [
+        "src/kanban/engine/core.ts",
+        "src/kanban/engine/index.ts"
+      ],
+      "tests": [
+        "KANBAN-001T"
+      ],
+      "documentation": [],
+      "estimated_complexity": "medium",
+      "can_parallelize": false,
+      "notes": [
+        "Foundation for all other KANBAN tasks",
+        "Must handle 5500+ line kanban.json efficiently"
+      ]
+    },
+    {
+      "id": "KANBAN-001T",
+      "parent_id": "KANBAN-001",
+      "phase": "PHASE-KANBAN",
+      "title": "Tests for Kanban Engine Core",
+      "description": "Unit tests for Loader, Model, Repository.",
+      "status": "backlog",
+      "priority": "high",
+      "type": "test",
+      "vertical_slice": "VS-KANBAN",
+      "parallel_group": "kanban-engine",
+      "dependencies": [
+        "KANBAN-001"
+      ],
+      "children": [],
+      "acceptance_criteria": [
+        "Load kanban.json successfully",
+        "Query tasks by ID, phase, status, parent",
+        "Repository returns correct typed objects",
+        "All tests pass"
+      ],
+      "deliverables": [],
+      "tests": [],
+      "documentation": [],
+      "estimated_complexity": "small",
+      "can_parallelize": false,
+      "notes": []
+    },
+    {
+      "id": "KANBAN-002",
+      "parent_id": null,
+      "phase": "PHASE-KANBAN",
+      "title": "Loader and Persistence — Atomic Write, Validation, Caching",
+      "description": "Create src/kanban/engine/persistence.ts: KanbanPersistence (atomic write with temp file + rename), validateBeforeWrite (runs all validation checks), KanbanCache (in-memory cache with invalidation on write). Implements safe write pattern: load -> parse -> validate -> mutate in memory -> validate -> write atomically -> verify.",
+      "status": "backlog",
+      "priority": "critical",
+      "type": "feature",
+      "vertical_slice": "VS-KANBAN",
+      "parallel_group": "kanban-engine",
+      "dependencies": [
+        "KANBAN-001",
+        "PLAN-001"
+      ],
+      "children": [
+        "KANBAN-002T"
+      ],
+      "acceptance_criteria": [
+        "Atomic write: temp file + rename, no partial writes",
+        "validateBeforeWrite runs all PLAN-001 checks",
+        "Cache invalidates on successful write",
+        "Load uses cache when valid",
+        "Corrupted JSON handled gracefully with clear error"
+      ],
+      "deliverables": [
+        "src/kanban/engine/persistence.ts"
+      ],
+      "tests": [
+        "KANBAN-002T"
+      ],
+      "documentation": [],
+      "estimated_complexity": "medium",
+      "can_parallelize": false,
+      "notes": [
+        "Critical for data integrity",
+        "Uses PLAN-001 validator logic"
+      ]
+    },
+    {
+      "id": "KANBAN-002T",
+      "parent_id": "KANBAN-002",
+      "phase": "PHASE-KANBAN",
+      "title": "Tests for Loader and Persistence",
+      "description": "Tests: atomic write, validation, cache, corruption handling.",
+      "status": "backlog",
+      "priority": "high",
+      "type": "test",
+      "vertical_slice": "VS-KANBAN",
+      "parallel_group": "kanban-engine",
+      "dependencies": [
+        "KANBAN-002"
+      ],
+      "children": [],
+      "acceptance_criteria": [
+        "Write creates valid kanban.json",
+        "Validation runs before write",
+        "Cache hit/miss behavior verified",
+        "Corrupt JSON throws descriptive error",
+        "All tests pass"
+      ],
+      "deliverables": [],
+      "tests": [],
+      "documentation": [],
+      "estimated_complexity": "small",
+      "can_parallelize": false,
+      "notes": []
+    },
+    {
+      "id": "KANBAN-003",
+      "parent_id": null,
+      "phase": "PHASE-KANBAN",
+      "title": "Query API — getTask, getReadyTasks, getBlockedTasks, getTaskContext, getDependencies, getDependents, getChildren, getParent, getTree, getNextTasks, searchTasks",
+      "description": "Create src/kanban/engine/queries.ts: Query API returning minimal data for agents. Each query loads only what's needed. getTask(id) returns single task. getReadyTasks() returns tasks with status!=done, not blocked, all deps done. getBlockedTasks() returns blocked tasks with reason. getTaskContext(id) returns task + parent + direct deps + dependents + tests + acceptance criteria + relevant decisions + recommended action. getDependencies(id) returns direct dependency tasks. getDependents(id) returns tasks depending on id. getChildren(id) returns child tasks. getParent(id) returns parent task. getTree(id) returns full subtree. getNextTasks() returns ready tasks sorted by priority. searchTasks(query) searches title/description.",
+      "status": "backlog",
+      "priority": "critical",
+      "type": "feature",
+      "vertical_slice": "VS-KANBAN",
+      "parallel_group": "kanban-query",
+      "dependencies": [
+        "KANBAN-001"
+      ],
+      "children": [
+        "KANBAN-003T"
+      ],
+      "acceptance_criteria": [
+        "All query functions exist and return typed results",
+        "getTaskContext returns minimal operational context (< 2KB JSON)",
+        "getReadyTasks correctly computes dependency resolution",
+        "getNextTasks sorts by priority: critical > high > medium > low",
+        "searchTasks searches title and description",
+        "No query loads full kanban.json into agent context"
+      ],
+      "deliverables": [
+        "src/kanban/engine/queries.ts"
+      ],
+      "tests": [
+        "KANBAN-003T"
+      ],
+      "documentation": [],
+      "estimated_complexity": "medium",
+      "can_parallelize": false,
+      "notes": [
+        "Core agent interface — must be token-efficient",
+        "Context size target: < 2000 chars for typical task"
+      ]
+    },
+    {
+      "id": "KANBAN-003T",
+      "parent_id": "KANBAN-003",
+      "phase": "PHASE-KANBAN",
+      "title": "Tests for Query API",
+      "description": "Tests for all query functions with various kanban states.",
+      "status": "backlog",
+      "priority": "high",
+      "type": "test",
+      "vertical_slice": "VS-KANBAN",
+      "parallel_group": "kanban-query",
+      "dependencies": [
+        "KANBAN-003"
+      ],
+      "children": [],
+      "acceptance_criteria": [
+        "getTaskContext returns expected structure",
+        "getReadyTasks excludes blocked and done tasks",
+        "Dependency resolution correct for chains",
+        "Context size measured and < 2KB typical",
+        "All tests pass"
+      ],
+      "deliverables": [],
+      "tests": [],
+      "documentation": [],
+      "estimated_complexity": "small",
+      "can_parallelize": false,
+      "notes": []
+    },
+    {
+      "id": "KANBAN-004",
+      "parent_id": null,
+      "phase": "PHASE-KANBAN",
+      "title": "Context Builder — Progressive Context Levels",
+      "description": "Create src/kanban/engine/context.ts: ContextBuilder with progressive levels. Level 1: task only. Level 2: task + parent + direct deps. Level 3: + dependents + tests. Level 4: + relevant decisions (from decisions.md). Level 5: + architecture.md sections. buildContext(taskId, level?) defaults to level 3. Returns JSON optimized for agent consumption. Includes recommended_action: 'start' | 'block' | 'wait' | 'complete' | 'split'.",
+      "status": "backlog",
+      "priority": "critical",
+      "type": "feature",
+      "vertical_slice": "VS-KANBAN",
+      "parallel_group": "kanban-query",
+      "dependencies": [
+        "KANBAN-003"
+      ],
+      "children": [
+        "KANBAN-004T"
+      ],
+      "acceptance_criteria": [
+        "buildContext(taskId, level) returns progressive context",
+        "Level 1: ~200 chars, Level 3: ~1500 chars, Level 5: ~5000 chars",
+        "recommended_action logic: ready->start, blocked->block, in_progress->complete, has_children->split",
+        "Decisions filtered by task tags/phase",
+        "Architecture sections filtered by module references"
+      ],
+      "deliverables": [
+        "src/kanban/engine/context.ts"
+      ],
+      "tests": [
+        "KANBAN-004T"
+      ],
+      "documentation": [],
+      "estimated_complexity": "medium",
+      "can_parallelize": false,
+      "notes": [
+        "Most important command for agent workflow",
+        "Must demonstrate context reduction vs full kanban.json"
+      ]
+    },
+    {
+      "id": "KANBAN-004T",
+      "parent_id": "KANBAN-004",
+      "phase": "PHASE-KANBAN",
+      "title": "Tests for Context Builder",
+      "description": "Tests: each level returns expected data, size limits, recommended_action logic.",
+      "status": "backlog",
+      "priority": "high",
+      "type": "test",
+      "vertical_slice": "VS-KANBAN",
+      "parallel_group": "kanban-query",
+      "dependencies": [
+        "KANBAN-004"
+      ],
+      "children": [],
+      "acceptance_criteria": [
+        "Level progression adds expected data",
+        "Context size measured at each level",
+        "recommended_action correct for each status",
+        "All tests pass"
+      ],
+      "deliverables": [],
+      "tests": [],
+      "documentation": [],
+      "estimated_complexity": "small",
+      "can_parallelize": false,
+      "notes": []
+    },
+    {
+      "id": "KANBAN-005",
+      "parent_id": null,
+      "phase": "PHASE-KANBAN",
+      "title": "Dependency Graph — Cycle Detection, Topological Sort, Block Detection",
+      "description": "Create src/kanban/engine/dependency-graph.ts: DependencyGraph builds adjacency lists from task dependencies. detectCycles() returns cycle paths. topologicalSort() returns valid execution order. getBlockedTasks() returns tasks with incomplete dependencies. getUnblockedBy(taskId) returns tasks that would be unblocked if taskId completes. validateGraph() runs all checks. Used by queries and mutations.",
+      "status": "backlog",
+      "priority": "critical",
+      "type": "feature",
+      "vertical_slice": "VS-KANBAN",
+      "parallel_group": "kanban-engine",
+      "dependencies": [
+        "KANBAN-001"
+      ],
+      "children": [
+        "KANBAN-005T"
+      ],
+      "acceptance_criteria": [
+        "detectCycles finds all cycles in dependency graph",
+        "topologicalSort produces valid order for DAG",
+        "getBlockedTasks identifies tasks with incomplete deps",
+        "getUnblockedBy predicts downstream unblocking",
+        "validateGraph used by mutations before write"
+      ],
+      "deliverables": [
+        "src/kanban/engine/dependency-graph.ts"
+      ],
+      "tests": [
+        "KANBAN-005T"
+      ],
+      "documentation": [],
+      "estimated_complexity": "medium",
+      "can_parallelize": false,
+      "notes": [
+        "Core for ready/next/blocked calculations",
+        "Must handle 160+ tasks efficiently"
+      ]
+    },
+    {
+      "id": "KANBAN-005T",
+      "parent_id": "KANBAN-005",
+      "phase": "PHASE-KANBAN",
+      "title": "Tests for Dependency Graph",
+      "description": "Tests: cycle detection, topological sort, blocked/unblocked prediction.",
+      "status": "backlog",
+      "priority": "high",
+      "type": "test",
+      "vertical_slice": "VS-KANBAN",
+      "parallel_group": "kanban-engine",
+      "dependencies": [
+        "KANBAN-005"
+      ],
+      "children": [],
+      "acceptance_criteria": [
+        "Cycle detected in circular dependency",
+        "Topological order respects all edges",
+        "Blocked tasks correctly identified",
+        "UnblockedBy prediction accurate",
+        "All tests pass"
+      ],
+      "deliverables": [],
+      "tests": [],
+      "documentation": [],
+      "estimated_complexity": "small",
+      "can_parallelize": false,
+      "notes": []
+    },
+    {
+      "id": "KANBAN-006",
+      "parent_id": null,
+      "phase": "PHASE-KANBAN",
+      "title": "Mutation API — createTask, createSubtask, updateTask, changeStatus, addDependency, removeDependency, blockTask, unblockTask, addAcceptanceCriteria, addTest, recordEvidence, completeTask",
+      "description": "Create src/kanban/engine/mutations.ts: All mutations follow load->validate->apply->validate->persist pattern. createTask: generates unique ID (prefix + number), validates parent exists, adds to parent.children. createSubtask: same, sets parent_id. updateTask: partial update with validation. changeStatus: validates transition (todo->ready->in_progress->review->done, blocked transitions). addDependency: validates both exist, no self-dep, no cycle. removeDependency: updates both sides. blockTask: sets status=blocked, blocked_reason. unblockTask: validates unblock condition, sets status=ready/todo. addAcceptanceCriteria: appends to array. addTest: appends test ID. recordEvidence: adds to evidence array. completeTask: validates criteria met, tests exist, deps done, then status=done.",
+      "status": "backlog",
+      "priority": "critical",
+      "type": "feature",
+      "vertical_slice": "VS-KANBAN",
+      "parallel_group": "kanban-mutation",
+      "dependencies": [
+        "KANBAN-002",
+        "KANBAN-005"
+      ],
+      "children": [
+        "KANBAN-006T"
+      ],
+      "acceptance_criteria": [
+        "All mutations follow load-validate-apply-validate-persist",
+        "createTask generates unique IDs (e.g., KANBAN-012)",
+        "changeStatus enforces valid transitions only",
+        "addDependency prevents cycles and self-deps",
+        "completeTask validates acceptance criteria, tests, dependencies",
+        "Parent-child symmetry maintained (parent_id <-> children)",
+        "Mutations return { success: boolean, taskId?, error? }"
+      ],
+      "deliverables": [
+        "src/kanban/engine/mutations.ts"
+      ],
+      "tests": [
+        "KANBAN-006T"
+      ],
+      "documentation": [],
+      "estimated_complexity": "hard",
+      "can_parallelize": false,
+      "notes": [
+        "Must never leave kanban.json invalid",
+        "All mutations validated by PLAN-001 rules"
+      ]
+    },
+    {
+      "id": "KANBAN-006T",
+      "parent_id": "KANBAN-006",
+      "phase": "PHASE-KANBAN",
+      "title": "Tests for Mutation API",
+      "description": "Tests: each mutation type, valid/invalid transitions, cycle prevention, parent-child symmetry, completion validation.",
+      "status": "backlog",
+      "priority": "high",
+      "type": "test",
+      "vertical_slice": "VS-KANBAN",
+      "parallel_group": "kanban-mutation",
+      "dependencies": [
+        "KANBAN-006"
+      ],
+      "children": [],
+      "acceptance_criteria": [
+        "createTask/subtask generates valid IDs",
+        "Status transitions enforced",
+        "Cycle detection in addDependency",
+        "completeTask rejects incomplete criteria",
+        "Parent-child references symmetric",
+        "All tests pass"
+      ],
+      "deliverables": [],
+      "tests": [],
+      "documentation": [],
+      "estimated_complexity": "small",
+      "can_parallelize": false,
+      "notes": []
+    },
+    {
+      "id": "KANBAN-007",
+      "parent_id": null,
+      "phase": "PHASE-KANBAN",
+      "title": "CLI — sastre kanban commands",
+      "description": "Create src/cli/commands/kanban.ts with all commands: ready, next, show <id>, context <id>, deps <id>, dependents <id>, tree <id>, search <query>, start <id>, complete <id>, block <id> --reason, unblock <id>, add, add-child <parent>, add-dependency <task> <dep>, remove-dependency <task> <dep>, update <id>, validate. All query commands support --json flag for agent output. Uses Kanban Engine (queries, mutations, context). Integrates with existing CLI structure.",
+      "status": "backlog",
+      "priority": "critical",
+      "type": "feature",
+      "vertical_slice": "VS-KANBAN",
+      "parallel_group": "kanban-cli",
+      "dependencies": [
+        "KANBAN-003",
+        "KANBAN-004",
+        "KANBAN-006",
+        "CLI-001"
+      ],
+      "children": [
+        "KANBAN-007T"
+      ],
+      "acceptance_criteria": [
+        "All 18 commands implemented",
+        "--json flag produces valid JSON, no logs mixed in",
+        "ready/next show only actionable tasks",
+        "context <id> returns progressive context (default level 3)",
+        "start/complete/block/unblock mutate kanban.json",
+        "add/add-child create tasks with generated IDs",
+        "add-dependency/remove-dependency manage deps",
+        "validate runs PLAN-001 checks",
+        "Help text for each command"
+      ],
+      "deliverables": [
+        "src/cli/commands/kanban.ts"
+      ],
+      "tests": [
+        "KANBAN-007T"
+      ],
+      "documentation": [],
+      "estimated_complexity": "hard",
+      "can_parallelize": false,
+      "notes": [
+        "Primary interface for agents and humans",
+        "JSON output must be machine-parseable"
+      ]
+    },
+    {
+      "id": "KANBAN-007T",
+      "parent_id": "KANBAN-007",
+      "phase": "PHASE-KANBAN",
+      "title": "Tests for CLI",
+      "description": "Integration tests for each CLI command, JSON output validation.",
+      "status": "backlog",
+      "priority": "high",
+      "type": "test",
+      "vertical_slice": "VS-KANBAN",
+      "parallel_group": "kanban-cli",
+      "dependencies": [
+        "KANBAN-007"
+      ],
+      "children": [],
+      "acceptance_criteria": [
+        "Each command tested with valid/invalid inputs",
+        "--json output is valid JSON",
+        "No console.log mixed with JSON output",
+        "Mutations persist to kanban.json",
+        "All tests pass"
+      ],
+      "deliverables": [],
+      "tests": [],
+      "documentation": [],
+      "estimated_complexity": "medium",
+      "can_parallelize": false,
+      "notes": []
+    },
+    {
+      "id": "KANBAN-008",
+      "parent_id": null,
+      "phase": "PHASE-KANBAN",
+      "title": "JSON Agent Interface — Compact Schemas for All Query Commands",
+      "description": "Define and implement strict JSON output schemas in src/kanban/engine/json-schemas.ts. ReadyTaskSchema: {id, title, status, priority, vertical_slice}. ContextSchema: {task, parent?, dependencies[], dependents[], tests[], acceptance_criteria[], relevant_decisions[], recommended_action}. TreeSchema: recursive {task, children[]}. DependencySchema: {id, title, status}. All schemas exclude verbose fields (description, notes, deliverables, documentation, estimated_complexity). Used by CLI --json flag.",
+      "status": "backlog",
+      "priority": "high",
+      "type": "feature",
+      "vertical_slice": "VS-KANBAN",
+      "parallel_group": "kanban-cli",
+      "dependencies": [
+        "KANBAN-003",
+        "KANBAN-004"
+      ],
+      "children": [
+        "KANBAN-008T"
+      ],
+      "acceptance_criteria": [
+        "TypeScript interfaces for all JSON output types",
+        "CLI --json uses schemas (no extra fields)",
+        "Schema validation on output (dev mode)",
+        "ContextSchema < 2KB for typical task",
+        "ReadyTaskSchema minimal for task lists"
+      ],
+      "deliverables": [
+        "src/kanban/engine/json-schemas.ts"
+      ],
+      "tests": [
+        "KANBAN-008T"
+      ],
+      "documentation": [],
+      "estimated_complexity": "medium",
+      "can_parallelize": false,
+      "notes": [
+        "Critical for agent token efficiency",
+        "Schemas must be stable"
+      ]
+    },
+    {
+      "id": "KANBAN-008T",
+      "parent_id": "KANBAN-008",
+      "phase": "PHASE-KANBAN",
+      "title": "Tests for JSON Agent Interface",
+      "description": "Tests: schema compliance, size limits, field exclusion.",
+      "status": "backlog",
+      "priority": "high",
+      "type": "test",
+      "vertical_slice": "VS-KANBAN",
+      "parallel_group": "kanban-cli",
+      "dependencies": [
+        "KANBAN-008"
+      ],
+      "children": [],
+      "acceptance_criteria": [
+        "All JSON outputs match defined schemas",
+        "Verbose fields excluded",
+        "Context size < 2KB typical",
+        "All tests pass"
+      ],
+      "deliverables": [],
+      "tests": [],
+      "documentation": [],
+      "estimated_complexity": "small",
+      "can_parallelize": false,
+      "notes": []
+    },
+    {
+      "id": "KANBAN-009",
+      "parent_id": null,
+      "phase": "PHASE-KANBAN",
+      "title": "Audit History — Mutation Log",
+      "description": "Create src/kanban/engine/history.ts: KanbanHistory records every mutation. Entry: {timestamp, operation, taskId, agentId?, before?, after?, success}. Stored in .kanban-history.json (append-only). queryHistory(taskId?) returns entries. CLI: kanban history <taskId?> --json. Used for debugging and multi-agent coordination.",
+      "status": "backlog",
+      "priority": "medium",
+      "type": "feature",
+      "vertical_slice": "VS-KANBAN",
+      "parallel_group": "kanban-engine",
+      "dependencies": [
+        "KANBAN-006"
+      ],
+      "children": [
+        "KANBAN-009T"
+      ],
+      "acceptance_criteria": [
+        "Every mutation appends to history file",
+        "Entry includes operation, taskId, timestamp, success",
+        "queryHistory filters by taskId",
+        "CLI history command works",
+        "File is append-only, human-readable JSON lines"
+      ],
+      "deliverables": [
+        "src/kanban/engine/history.ts"
+      ],
+      "tests": [
+        "KANBAN-009T"
+      ],
+      "documentation": [],
+      "estimated_complexity": "medium",
+      "can_parallelize": true,
+      "notes": [
+        "Enables multi-agent coordination",
+        "Useful for debugging"
+      ]
+    },
+    {
+      "id": "KANBAN-009T",
+      "parent_id": "KANBAN-009",
+      "phase": "PHASE-KANBAN",
+      "title": "Tests for Audit History",
+      "description": "Tests: history recorded, query works, format correct.",
+      "status": "backlog",
+      "priority": "high",
+      "type": "test",
+      "vertical_slice": "VS-KANBAN",
+      "parallel_group": "kanban-engine",
+      "dependencies": [
+        "KANBAN-009"
+      ],
+      "children": [],
+      "acceptance_criteria": [
+        "Mutation creates history entry",
+        "queryHistory returns correct entries",
+        "JSON lines format valid",
+        "All tests pass"
+      ],
+      "deliverables": [],
+      "tests": [],
+      "documentation": [],
+      "estimated_complexity": "small",
+      "can_parallelize": false,
+      "notes": []
+    },
+    {
+      "id": "KANBAN-010",
+      "parent_id": null,
+      "phase": "PHASE-KANBAN",
+      "title": "OpenCode Skill — Agent Protocol for Kanban Operations",
+      "description": "Create .opencode/skill/kanban.md: Complete skill document teaching agents how to use the Kanban system. Covers: when to consult kanban (before starting work), never read kanban.json directly, discovery commands (ready, next), context command (context <id>), task lifecycle (start, complete, block, unblock), creating work (add, add-child), managing dependencies (add-dependency, remove-dependency), multi-agent protocol (task ownership via agent_id in start, detecting in-progress tasks), error handling (validation errors, conflicts), context progression (levels 1-5). Includes examples for complete agent workflow.",
+      "status": "backlog",
+      "priority": "critical",
+      "type": "feature",
+      "vertical_slice": "VS-KANBAN",
+      "parallel_group": "kanban-skill",
+      "dependencies": [
+        "KANBAN-007"
+      ],
+      "children": [
+        "KANBAN-010T"
+      ],
+      "acceptance_criteria": [
+        "Skill document at .opencode/skill/kanban.md",
+        "Covers all CLI commands with examples",
+        "Explains context progression levels",
+        "Defines multi-agent protocol (agent_id, started_at)",
+        "Documents error handling patterns",
+        "Complete workflow example: ready -> context -> start -> work -> complete -> ready"
+      ],
+      "deliverables": [
+        ".opencode/skill/kanban.md"
+      ],
+      "tests": [
+        "KANBAN-010T"
+      ],
+      "documentation": [],
+      "estimated_complexity": "medium",
+      "can_parallelize": false,
+      "notes": [
+        "This IS the agent interface — must be comprehensive",
+        "Skill should not duplicate engine logic"
+      ]
+    },
+    {
+      "id": "KANBAN-010T",
+      "parent_id": "KANBAN-010",
+      "phase": "PHASE-KANBAN",
+      "title": "Tests for OpenCode Skill",
+      "description": "Verification: skill document exists, covers all commands, workflow example works.",
+      "status": "backlog",
+      "priority": "high",
+      "type": "test",
+      "vertical_slice": "VS-KANBAN",
+      "parallel_group": "kanban-skill",
+      "dependencies": [
+        "KANBAN-010"
+      ],
+      "children": [],
+      "acceptance_criteria": [
+        "Skill document exists and is readable",
+        "All 18 commands documented",
+        "Workflow example executable",
+        "All tests pass"
+      ],
+      "deliverables": [],
+      "tests": [],
+      "documentation": [],
+      "estimated_complexity": "small",
+      "can_parallelize": false,
+      "notes": []
+    },
+    {
+      "id": "KANBAN-011",
+      "parent_id": null,
+      "phase": "PHASE-KANBAN",
+      "title": "Integration Tests — Full Agent Workflow",
+      "description": "Create tests/integration/kanban-workflow.test.ts: End-to-end test simulating agent workflow. 1) sastre kanban ready --json -> pick task. 2) sastre kanban context <id> --json -> get context. 3) sastre kanban start <id> -> mark in_progress. 4) sastre kanban add-child <id> -> create subtask. 5) sastre kanban add-dependency <new> <existing> -> link. 6) sastre kanban complete <id> -> validate and complete. 7) sastre kanban ready --json -> verify new tasks unblocked. All steps use CLI, verify JSON output, verify kanban.json mutations.",
+      "status": "backlog",
+      "priority": "critical",
+      "type": "test",
+      "vertical_slice": "VS-KANBAN",
+      "parallel_group": "kanban-integration",
+      "dependencies": [
+        "KANBAN-007",
+        "KANBAN-008",
+        "KANBAN-009",
+        "KANBAN-010"
+      ],
+      "children": [],
+      "acceptance_criteria": [
+        "Full workflow executes without errors",
+        "Each step produces valid JSON",
+        "kanban.json correctly mutated at each step",
+        "Dependency resolution works (new ready tasks appear)",
+        "Context size measured and < 2KB",
+        "History recorded for each mutation",
+        "Test passes in CI"
+      ],
+      "deliverables": [
+        "tests/integration/kanban-workflow.test.ts"
+      ],
+      "tests": [],
+      "documentation": [],
+      "estimated_complexity": "hard",
+      "can_parallelize": false,
+      "notes": [
+        "Ultimate validation of the entire system",
+        "Demonstrates agent workflow works end-to-end"
+      ]
     }
   ],
   "milestones": [
@@ -5373,6 +6102,35 @@
         "DOC-004T"
       ],
       "status": "backlog"
+    },
+    {
+      "id": "MKANBAN",
+      "title": "AI Kanban Operations",
+      "description": "Kanban Engine, CLI, Query API, Mutation API, Context Builder, OpenCode Skill for AI agents",
+      "tasks": [
+        "KANBAN-001",
+        "KANBAN-001T",
+        "KANBAN-002",
+        "KANBAN-002T",
+        "KANBAN-003",
+        "KANBAN-003T",
+        "KANBAN-004",
+        "KANBAN-004T",
+        "KANBAN-005",
+        "KANBAN-005T",
+        "KANBAN-006",
+        "KANBAN-006T",
+        "KANBAN-007",
+        "KANBAN-007T",
+        "KANBAN-008",
+        "KANBAN-008T",
+        "KANBAN-009",
+        "KANBAN-009T",
+        "KANBAN-010",
+        "KANBAN-010T",
+        "KANBAN-011"
+      ],
+      "status": "backlog"
     }
   ],
   "decisions": [
@@ -5488,15 +6246,15 @@
             "plan001_exists": "NOT_VALIDATED"
         },
     "task_counts": {
-      "total": 166,
-      "implementation": 67,
-      "tests": 68,
+      "total": 187,
+      "implementation": 78,
+      "tests": 78,
       "setup": 9,
       "documentation": 8,
       "test_patterns": 14
     },
-    "milestone_count": 12,
-    "phase_count": 12,
-    "vertical_slice_count": 10
+    "milestone_count": 13,
+    "phase_count": 13,
+    "vertical_slice_count": 11
   }
 }
