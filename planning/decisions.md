@@ -80,21 +80,25 @@
 - No surprises in angle or direction calculations
 **Trade-offs:** One transform step at render. Small cost for major clarity gain.
 
-## D09: Named Entity Model — Immutable Registry with Lazy DAG Evaluation
+## D09: Named Entity Model — Definitions, Evaluation, Registry
 
 **Problem:** How to store and reference geometry entities?
 **Options:** Mutable registry, immutable snapshots, immutable + lazy evaluation, database.
-**Decision:** Immutable entities in an append-only Registry with lazy topological evaluation.
+**Decision:** Definitions are immutable. Evaluation produces computed values. Registry is append-only.
 **Semantics:**
-- Entities are immutable once created (never modified in place)
+- Definitions are immutable once registered (never modified in place)
 - Registry is append-only (no deletion or modification of existing entries)
 - Duplicate names are errors
-- Forward references are NOT allowed (point N can only reference 0..N-1)
-- Shadowing is NOT allowed (re-declaration of existing name is error)
+- Forward references NOT allowed
+- Shadowing NOT allowed (re-declaration of existing name is error)
 - Evaluation is lazy: entity values are computed on demand via topological sort
-- Change propagation: modifying an entity invalidates all downstream dependents; re-evaluation follows topological order
-**Motivo:** Pattern geometry is inherently sequential. Named references essential for DSL readability. Immutable creation prevents subtle mutation bugs. Lazy evaluation avoids computing unused geometry.
-**Trade-offs:** More complex than mutable state. Requires topological sort implementation.
+- **Change propagation:** Create a new definition + re-evaluate. Do NOT modify an existing entity.
+  - Example: If point A changes, create A' (new definition), then re-evaluate all downstream entities B, C, ... that depended on A.
+  - The old definitions remain in the registry as history. New evaluation context produces new computed values.
+  - Alternative model: Definitions → Evaluation Context → Computed Values (functional pipeline).
+- **NOT this:** Modify entity → invalidate downstream → re-evaluate (this violates immutability)
+**Motivo:** Pattern geometry is inherently sequential. Named references essential for DSL readability. Immutable definitions prevent subtle mutation bugs. Lazy evaluation avoids computing unused geometry.
+**Trade-offs:** More complex than mutable state. Requires topological sort implementation. Change = new version + re-evaluation, not in-place mutation.
 
 ## D10: Testing — Unit + Integration + Reference Patterns + Property-Based
 

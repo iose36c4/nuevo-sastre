@@ -44,13 +44,18 @@ SASTRE creates clothing patterns via a DSL and exports them as SVG. The architec
 ## Build Order (Vertical Slices)
 
 ```
-VS-01: Point → Segment → Path → SVG Renderer → RECTANGLE SVG
-VS-02: Bezier → Path(curve) → SVG → CURVED SVG
-VS-03: DSL Lexer → Parser → Interpreter → DSL SVG
-VS-04: INPUT → LET → Expressions → PARAMETRIC SVG
-VS-05: Pattern → Piece → Contour → PIECE SVG
-VS-06: Offset → SeamAllowance → Notch → Grainline → PATTERN SVG
-VS-07: Boxer front → back → waistband → COMPLETE BOXER
+VS-01: Foundations + Kanban Validator
+VS-02: Point → Segment → SVG Renderer → RECTANGLE SVG (MINIMAL: no Vector, no Line)
+VS-03: Bezier → Path → SVG → CURVED SVG (M2A)
+VS-03b: Vector, Line, Circle, Arc, Polygon, Transform, Measure (parallel to VS-03) (M2B)
+VS-03c: Intersections (decomposed: Line-Line, Segment-Segment, Line-Circle, etc.) (M2C)
+VS-04: DSL v0.1 (no expressions, no units, no INPUT/LET) → DSL SVG
+VS-05: DSL v0.2 (INPUT, LET, Pratt, Units, Point methods) → PARAMETRIC SVG
+VS-06: Pattern Piece → PIECE SVG (parallel to DSL, depends only on geometry+SVG)
+VS-07: Offset (decomposed), SeamAllowance, Notch, Grainline → PATTERN SVG
+VS-08: CLI + Validation
+VS-09: Boxer progressive patterns
+VS-10: Integration tests + Documentation
 ```
 
 ## Module Map
@@ -161,12 +166,13 @@ type PathSegment =
 
 ## Entity Model
 
-- Entities are immutable after creation
+- **Definitions are immutable** once registered — never modified in place
 - Registry is append-only
 - Forward references NOT allowed
 - Shadowing NOT allowed
 - Evaluation via topological sort (lazy, on demand)
-- Change propagation: modify entity → invalidate downstream → re-evaluate
+- **Change propagation:** Create new definition → re-evaluate downstream. Do NOT modify existing entities.
+  - Model: Definitions → Evaluation Context → Computed Values (functional pipeline)
 
 ## Testing Architecture
 

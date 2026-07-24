@@ -1,94 +1,74 @@
-# Planning Validation — SASTRE DSL (V2)
+# Planning Validation — SASTRE DSL (V3)
 
 This document describes the validation checks applied to the kanban.json file.
 
 ## Validation Schema
 
-```json
-{
-  "schema_version": "2.0",
-  "checks": [
-    "all_task_ids_unique",
-    "all_dependency_ids_exist",
-    "all_block_ids_exist",
-    "no_dependency_cycles",
-    "all_parent_ids_exist_or_null",
-    "all_child_ids_exist",
-    "no_orphan_tasks",
-    "all_milestone_task_ids_exist",
-    "all_critical_tasks_have_acceptance_criteria",
-    "all_implementation_tasks_have_test_children_or_inline_tests",
-    "all_blocked_tasks_have_blocking_dependencies",
-    "all_tasks_have_phase_reference",
-    "all_tasks_have_priority",
-    "all_tasks_have_type",
-    "all_tasks_have_status",
-    "all_vertical_slice_refs_valid",
-    "no_task_has_more_than_15_acceptance_criteria"
-  ]
-}
-```
-
-## Check Descriptions
+The Kanban Validator (`scripts/validate-kanban.ts`) runs these checks:
 
 | Check | Description |
 |-------|-------------|
-| all_task_ids_unique | No two tasks share the same `id` |
+| unique_ids | No two tasks share the same `id` |
 | all_dependency_ids_exist | Every ID in `dependencies` array exists as a task `id` |
-| all_block_ids_exist | Every ID in `blocks` array exists as a task `id` |
 | no_dependency_cycles | Topological sort succeeds (no circular dependency chains) |
 | all_parent_ids_exist_or_null | Every `parent_id` is null or references an existing task |
 | all_child_ids_exist | Every ID in `children` array exists as a task `id` |
 | no_orphan_tasks | Every task is referenced by at least one milestone or parent |
 | all_milestone_task_ids_exist | Every task ID in milestones exists as a task |
-| all_critical_tasks_have_acceptance_criteria | Tasks with priority=critical have ≥1 acceptance criteria |
-| all_implementation_tasks_have_tests | Tasks with type=feature have test children or tests in their list |
-| all_blocked_tasks_have_blocking_dependencies | Tasks with blocks[] are referenced by blocked tasks |
+| all_critical_tasks_have_acceptance_criteria | Tasks with priority=critical have >=1 acceptance criteria |
+| all_features_have_tests | Tasks with type=feature have non-empty `tests` array |
+| all_blocked_tasks_have_blocking_dependencies | Phase-level blocks reference valid phases |
 | all_tasks_have_phase_reference | Every task references a valid phase |
 | all_tasks_have_priority | Every task has a priority field |
 | all_tasks_have_type | Every task has a type field |
 | all_tasks_have_status | Every task has a status field |
 | all_vertical_slice_refs_valid | Every vertical_slice reference is valid |
 | no_task_has_more_than_15_acceptance_criteria | Max 15 acceptance criteria per task |
+| dsl_v01_no_input_let | DSL-001 keywords do NOT include INPUT or LET |
+| m1_no_vector_line | M1 milestone does NOT contain Vector or Line tasks |
+| offset_decomposed | GEO-014 does NOT exist; OFFSET-001 through OFFSET-006 exist |
+| intersections_decomposed | GEO-009/010/016 do NOT exist; INTER-001 through INTER-008 exist |
+| plan001_exists | PLAN-001 (Kanban Validator) task exists |
 
-## Automated Validation
+## Running Validation
 
-A validation script should be created at `scripts/validate-kanban.ts` that:
-1. Loads `planning/kanban.json`
-2. Runs all checks above
-3. Reports pass/fail for each check
-4. Exits with code 0 if all pass, 1 if any fail
-5. Can be run via `npm run validate:kanban`
+```bash
+npm run validate:kanban
+# or
+npx tsx scripts/validate-kanban.ts
+```
 
-This script should be included in CI/CD if applicable.
+Exits with code 0 if all checks pass, 1 if any fail.
 
-## V2 Audit Summary
+## V3 Changes from V2
 
-### What Changed from V1
+### Critical Fixes Applied
 
-1. **Vertical slices introduced** — tasks organized by verifiable slices, not horizontal layers
-2. **SVG decoupled from Model** — SVG renderer can render geometry directly, no model dependency for basic rendering
-3. **Coordinate system corrected** — Y-up internally, Y-down at SVG render only
-4. **Precision terminology fixed** — no more "f64", clear IEEE-754 binary64 / JavaScript Number
-5. **Tests integrated into tasks** — every implementation task includes test children
-6. **Offset decomposed** — single hard task split into research, straight, curve, path, validation
-7. **Intersections decomposed** — each type is a separate task with tests
-8. **Parallel groups added** — tasks indicate parallelizable groups
-9. **Milestones moved earlier** — first SVG at M1 (was M2 in V1)
-10. **Entity model clarified** — immutable entities, append-only registry, no shadowing, no forward refs
-11. **DSL versions formalized** — v0.1, v0.2, v0.3, v1.0 with gates
-12. **New decisions added** — D13 (vertical slices), D14 (DSL versions), D15 (offset strategy)
-13. **New risks added** — R09 (coordinate confusion), R11 (agent errors), R12 (offset validation)
-14. **Planning validation section added** — formal schema for kanban integrity
+1. **M1 minimal:** GEO-002 (Vector) and GEO-003 (Line) removed from M1. M1 = Point + Segment + SVG only.
+2. **M2 split into M2A/M2B/M2C:**
+   - M2A: Bezier → Path → SVG (curved rendering)
+   - M2B: Extended Geometry (Vector, Line, Circle, Arc, Polygon, Transform, Measure)
+   - M2C: Intersections (decomposed into 8 subtasks with tests)
+3. **DSL v0.1 clean:** INPUT and LET keywords removed from DSL-001. DSL-005 (Pratt) and DSL-008 (Units) moved to PHASE-04 (v0.2). DSL-006 (Interpreter) no longer depends on DSL-008.
+4. **PLAN-001 created:** Real Kanban Validator task with acceptance criteria and tests.
+5. **All features have tests:** Every task with type=feature has non-empty `tests` array and corresponding test child tasks.
+6. **Offset decomposed:** GEO-014 replaced with OFFSET-001 through OFFSET-006.
+7. **Intersections decomposed:** GEO-009/010/016 replaced with INTER-001 through INTER-008.
+8. **D09 fixed:** Immutable definitions model. Change = new definition + re-evaluation (NOT modify entity).
+9. **PAT-001 parallel:** Pattern Piece depends only on geometry+SVG, not DSL. Can run in parallel.
+10. **Dependencies unified:** `blocks` field removed from all tasks. Dependencies is the single source of truth. `blocks` kept only at phase level.
+11. **Validation status:** All checks set to NOT_VALIDATED (requires running actual script).
 
 ### What Was Preserved
 
-1. All original architectural decisions (D01-D12) — corrected and expanded
+1. All architectural decisions D01-D16 (corrected D09)
 2. TypeScript/Vitest/ESLint stack
 3. Custom geometry library approach
 4. Template-based SVG generation
-5. Recursive descent + Pratt parser
+5. Recursive descent + Pratt parser (Pratt in v0.2)
 6. Boxer shorts as target pattern
 7. Progressive pattern development
 8. Error strategy (source spans, panic mode recovery)
-9. Testing strategy (unit + integration + reference patterns)
+9. Testing strategy (unit + integration + reference patterns + property-based)
+10. Coordinate system: Y-up internally, Y-down at SVG render
+11. Precision: IEEE-754 binary64 / JS number (not f64)
