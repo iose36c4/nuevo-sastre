@@ -41,22 +41,28 @@ SASTRE creates clothing patterns via a DSL and exports them as SVG. The architec
                     └──────────────┘
 ```
 
-## Build Order (Vertical Slices)
+## Build Order (Milestones / Vertical Slices)
 
 ```
-VS-01: Foundations + Kanban Validator
-VS-02: Point → Segment → SVG Renderer → RECTANGLE SVG (MINIMAL: no Vector, no Line)
-VS-03: Bezier → Path → SVG → CURVED SVG (M2A)
-VS-03b: Vector, Line, Circle, Arc, Polygon, Transform, Measure (parallel to VS-03) (M2B)
-VS-03c: Intersections (decomposed: Line-Line, Segment-Segment, Line-Circle, etc.) (M2C)
-VS-04: DSL v0.1 (no expressions, no units, no INPUT/LET) → DSL SVG
-VS-05: DSL v0.2 (INPUT, LET, Pratt, Units, Point methods) → PARAMETRIC SVG
-VS-06: Pattern Piece → PIECE SVG (parallel to DSL, depends only on geometry+SVG)
-VS-07: Offset (decomposed), SeamAllowance, Notch, Grainline → PATTERN SVG
-VS-08: CLI + Validation
-VS-09: Boxer progressive patterns
-VS-10: Integration tests + Documentation
+M0 (VS-01): Foundations + Kanban Validator
+M1 (VS-02): Point → Segment → SVG Renderer → RECTANGLE SVG (MINIMAL: no Vector, no Line)
+M2A (VS-03): Bezier → Path → SVG → CURVED SVG
+M2B (VS-03b): Vector, Line, Circle, Arc, Polygon, Transform, Measure (parallel to M2A)
+M2C (VS-03c): Intersections (decomposed: Line-Line, Segment-Segment, Line-Circle, etc.)
+M3 (VS-04): DSL v0.1 (no expressions, no units, no INPUT/LET) → DSL SVG
+M4 (VS-05): DSL v0.2 (INPUT, LET, Pratt, Units, Point methods) → PARAMETRIC SVG
+M5 (VS-06): Pattern Piece → PIECE SVG (parallel to DSL, depends only on geometry+SVG)
+M6 (VS-07): Offset (decomposed), SeamAllowance, Notch, Grainline → PATTERN SVG
+M7 (VS-08): CLI + Validation
+M8 (VS-09): Boxer progressive patterns
+M9 (VS-10): Integration tests + Documentation
 ```
+
+**Nomenclature:**
+- **PHASE** = work container (PHASE-00 through PHASE-09 in kanban.json)
+- **VS** = Vertical Slice (functional slice producing verifiable output)
+- **M** = Milestone (verifiable delivery point matching kanban.json milestones M0–M9)
+- **TASK** = executable task (FND-XXX, GEO-XXX, DSL-XXX, etc.)
 
 ## Module Map
 

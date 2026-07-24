@@ -30,6 +30,15 @@ The Kanban Validator (`scripts/validate-kanban.ts`) runs these checks:
 | intersections_decomposed | GEO-009/010/016 do NOT exist; INTER-001 through INTER-008 exist |
 | plan001_exists | PLAN-001 (Kanban Validator) task exists |
 
+## Nomenclature (Canonical)
+
+| Symbol | Meaning |
+|--------|---------|
+| **PHASE** | Work container (PHASE-00 … PHASE-09) |
+| **VS** | Vertical Slice — functional chain producing verifiable output (VS-01 … VS-10) |
+| **M** | Milestone — verifiable delivery point (M0 … M9) |
+| **TASK** | Executable unit (FND-XXX, GEO-XXX, DSL-XXX, etc.) |
+
 ## Running Validation
 
 ```bash
@@ -39,6 +48,12 @@ npx tsx scripts/validate-kanban.ts
 ```
 
 Exits with code 0 if all checks pass, 1 if any fail.
+
+## Current Validation Status
+
+**NOT_VALIDATED** — The validator script (`scripts/validate-kanban.ts`) does not exist yet. It is planned as task **PLAN-001** in **PHASE-00 (M0)**. The `npm run validate:kanban` command is declared in **FND-005** acceptance criteria but requires `package.json` from **FND-001** to be runnable.
+
+> **Rule:** Status is `NOT_VALIDATED` until the validator is implemented and actually executed. Do not mark `PASS` based on plan coherence alone.
 
 ## V3 Changes from V2
 

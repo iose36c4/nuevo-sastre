@@ -122,6 +122,23 @@ DOC-001 + DOC-002 + DOC-003 → DOC-004
 7. **PLAN-001 exists:** Kanban Validator is a real task
 8. **Dependencies only:** No redundant `blocks` field on tasks
 
+## Milestone ↔ Phase ↔ Vertical Slice Mapping
+
+| Milestone | Phase(s) | Vertical Slice | Description |
+|-----------|----------|----------------|-------------|
+| M0 | PHASE-00 | VS-01 | Foundations + Kanban Validator |
+| M1 | PHASE-01 | VS-02 | First SVG — Rectangle |
+| M2A | PHASE-02A | VS-03 | Curved SVG |
+| M2B | PHASE-02B | VS-03b | Extended Geometry |
+| M2C | PHASE-02C | VS-03c | Intersections |
+| M3 | PHASE-03 | VS-04 | DSL v0.1 Minimal |
+| M4 | PHASE-04 | VS-05 | DSL v0.2 Parametric |
+| M5 | PHASE-05 | VS-06 | Pattern Piece |
+| M6 | PHASE-06 | VS-07 | Pattern Operations |
+| M7 | PHASE-07 | VS-08 | CLI + Validation |
+| M8 | PHASE-08 | VS-09 | Boxer Patterns |
+| M9 | PHASE-09 | VS-10 | Integration Tests + Docs |
+
 ## Module-Level Dependencies
 ```
 geometry (no internal deps)
@@ -160,19 +177,23 @@ cli (depends on everything)
 ## Critical Path (V3)
 
 ```
-FND-001 → GEO-001 → GEO-004 → GEO-SVG-001 [M1: First SVG]
+FND-001 → GEO-001 → GEO-004 → GEO-SVG-001 [M0: Foundations + Validator]
+    ↓
+    GEO-004 → GEO-SVG-001 [M1: First SVG]
     ↓
 GEO-008C → GEO-011 → GEO-SVG-002 [M2A: Curved SVG]
     ↓
-DSL-001 → DSL-004 → DSL-006 → DSL-SVG-001 [M3: First DSL]
+DSL-001 → DSL-004 → DSL-006 → DSL-SVG-001 [M3: DSL v0.1 Minimal]
     ↓
-DSL-009 → DSL-010 → DSL-SVG-002 [M4: Parametric DSL]
+DSL-009 → DSL-010 → DSL-SVG-002 [M4: DSL v0.2 Parametric]
     ↓ (parallel)
 PAT-001 → PAT-SVG-001 [M5: Pattern Piece]
     ↓
 OFFSET-001..006 → PAT-002 → PAT-SVG-002 [M6: Pattern Operations]
     ↓
-CLI-001 → CLI-002 [M7: CLI]
+CLI-001 → CLI-002 [M7: CLI + Validation]
     ↓
-PAT-010 → ... → PAT-016 [M8: Boxer]
+PAT-010 → ... → PAT-016 [M8: Boxer Pattern]
+    ↓
+TST-001, TST-002, TST-003, TST-004, DOC-001..004 [M9: Integration Tests + Docs]
 ```
