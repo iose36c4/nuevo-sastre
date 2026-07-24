@@ -1,151 +1,113 @@
-# Dependency Graph — SASTRE DSL
+# Dependency Graph — SASTRE DSL (V2)
 
-## Module-Level Dependencies
+## Vertical Slice Dependency Chains
 
+### VS-01: First SVG (Rectangle)
 ```
-                    ┌─────────────┐
-                    │   CLI       │
-                    └──────┬──────┘
-                           │
-              ┌────────────┼────────────┐
-              │            │            │
-        ┌─────▼─────┐ ┌───▼────┐ ┌────▼─────┐
-        │ Validation │ │Pattern │ │   DSL    │
-        └─────┬──────┘ └───┬────┘ └────┬─────┘
-              │            │            │
-              │      ┌─────┼────────────┘
-              │      │     │
-              │  ┌───▼──┐ ┌▼─────────┐
-              │  │  SVG │ │  Model   │
-              │  └──┬───┘ └──┬───────┘
-              │     │        │
-              └─────┼────────┘
-                    │
-              ┌─────▼──────┐
-              │  Geometry  │
-              └────────────┘
+FND-001 → FND-004 → GEO-001 → GEO-004 → GEO-SVG-001 → GEO-SVG-001T
+                          ↓
+                      GEO-002 → GEO-003
 ```
+**Produces:** A valid SVG rectangle. First visual verification.
 
-## Task-Level Dependencies (Key Chains)
-
-### Chain 1: Core Geometry
+### VS-02: Curved SVG
 ```
-Point → Vector → Line → Segment → Intersection(Line,Line) → Circle → Arc
+GEO-008C → GEO-SVG-002 → GEO-SVG-002T
+```
+**Produces:** An SVG shape with Bezier curves. Second visual verification.
+
+### VS-03: First DSL
+```
+DSL-001 → DSL-002 → DSL-003 → DSL-004 → DSL-006 → DSL-SVG-001 → DSL-SVG-001T
+```
+**Produces:** A DSL file that generates SVG. End-to-end verification.
+
+### VS-04: Parametric DSL
+```
+DSL-008 → DSL-009 → DSL-010 → DSL-SVG-002 → DSL-SVG-002T
+```
+**Produces:** Changing INPUT changes the SVG. Parametric verification.
+
+### VS-05: Pattern Piece
+```
+PAT-001 → PAT-SVG-001 → PAT-SVG-001T
+```
+**Produces:** A recognizable pattern piece in SVG.
+
+### VS-06: Pattern Operations
+```
+GEO-014A → GEO-014B → GEO-014C → PAT-002 → PAT-003 → PAT-SVG-002 → PAT-SVG-002T
+```
+**Produces:** Pattern piece with seam allowance, notches, grainline in SVG.
+
+### VS-07: Boxer Progressive
+```
+PAT-010 → PAT-011 → PAT-012 → PAT-013 → PAT-014 → PAT-015 → PAT-016
+```
+**Produces:** Complete boxer pattern.
+
+## Module-Level Dependencies (preserved from V1)
+```
+geometry (no internal deps)
     ↓
-Bezier → Path → Polygon
+model (depends on geometry)
     ↓
-Transform → Offset
+dsl (depends on model, geometry)
+svg (depends on geometry — NOT model for basic rendering)
     ↓
-Measure (distance, angle, area, arc length)
-```
-
-### Chain 2: Geometry Model
-```
-Point → Entity → PointEntity → Registry
+pattern (depends on geometry, svg)
     ↓
-CurveEntity → PathEntity → DAG
-```
-
-### Chain 3: SVG Renderer
-```
-Geometry Model → Layout → Elements → Renderer → Export
-```
-
-### Chain 4: DSL
-```
-Token → Lexer → Parser (recursive descent)
+validation (depends on model, geometry)
     ↓
-AST Types → Pratt (expression parser) → Parser
-    ↓
-Interpreter → (writes to Geometry Model)
-```
-
-### Chain 5: Validation
-```
-ReferenceValidator ← Geometry Model
-GeometryValidator ← Geometry
-PathValidator ← Path, Polygon
+cli (depends on everything)
 ```
 
-### Chain 6: CLI
-```
-Commands → CLI entry → (build, inspect, validate, export)
-```
+## Key Change from V1: SVG Does NOT Depend on Model
 
-## Parallelization Opportunities
+In V1, SVG-001 depended on MDL-005 (Registry), forcing the entire model layer before any SVG output.
 
-### After Core Geometry (Point, Vector, Line, Segment)
-These can be developed in parallel:
-- Bezier curves
-- Circle and Arc
-- Transformations
-- SVG renderer (using Point, Line, Segment)
+In V2, the SVG renderer has TWO entry points:
+1. **Direct geometry rendering** (VS-01, VS-02): renders Point[], Segment[], Path directly
+2. **Model-based rendering** (VS-03+): renders from named entity Registry
 
-### After Geometry Model
-These can be developed in parallel:
-- SVG renderer (full)
-- DSL lexer and parser
-- Validation framework
+This allows SVG output as soon as geometry primitives exist.
 
-### After DSL Parser
-These can be developed in parallel:
-- DSL interpreter
-- CLI commands
-- Reference pattern tests
+## Parallelization After Key Milestones
 
-## Blocking Dependencies
+### After M1 (First SVG):
+- Agent A: Bezier curves (VS-02)
+- Agent B: Additional geometry (Circle, Arc, Polygon, Transform)
+- Agent C: Model layer (MDL-001 through MDL-005)
 
-| Blocked Task | Blocked By | Notes |
-|---|---|---|
-| SVG Renderer | All geometry types | Needs Point, Line, Segment, Bezier at minimum |
-| DSL Parser | Token types, AST types | Needs lexer first |
-| DSL Interpreter | Parser, Geometry Model | Needs both AST and entity creation |
-| CLI | Interpreter, Renderer | Needs full pipeline |
-| Validation | Geometry Model | Needs entity registry and DAG |
-| Pattern Concepts | Geometry Model, SVG | Needs both model and rendering |
-| Seam Allowance | Offset algorithm, Path | Needs curve offset capability |
-| Reference Patterns | Full pipeline | Needs DSL → Geometry → SVG working |
+### After M2 (Curved SVG):
+- Agent A: DSL v0.1 (VS-03)
+- Agent B: Validation framework
+- Agent C: Additional geometry (intersections, measure)
 
-## Critical Path
+### After M3 (First DSL):
+- Agent A: DSL v0.2 (VS-04)
+- Agent B: CLI base
+- Agent C: Pattern model (VS-05)
 
-The critical path (longest dependency chain) is:
+### After M4 (Parametric DSL):
+- Agent A: DSL v0.3 (methods, intersections)
+- Agent B: Pattern operations (VS-06)
+- Agent C: Boxer patterns (VS-07)
+
+## Critical Path (V2)
 
 ```
-Point → Vector → Line → Segment → Bezier → Path
-  → Geometry Model → DSL Parser → Interpreter
-  → SVG Renderer → CLI → Reference Patterns
-```
-
-Any delay on this chain delays the entire project. All other work (transforms, circle, arc, validation, pattern concepts) can be parallelized around this core.
-
-## Phase Dependency Summary
-
-```
-Phase 0 (Foundation) ──→ All subsequent phases
+FND-001 → GEO-001 → GEO-004 → GEO-SVG-001 [M1: First SVG]
     ↓
-Phase 1 (Geometry) ──→ Phase 2, Phase 3
+GEO-008C → GEO-SVG-002 [M2: Curved SVG]
     ↓
-Phase 2 (Model) ──→ Phase 4, Phase 6, Phase 8
+DSL-001 → DSL-004 → DSL-006 → DSL-SVG-001 [M3: First DSL]
     ↓
-Phase 3 (SVG) ──→ Phase 6, Phase 11
+DSL-008 → DSL-009 → DSL-010 → DSL-SVG-002 [M4: Parametric DSL]
     ↓
-Phase 4 (DSL) ──→ Phase 5, Phase 9
+PAT-001 → PAT-SVG-001 [M5: First Pattern]
     ↓
-Phase 5 (Parametric DSL) ──→ Phase 6
+GEO-014 → PAT-002 → PAT-SVG-002 [M6: Pattern Operations]
     ↓
-Phase 6 (Pattern Model) ──→ Phase 7, Phase 11
-    ↓
-Phase 7 (Pattern Operations) ──→ Phase 11
-    ↓
-Phase 8 (Validation) ──→ Phase 9, Phase 11
-    ↓
-Phase 9 (CLI) ──→ Phase 10
-    ↓
-Phase 10 (Inspection) ──→ Phase 11
-    ↓
-Phase 11 (Reference Patterns) ──→ Phase 12
-    ↓
-Phase 12 (Testing) ──→ Phase 13
-    ↓
-Phase 13 (Documentation) ──→ Done
+PAT-010 → ... → PAT-016 [M7: Complete Boxer]
 ```

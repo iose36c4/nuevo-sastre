@@ -1,71 +1,73 @@
-# Risks — SASTRE DSL
+# Risks — SASTRE DSL (V2)
 
 ## R01: Floating-Point Precision Issues
-**Severity:** High
-**Probability:** High
-**Description:** Geometry operations (intersections, offsets) produce slightly different results due to floating-point arithmetic. Can cause: gaps in paths, incorrect intersections, self-intersecting offsets.
-**Mitigation:** Epsilon comparisons (0.001mm tolerance). All geometry operations accept optional tolerance parameter. Test with known edge cases (parallel lines, tangent curves, coincident points).
+**Severity:** High | **Probability:** High
+**Description:** Geometry operations produce different results due to floating-point arithmetic. Gaps in paths, incorrect intersections, self-intersecting offsets.
+**Mitigation:** Epsilon comparisons (0.001mm default). Configurable tolerance per operation. Test with known edge cases. Separate tolerances for intersection (0.01mm) and comparison (0.001mm).
 **Status:** Identified
 
 ## R02: Bezier Offset Non-Exactness
-**Severity:** High
-**Probability:** High
-**Description:** The mathematical offset of a Bezier curve is NOT a Bezier curve. Approximation introduces error. For tight concave curves (crotch curves, armholes), offset can produce self-intersections.
-**Mitigation:** Use high sample count (50 points) for curve offset. Validate offset results for self-intersection. Implement fallback: subdivide original curve before offsetting. Document as known limitation for extreme curvatures.
+**Severity:** High | **Probability:** High
+**Description:** Mathematical offset of a Bezier curve is NOT a Bezier curve. Approximation introduces error. Tight concave curves can produce self-intersections.
+**Mitigation:** Sample-then-fit approach with adaptive sampling. Validate offset results for self-intersection. Document as known limitation for extreme curvatures. Start with straight-only offset, add curve offset later.
 **Status:** Identified
 
 ## R03: DSL Complexity Creep
-**Severity:** Medium
-**Probability:** Medium
-**Description:** The DSL may grow beyond its minimal scope, making parser/interpreter harder to maintain. Features like constraint solving, functions, and modules can add significant complexity.
-**Mitigation:** Strict phase gates: v0.1 DSL only supports POINT, LINE, CURVE, PATH, CUT, EXPORT. No variables initially (constants only). Add features incrementally. Each feature must have clear use case before implementation.
+**Severity:** Medium | **Probability:** Medium
+**Description:** DSL grows beyond minimal scope, making parser/interpreter unmaintainable.
+**Mitigation:** Strict version gates: v0.1 only POINT/LINE/CURVE/PATH/EXPORT. No variables initially. Each feature must have clear use case. Document DSL scope in decisions.
 **Status:** Identified
 
 ## R04: Pattern Geometry Correctness
-**Severity:** High
-**Probability:** Medium
-**Description:** Clothing patterns have strict geometric requirements (matching seam lengths, closed contours, correct dart angles). Incorrect geometry produces unwearable patterns.
-**Mitigation:** Progressive validation: start with simple geometric checks, add pattern-specific validators. Reference pattern tests (boxer pieces must have specific properties). Human review of SVG output in Inkscape/Illustrator.
+**Severity:** High | **Probability:** Medium
+**Description:** Clothing patterns have strict geometric requirements. Incorrect geometry produces unwearable patterns.
+**Mitigation:** Progressive validation. Reference pattern tests. Human review of SVG output. Start with simple patterns, validate each before advancing.
 **Status:** Identified
 
 ## R05: SVG Compatibility Issues
-**Severity:** Medium
-**Probability:** Low
-**Description:** SVG output may render differently across viewers (browsers, Inkscape, Illustrator). viewBox interpretation, font rendering, and CSS support vary.
-**Mitigation:** Use only SVG 1.1 basic features. Test output in: Chrome, Firefox, Inkscape, Illustrator. Avoid CSS features not universally supported. Use inline styles as fallback.
+**Severity:** Medium | **Probability:** Low
+**Description:** SVG renders differently across viewers.
+**Mitigation:** Use SVG 1.1 basic features only. Test in Chrome, Firefox, Inkscape. Avoid unsupported CSS. Inline styles as fallback.
 **Status:** Identified
 
 ## R06: Scope Creep to AI Integration
-**Severity:** High
-**Probability:** High
-**Description:** Temptation to add natural language processing or AI features before core geometry and DSL are solid. This was the failure mode of the previous SASTRE project.
-**Mitigation:** Strict build order enforcement. No AI/NLP code until: geometry + SVG + DSL + CLI + boxer pattern all complete and tested. Document this constraint in project README and AGENTS.md.
+**Severity:** High | **Probability:** High
+**Description:** Temptation to add NLP/AI before core is solid. This was the failure mode of the previous SASTRE project.
+**Mitigation:** Strict build order. No AI/NLP code until geometry + SVG + DSL + CLI + boxer pattern all complete. Document in README.
 **Status:** Identified
 
 ## R07: Seam Allowance Complexity
-**Severity:** Medium
-**Probability:** High
-**Description:** Seam allowances seem simple (parallel offset) but involve complex corner treatments, variable widths, and self-intersection handling. Can consume disproportionate development time.
-**Mitigation:** Start with constant-width seam allowance on straight edges only. Add variable width later. Use simple corner joins initially. Document which edge cases are deferred.
+**Severity:** Medium | **Probability:** High
+**Description:** Offset seems simple but involves complex corner treatments, variable widths, self-intersection handling.
+**Mitigation:** Start with constant-width, straight edges only. Add variable width later. Simple corners initially. Document deferred edge cases.
 **Status:** Identified
 
 ## R08: Test Pattern Accuracy
-**Severity:** Medium
-**Probability:** Medium
-**Description:** Boxer shorts pattern dimensions may not match real-world measurements, leading to incorrect pattern validation.
-**Mitigation:** Reference measurements from established pattern drafting resources. Cross-check with Seamly2D examples. Allow manual verification step (export → print at scale → measure).
+**Severity:** Medium | **Probability:** Medium
+**Description:** Boxer pattern dimensions may not match real-world measurements.
+**Mitigation:** Reference measurements from pattern drafting resources. Cross-check with Seamly2D. Allow manual verification.
 **Status:** Identified
 
-## R09: TypeScript Build Complexity
-**Severity:** Low
-**Probability:** Low
-**Description:** TypeScript configuration, module resolution, and build pipeline may add unnecessary complexity for what is essentially a computational tool.
-**Mitigation:** Use minimal tsconfig (strict mode, ESM, no decorators). Single build step (tsc). No bundler needed for initial development. Add bundler only when CLI distribution is needed.
-**Status:** Identified
+## R09: Coordinate System Confusion
+**Severity:** Medium | **Probability:** Medium (NEW)
+**Description:** Using Y-down internally (SVG convention) causes confusion in pattern construction. "UP" means negative Y. Angles are inverted.
+**Mitigation:** Use Y-up internally, flip to Y-down only at SVG render. All geometry and DSL use standard Cartesian conventions. Single well-defined transform in renderer.
+**Status:** Identified, mitigated by D08
 
 ## R10: Module Boundary Violations
-**Severity:** Medium
-**Probability:** Medium
-**Description:** Circular dependencies between modules (e.g., geometry depending on model, model depending on geometry) can cause import issues and architectural degradation.
-**Mitigation:** Strict dependency direction enforced: geometry → model → dsl/svg → pattern → cli. No upward imports. ESLint rule for circular dependencies. Architecture tests (import graph validation).
+**Severity:** Medium | **Probability:** Medium
+**Description:** Circular dependencies between modules.
+**Mitigation:** Strict dependency direction: geometry → model → dsl/svg → pattern → cli. No upward imports. ESLint rule.
+**Status:** Identified
+
+## R11: Agent Implementation Errors (NEW)
+**Severity:** High | **Probability:** Medium
+**Description:** Future agents implementing tasks may introduce subtle bugs, miss acceptance criteria, or deviate from architecture.
+**Mitigation:** Every task has concrete, verifiable acceptance criteria. Tests included in every task. Clear file paths and deliverables. Architecture constraints documented.
+**Status:** Identified
+
+## R12: Offset Strategy Validation (NEW)
+**Severity:** Medium | **Probability:** Medium
+**Description:** The sample-then-fit offset strategy may not produce adequate results for complex pattern curves (armholes, crotch curves).
+**Mitigation:** Mark offset tasks as "needs validation". Implement with configurable sample count. Test on reference patterns. Document accuracy limitations. Fallback to subdivision approach if needed.
 **Status:** Identified
