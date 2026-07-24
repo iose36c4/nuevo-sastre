@@ -44,7 +44,8 @@ export function createMutations(
   return {
     createTask: (input: CreateTaskInput): MutationResult => {
       const existingIds = new Set(model.tasks.keys());
-      const prefix = input.parent_id ? input.parent_id.split('-')[0] : 'TASK';
+      const parentId = input.parent_id ?? 'TASK';
+      const prefix = parentId.split('-')[0] || 'TASK';
       const id = generateTaskId(prefix, existingIds);
 
       const parent = input.parent_id ? repo.getTask(input.parent_id) : null;
@@ -98,7 +99,10 @@ export function createMutations(
 
         const cycles = detectCycles(testGraph);
         if (cycles.length > 0) {
-          return { success: false, error: `Adding dependencies would create cycle: ${cycles[0].join(' -> ')}` };
+          const cycle = cycles[0];
+          if (cycle) {
+            return { success: false, error: `Adding dependencies would create cycle: ${cycle.join(' -> ')}` };
+          }
         }
       }
 
@@ -232,7 +236,10 @@ export function createMutations(
 
       const cycles = detectCycles(testGraph);
       if (cycles.length > 0) {
-        return { success: false, error: `Adding dependency would create cycle: ${cycles[0].join(' -> ')}` };
+        const cycle = cycles[0];
+        if (cycle) {
+          return { success: false, error: `Adding dependency would create cycle: ${cycle.join(' -> ')}` };
+        }
       }
 
       task.dependencies.push(dependencyId);

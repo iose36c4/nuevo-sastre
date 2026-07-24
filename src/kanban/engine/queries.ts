@@ -1,4 +1,4 @@
-import type { Task, TaskStatus, TaskPriority, Phase, Decision, TaskContext } from './types.js';
+import type { Task, TaskStatus, TaskPriority, Phase, Decision, TaskContext, TaskDependency, TaskDependent } from './types.js';
 import type { KanbanRepository } from './repository.js';
 
 export interface ReadyTask {
@@ -14,18 +14,6 @@ export interface BlockedTask {
   title: string;
   status: TaskStatus;
   blocked_reason: string;
-}
-
-export interface TaskDependency {
-  id: string;
-  title: string;
-  status: TaskStatus;
-}
-
-export interface TaskDependent {
-  id: string;
-  title: string;
-  status: TaskStatus;
 }
 
 export interface TaskTree {
@@ -112,8 +100,9 @@ export function createQueries(repo: KanbanRepository): KanbanQueries {
     getTaskContext: (taskId: string): TaskContext | undefined => {
       const task = repo.getTask(taskId);
       if (!task) return undefined;
+      const t = task;
 
-      const parent = task.parent_id ? repo.getTask(task.parent_id) || null : null;
+      const parent = t.parent_id ? repo.getTask(t.parent_id) || null : null;
       const dependencies = repo.getDependencies(taskId).map((depId: string) => {
         const dep = repo.getTask(depId);
         return dep ? { id: dep.id, title: dep.title, status: dep.status as TaskStatus } : null;
@@ -124,26 +113,26 @@ export function createQueries(repo: KanbanRepository): KanbanQueries {
         return dep ? { id: dep.id, title: dep.title, status: dep.status as TaskStatus } : null;
       }).filter(Boolean) as TaskDependent[];
 
-      const tests = task.tests.map((testId: string) => repo.getTask(testId)?.title || testId).filter(Boolean);
+      const tests = t.tests.map((testId: string) => repo.getTask(testId)?.title || testId).filter(Boolean);
 
       const relevantDecisions = repo.getAllDecisions()
-        .filter((d: Decision) => task.phase.includes(d.id.replace('D', '')) || d.title.toLowerCase().includes(task.title.toLowerCase().split(' ')[0]))
+        .filter((d: Decision) => t.phase.includes(d.id.replace('D', '')) || d.title.toLowerCase().includes(t.title.toLowerCase().split(' ')[0] || ''))
         .slice(0, 5)
         .map((d: Decision) => ({ id: d.id, title: d.title }));
 
       let recommendedAction: TaskContext['recommended_action'] = 'wait';
-      if (task.status === 'ready') recommendedAction = 'start';
-      else if (task.status === 'blocked') recommendedAction = 'block';
-      else if (task.status === 'in_progress' || task.status === 'review') recommendedAction = 'complete';
-      else if (task.children.length > 0) recommendedAction = 'split';
+      if (t.status === 'ready') recommendedAction = 'start';
+      else if (t.status === 'blocked') recommendedAction = 'block';
+      else if (t.status === 'in_progress' || t.status === 'review') recommendedAction = 'complete';
+      else if (t.children.length > 0) recommendedAction = 'split';
 
       return {
-        task,
+        task: t,
         parent,
         dependencies,
         dependents,
         tests,
-        acceptance_criteria: task.acceptance_criteria,
+        acceptance_criteria: t.acceptance_criteria,
         relevant_decisions: relevantDecisions,
         recommended_action: recommendedAction
       };

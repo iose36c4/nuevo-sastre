@@ -1,12 +1,8 @@
 import { writeFileSync, existsSync, mkdirSync, readFileSync } from 'fs';
-import { resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
-import type { KanbanModel, Task, TaskStatus, TaskPriority, TaskType } from './types.js';
+import { dirname } from 'path';
+import type { KanbanModel, TaskStatus, TaskPriority, TaskType } from './types.js';
 import { validateGraph } from './dependency-graph.js';
 import { VALID_STATUSES, VALID_PRIORITIES, VALID_TYPES } from './types.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = resolve(__filename, '..');
 
 export interface PersistenceOptions {
   kanbanPath: string;

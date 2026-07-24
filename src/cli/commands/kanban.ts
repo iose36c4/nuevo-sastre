@@ -1,22 +1,19 @@
 import { Command } from 'commander';
 import { resolve } from 'path';
-import { KanbanLoader } from '../kanban/engine/loader.js';
-import { KanbanRepository } from '../kanban/engine/repository.js';
-import { createQueries } from '../kanban/engine/queries.js';
-import { createMutations } from '../kanban/engine/mutations.js';
-import { KanbanPersistence } from '../kanban/engine/persistence.js';
-import { KanbanCacheManager } from '../kanban/engine/persistence.js';
-import { ContextBuilder } from '../kanban/engine/context.js';
-import { KanbanHistory } from '../kanban/engine/history.js';
+import { KanbanLoader } from '../../kanban/engine/loader.js';
+import { KanbanRepository } from '../../kanban/engine/repository.js';
+import { createQueries } from '../../kanban/engine/queries.js';
+import { createMutations } from '../../kanban/engine/mutations.js';
+import { KanbanPersistence } from '../../kanban/engine/persistence.js';
+import { KanbanCacheManager } from '../../kanban/engine/persistence.js';
+import { ContextBuilder } from '../../kanban/engine/context.js';
+import { KanbanHistory } from '../../kanban/engine/history.js';
 import { 
   toReadyTaskSchema, 
-  toBlockedTaskSchema, 
   toTaskSchema, 
   toTaskContextSchema, 
-  toPhaseSchema, 
-  toMilestoneSchema,
   toSearchResultSchema 
-} from '../kanban/engine/json-schemas.js';
+} from '../../kanban/engine/json-schemas.js';
 
 function createKanbanCommand(): Command {
   const kanban = new Command('kanban')
@@ -45,7 +42,7 @@ function createKanbanCommand(): Command {
   return kanban;
 }
 
-function getEngine(jsonOutput = false) {
+function getEngine() {
   const loader = KanbanLoader.getInstance();
   const model = loader.getModel();
   const repo = new KanbanRepository(model);
@@ -84,12 +81,12 @@ function createReadyCommand(): Command {
     .description('Show tasks ready to work on (all dependencies complete)')
     .option('--json', 'Output as JSON')
     .action((options) => {
-      const { queries } = getEngine(options.json);
+      const { queries } = getEngine();
       const ready = queries.getReadyTasks();
       if (options.json) {
         outputJson(ready.map(toReadyTaskSchema));
       } else {
-        outputHuman(ready, (tasks) => tasks.map(t => `  ${t.id} [${t.priority}] ${t.title} (${t.vertical_slice})`).join('\n'));
+        outputHuman(ready, (tasks: typeof ready) => tasks.map((t) => `  ${t.id} [${t.priority}] ${t.title} (${t.vertical_slice})`).join('\n'));
       }
     });
   return cmd;
@@ -100,23 +97,24 @@ function createNextCommand(): Command {
     .description('Show next recommended tasks (alias for ready)')
     .option('--json', 'Output as JSON')
     .action((options) => {
-      const { queries } = getEngine(options.json);
+      const { queries } = getEngine();
       const next = queries.getNextTasks();
       if (options.json) {
         outputJson(next.map(toReadyTaskSchema));
       } else {
-        outputHuman(next, (tasks) => tasks.map(t => `  ${t.id} [${t.priority}] ${t.title} (${t.vertical_slice})`).join('\n'));
+        outputHuman(next, (tasks: typeof next) => tasks.map((t) => `  ${t.id} [${t.priority}] ${t.title} (${t.vertical_slice})`).join('\n'));
       }
     });
   return cmd;
 }
 
 function createShowCommand(): Command {
-  const cmd = new Command('show <taskId>')
+  const cmd = new Command('show')
     .description('Show task details')
+    .argument('<taskId>')
     .option('--json', 'Output as JSON')
     .action((taskId, options) => {
-      const { repo } = getEngine(options.json);
+      const { repo } = getEngine();
       const task = repo.getTask(taskId);
       if (!task) {
         console.error(`Task ${taskId} not found`);
@@ -142,12 +140,13 @@ function createShowCommand(): Command {
 }
 
 function createContextCommand(): Command {
-  const cmd = new Command('context <taskId>')
+  const cmd = new Command('context')
     .description('Get operational context for a task')
+    .argument('<taskId>')
     .option('--json', 'Output as JSON')
     .option('--level <1-5>', 'Context level (1=minimal, 3=operational default, 5=architecture)', '3')
     .action((taskId, options) => {
-      const { contextBuilder } = getEngine(options.json);
+      const { contextBuilder } = getEngine();
       const level = parseInt(options.level) as 1 | 2 | 3 | 4 | 5;
       const context = contextBuilder.buildContext(taskId, { level });
       if (!context) {
@@ -184,43 +183,46 @@ function createContextCommand(): Command {
 }
 
 function createDepsCommand(): Command {
-  const cmd = new Command('deps <taskId>')
+  const cmd = new Command('deps')
     .description('Show task dependencies')
+    .argument('<taskId>')
     .option('--json', 'Output as JSON')
     .action((taskId, options) => {
-      const { queries } = getEngine(options.json);
+      const { queries } = getEngine();
       const deps = queries.getDependencies(taskId);
       if (options.json) {
         outputJson(deps);
       } else {
-        outputHuman(deps, (d) => d.map(x => `  ${x.id} [${x.status}] ${x.title}`).join('\n') || '  none');
+        outputHuman(deps, (d: typeof deps) => d.map((x) => `  ${x.id} [${x.status}] ${x.title}`).join('\n') || '  none');
       }
     });
   return cmd;
 }
 
 function createDependentsCommand(): Command {
-  const cmd = new Command('dependents <taskId>')
+  const cmd = new Command('dependents')
     .description('Show tasks that depend on this task')
+    .argument('<taskId>')
     .option('--json', 'Output as JSON')
     .action((taskId, options) => {
-      const { queries } = getEngine(options.json);
+      const { queries } = getEngine();
       const deps = queries.getDependents(taskId);
       if (options.json) {
         outputJson(deps);
       } else {
-        outputHuman(deps, (d) => d.map(x => `  ${x.id} [${x.status}] ${x.title}`).join('\n') || '  none');
+        outputHuman(deps, (d: typeof deps) => d.map((x) => `  ${x.id} [${x.status}] ${x.title}`).join('\n') || '  none');
       }
     });
   return cmd;
 }
 
 function createTreeCommand(): Command {
-  const cmd = new Command('tree <taskId>')
+  const cmd = new Command('tree')
     .description('Show task tree (subtasks)')
+    .argument('<taskId>')
     .option('--json', 'Output as JSON')
     .action((taskId, options) => {
-      const { queries } = getEngine(options.json);
+      const { queries } = getEngine();
       const tree = queries.getTree(taskId);
       if (!tree) {
         console.error(`Task ${taskId} not found`);
@@ -244,27 +246,29 @@ function printTree(tree: any, indent: number): void {
 }
 
 function createSearchCommand(): Command {
-  const cmd = new Command('search <query>')
+  const cmd = new Command('search')
     .description('Search tasks by title/description')
+    .argument('<query>')
     .option('--json', 'Output as JSON')
     .action((query, options) => {
-      const { queries } = getEngine(options.json);
+      const { queries } = getEngine();
       const results = queries.searchTasks(query);
       if (options.json) {
         outputJson(results.map(toSearchResultSchema));
       } else {
-        outputHuman(results, (r) => r.map(t => `  ${t.id} [${t.status}/${t.priority}] ${t.title} (${t.vertical_slice})`).join('\n'));
+        outputHuman(results, (r: typeof results) => r.map((t) => `  ${t.id} [${t.status}/${t.priority}] ${t.title} (${t.vertical_slice})`).join('\n'));
       }
     });
   return cmd;
 }
 
 function createStartCommand(): Command {
-  const cmd = new Command('start <taskId>')
+  const cmd = new Command('start')
     .description('Start working on a task (sets status to in_progress)')
+    .argument('<taskId>')
     .option('--json', 'Output as JSON')
     .action((taskId, options) => {
-      const { mutations } = getEngine(options.json);
+      const { mutations } = getEngine();
       const result = mutations.changeStatus(taskId, 'in_progress');
       if (options.json) {
         outputJson(result);
@@ -279,12 +283,13 @@ function createStartCommand(): Command {
 }
 
 function createCompleteCommand(): Command {
-  const cmd = new Command('complete <taskId>')
+  const cmd = new Command('complete')
     .description('Complete a task (validates criteria, tests, dependencies)')
+    .argument('<taskId>')
     .option('--evidence <text>', 'Evidence of completion')
     .option('--json', 'Output as JSON')
     .action((taskId, options) => {
-      const { mutations } = getEngine(options.json);
+      const { mutations } = getEngine();
       if (options.evidence) {
         mutations.recordEvidence(taskId, options.evidence);
       }
@@ -302,12 +307,13 @@ function createCompleteCommand(): Command {
 }
 
 function createBlockCommand(): Command {
-  const cmd = new Command('block <taskId>')
+  const cmd = new Command('block')
     .description('Block a task with a reason')
+    .argument('<taskId>')
     .requiredOption('--reason <text>', 'Reason for blocking')
     .option('--json', 'Output as JSON')
     .action((taskId, options) => {
-      const { mutations } = getEngine(options.json);
+      const { mutations } = getEngine();
       const result = mutations.blockTask(taskId, options.reason);
       if (options.json) {
         outputJson(result);
@@ -322,11 +328,12 @@ function createBlockCommand(): Command {
 }
 
 function createUnblockCommand(): Command {
-  const cmd = new Command('unblock <taskId>')
+  const cmd = new Command('unblock')
     .description('Unblock a task (auto-sets to ready/todo based on deps)')
+    .argument('<taskId>')
     .option('--json', 'Output as JSON')
     .action((taskId, options) => {
-      const { mutations } = getEngine(options.json);
+      const { mutations } = getEngine();
       const result = mutations.unblockTask(taskId);
       if (options.json) {
         outputJson(result);
@@ -354,7 +361,7 @@ function createAddCommand(): Command {
     .option('--dependency <id>', 'Dependency task ID (can repeat)')
     .option('--json', 'Output as JSON')
     .action((options) => {
-      const { mutations } = getEngine(options.json);
+      const { mutations } = getEngine();
       const result = mutations.createTask({
         title: options.title,
         description: options.description,
@@ -379,15 +386,16 @@ function createAddCommand(): Command {
 }
 
 function createAddChildCommand(): Command {
-  const cmd = new Command('add-child <parentId>')
+  const cmd = new Command('add-child')
     .description('Create a subtask under a parent task')
+    .argument('<parentId>')
     .requiredOption('--title <text>', 'Task title')
     .option('--description <text>', 'Task description')
     .option('--type <type>', 'Task type (feature, test, setup, documentation)', 'feature')
     .option('--priority <priority>', 'Priority (critical, high, medium, low)', 'medium')
     .option('--json', 'Output as JSON')
     .action((parentId, options) => {
-      const { mutations } = getEngine(options.json);
+      const { mutations } = getEngine();
       const result = mutations.createSubtask(parentId, {
         title: options.title,
         description: options.description,
@@ -407,11 +415,13 @@ function createAddChildCommand(): Command {
 }
 
 function createAddDependencyCommand(): Command {
-  const cmd = new Command('add-dependency <taskId> <dependencyId>')
+  const cmd = new Command('add-dependency')
     .description('Add a dependency between tasks')
+    .argument('<taskId>')
+    .argument('<dependencyId>')
     .option('--json', 'Output as JSON')
     .action((taskId, dependencyId, options) => {
-      const { mutations } = getEngine(options.json);
+      const { mutations } = getEngine();
       const result = mutations.addDependency(taskId, dependencyId);
       if (options.json) {
         outputJson(result);
@@ -426,11 +436,13 @@ function createAddDependencyCommand(): Command {
 }
 
 function createRemoveDependencyCommand(): Command {
-  const cmd = new Command('remove-dependency <taskId> <dependencyId>')
+  const cmd = new Command('remove-dependency')
     .description('Remove a dependency between tasks')
+    .argument('<taskId>')
+    .argument('<dependencyId>')
     .option('--json', 'Output as JSON')
     .action((taskId, dependencyId, options) => {
-      const { mutations } = getEngine(options.json);
+      const { mutations } = getEngine();
       const result = mutations.removeDependency(taskId, dependencyId);
       if (options.json) {
         outputJson(result);
@@ -445,8 +457,9 @@ function createRemoveDependencyCommand(): Command {
 }
 
 function createUpdateCommand(): Command {
-  const cmd = new Command('update <taskId>')
+  const cmd = new Command('update')
     .description('Update task fields')
+    .argument('<taskId>')
     .option('--title <text>', 'Task title')
     .option('--description <text>', 'Task description')
     .option('--type <type>', 'Task type')
@@ -455,7 +468,7 @@ function createUpdateCommand(): Command {
     .option('--parallel-group <name>', 'Parallel group name')
     .option('--json', 'Output as JSON')
     .action((taskId, options) => {
-      const { mutations } = getEngine(options.json);
+      const { mutations } = getEngine();
       const input: any = {};
       if (options.title) input.title = options.title;
       if (options.description) input.description = options.description;
@@ -482,7 +495,7 @@ function createValidateCommand(): Command {
     .description('Validate kanban.json structure')
     .option('--json', 'Output as JSON')
     .action((options) => {
-      const { loader } = getEngine(options.json);
+      const { loader } = getEngine();
       try {
         loader.load(true);
         const result = { valid: true, errors: [] };
@@ -502,17 +515,18 @@ function createValidateCommand(): Command {
 }
 
 function createHistoryCommand(): Command {
-  const cmd = new Command('history [taskId]')
+  const cmd = new Command('history')
     .description('Show mutation history')
+    .argument('[taskId]', 'Filter by task ID')
     .option('--json', 'Output as JSON')
     .option('--limit <n>', 'Limit results', '50')
     .action((taskId, options) => {
-      const { history } = getEngine(options.json);
+      const { history } = getEngine();
       const entries = history.query(taskId, parseInt(options.limit));
       if (options.json) {
         outputJson(entries);
       } else {
-        outputHuman(entries, (e) => e.map(x => `  ${x.timestamp} ${x.operation} ${x.taskId} ${x.success ? 'OK' : 'FAIL'} ${x.error || ''}`).join('\n'));
+        outputHuman(entries, (e: typeof entries) => e.map((x) => `  ${x.timestamp} ${x.operation} ${x.taskId} ${x.success ? 'OK' : 'FAIL'} ${x.error || ''}`).join('\n'));
       }
     });
   return cmd;

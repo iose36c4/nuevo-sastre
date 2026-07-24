@@ -147,3 +147,26 @@ export interface KanbanHistoryEntry {
   success: boolean;
   error?: string;
 }
+
+export interface TaskDependency {
+  id: string;
+  title: string;
+  status: TaskStatus;
+}
+
+export interface TaskDependent {
+  id: string;
+  title: string;
+  status: TaskStatus;
+}
+
+export interface TaskContext {
+  task: Task;
+  parent: Task | null;
+  dependencies: TaskDependency[];
+  dependents: TaskDependent[];
+  tests: string[];
+  acceptance_criteria: string[];
+  relevant_decisions: { id: string; title: string }[];
+  recommended_action: 'start' | 'block' | 'wait' | 'complete' | 'split';
+}

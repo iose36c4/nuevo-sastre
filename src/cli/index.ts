@@ -8,7 +8,7 @@ const program = new Command()
 
 program.addCommand(createKanbanCommand());
 
-program.parseAsync(process.argv).catch((err) => {
+program.parseAsync(process.argv.slice(2)).catch((err) => {
   console.error(err);
   process.exit(1);
 });

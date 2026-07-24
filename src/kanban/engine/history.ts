@@ -1,6 +1,5 @@
 import { appendFileSync, existsSync, readFileSync, mkdirSync } from 'fs';
 import { resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
 import type { KanbanHistoryEntry } from './types.js';
 
 export class KanbanHistory {

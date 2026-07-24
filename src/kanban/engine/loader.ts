@@ -1,6 +1,5 @@
 import { readFileSync, existsSync, statSync } from 'fs';
 import { resolve } from 'path';
-import { fileURLToPath } from 'url';
 import type { KanbanData, KanbanModel, Task, Phase, Milestone, Decision } from './types.js';
 
 export class KanbanLoader {
