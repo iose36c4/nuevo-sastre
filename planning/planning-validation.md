@@ -1,4 +1,4 @@
-# Planning Validation — SASTRE DSL (V3)
+# Planning Validation — SASTRE DSL
 
 This document describes the validation checks applied to the kanban.json file.
 
@@ -13,19 +13,22 @@ The Kanban Validator (`scripts/validate-kanban.ts`) runs these checks:
 | no_dependency_cycles | Topological sort succeeds (no circular dependency chains) |
 | all_parent_ids_exist_or_null | Every `parent_id` is null or references an existing task |
 | all_child_ids_exist | Every ID in `children` array exists as a task `id` |
+| parent_child_references_are_symmetric | `parent_id` ↔ `children` represent exactly the same relationship |
 | no_orphan_tasks | Every task is referenced by at least one milestone or parent |
 | all_milestone_task_ids_exist | Every task ID in milestones exists as a task |
 | all_critical_tasks_have_acceptance_criteria | Tasks with priority=critical have >=1 acceptance criteria |
 | all_features_have_tests | Tasks with type=feature have non-empty `tests` array |
-| all_blocked_tasks_have_blocking_dependencies | Phase-level blocks reference valid phases |
 | all_tasks_have_phase_reference | Every task references a valid phase |
 | all_tasks_have_priority | Every task has a priority field |
 | all_tasks_have_type | Every task has a type field |
 | all_tasks_have_status | Every task has a status field |
 | all_vertical_slice_refs_valid | Every vertical_slice reference is valid |
 | no_task_has_more_than_15_acceptance_criteria | Max 15 acceptance criteria per task |
+| all_block_ids_exist | Every ID in phase `blocks` array exists as a phase `id` |
+| all_blocked_tasks_have_blocking_dependencies | Phase-level blocks reference valid phases |
 | dsl_v01_no_input_let | DSL-001 keywords do NOT include INPUT or LET |
 | m1_no_vector_line | M1 milestone does NOT contain Vector or Line tasks |
+| m2a_no_circle_arc_polygon | M2A milestone does NOT contain Circle, Arc, Polygon, Transform, Measure |
 | offset_decomposed | GEO-014 does NOT exist; OFFSET-001 through OFFSET-006 exist |
 | intersections_decomposed | GEO-009/010/016 do NOT exist; INTER-001 through INTER-008 exist |
 | plan001_exists | PLAN-001 (Kanban Validator) task exists |
@@ -73,6 +76,7 @@ Exits with code 0 if all checks pass, 1 if any fail.
 9. **PAT-001 parallel:** Pattern Piece depends only on geometry+SVG, not DSL. Can run in parallel.
 10. **Dependencies unified:** `blocks` field removed from all tasks. Dependencies is the single source of truth. `blocks` kept only at phase level.
 11. **Validation status:** All checks set to NOT_VALIDATED (requires running actual script).
+12. **Parent-child symmetry:** `parent_id` and `children` now symmetric (9 inconsistencies fixed).
 
 ### What Was Preserved
 

@@ -1,4 +1,4 @@
-# Dependency Graph — SASTRE DSL (V3)
+# Dependency Graph — SASTRE DSL
 
 ## Vertical Slice Dependency Chains
 

@@ -30,7 +30,7 @@
   "phases": [
     {
       "id": "PHASE-00",
-      "title": "VS-01: Foundations",
+      "title": "Foundations + Kanban Validator",
       "description": "Project setup + Kanban validator",
       "order": 0,
       "status": "backlog",
@@ -41,7 +41,7 @@
     },
     {
       "id": "PHASE-01",
-      "title": "VS-02: First SVG — Rectangle",
+      "title": "First SVG — Rectangle",
       "description": "Point, Segment (inline vector math), SVG Renderer, Export",
       "order": 1,
       "status": "backlog",
@@ -54,7 +54,7 @@
     },
     {
       "id": "PHASE-02A",
-      "title": "VS-03: Curved SVG",
+      "title": "Curved SVG",
       "description": "Bezier cubic, Path, SVG curves",
       "order": 2,
       "status": "backlog",
@@ -67,7 +67,7 @@
     },
     {
       "id": "PHASE-02B",
-      "title": "VS-03b: Extended Geometry",
+      "title": "Extended Geometry",
       "description": "Vector, Line, Circle, Arc, Polygon, Transform, Measure (parallel to 02A)",
       "order": 3,
       "status": "backlog",
@@ -78,7 +78,7 @@
     },
     {
       "id": "PHASE-02C",
-      "title": "VS-03c: Intersections",
+      "title": "Intersections",
       "description": "All intersection types decomposed, projections, tangents",
       "order": 4,
       "status": "backlog",
@@ -89,7 +89,7 @@
     },
     {
       "id": "PHASE-03",
-      "title": "VS-04: DSL v0.1 Minimal",
+      "title": "DSL v0.1 Minimal",
       "description": "Lexer, Parser (no Pratt), Interpreter (no units), Model, Registry — no INPUT, no LET",
       "order": 5,
       "status": "backlog",
@@ -100,7 +100,7 @@
     },
     {
       "id": "PHASE-04",
-      "title": "VS-05: DSL v0.2 Parametric",
+      "title": "DSL v0.2 Parametric",
       "description": "INPUT, LET, Pratt, Units, Point methods",
       "order": 6,
       "status": "backlog",
@@ -111,7 +111,7 @@
     },
     {
       "id": "PHASE-05",
-      "title": "VS-06: Pattern Piece",
+      "title": "Pattern Piece",
       "description": "Piece model, PatternRenderer (parallel to DSL)",
       "order": 7,
       "status": "backlog",
@@ -122,7 +122,7 @@
     },
     {
       "id": "PHASE-06",
-      "title": "VS-07: Pattern Operations",
+      "title": "Pattern Operations",
       "description": "Offset (decomposed), SeamAllowance, Notch, Grainline, Dart",
       "order": 8,
       "status": "backlog",
@@ -133,7 +133,7 @@
     },
     {
       "id": "PHASE-07",
-      "title": "VS-08: CLI + Validation",
+      "title": "CLI + Validation",
       "description": "CLI commands, validators",
       "order": 9,
       "status": "backlog",
@@ -145,7 +145,7 @@
     },
     {
       "id": "PHASE-08",
-      "title": "VS-09: Boxer Patterns",
+      "title": "Boxer Patterns",
       "description": "Progressive reference patterns",
       "order": 10,
       "status": "backlog",
@@ -156,7 +156,7 @@
     },
     {
       "id": "PHASE-09",
-      "title": "VS-10: Integration Tests + Docs",
+      "title": "Integration Tests + Docs",
       "description": "End-to-end tests, property-based tests, documentation",
       "order": 11,
       "status": "backlog",
@@ -206,7 +206,7 @@
     },
     {
       "id": "FND-002",
-      "parent_id": null,
+      "parent_id": "FND-001",
       "phase": "PHASE-00",
       "title": "Configure ESLint",
       "description": "Configure ESLint with @typescript-eslint/recommended and strict rules. Create .eslintrc.json.",
@@ -235,7 +235,7 @@
     },
     {
       "id": "FND-003",
-      "parent_id": null,
+      "parent_id": "FND-001",
       "phase": "PHASE-00",
       "title": "Configure Vitest",
       "description": "Configure Vitest with vitest.config.ts. Set up test paths and coverage configuration.",
@@ -264,7 +264,7 @@
     },
     {
       "id": "FND-004",
-      "parent_id": null,
+      "parent_id": "FND-001",
       "phase": "PHASE-00",
       "title": "Create directory structure",
       "description": "Create src/ tree: geometry/, model/, dsl/, svg/, pattern/, cli/, validation/. Create index.ts in each module.",
@@ -299,7 +299,7 @@
     },
     {
       "id": "FND-005",
-      "parent_id": null,
+      "parent_id": "FND-001",
       "phase": "PHASE-00",
       "title": "Configure npm scripts",
       "description": "Create scripts: build, test, lint, typecheck, dev, clean, validate:kanban.",
@@ -329,7 +329,7 @@
     },
     {
       "id": "FND-006",
-      "parent_id": null,
+      "parent_id": "FND-001",
       "phase": "PHASE-00",
       "title": "Create README.md",
       "description": "README with: name, description, prerequisites, installation, structure, conventions.",
@@ -362,7 +362,7 @@
     },
     {
       "id": "FND-007",
-      "parent_id": null,
+      "parent_id": "FND-001",
       "phase": "PHASE-00",
       "title": "Create .gitignore",
       "description": "Configure .gitignore: node_modules, dist, coverage, .env, editor files, OS files.",
@@ -389,7 +389,7 @@
     },
     {
       "id": "FND-008",
-      "parent_id": null,
+      "parent_id": "FND-001",
       "phase": "PHASE-00",
       "title": "Create testing utilities",
       "description": "Create src/geometry/__tests__/helpers.ts: assertPointsEqual, assertSegmentsEqual, GEOMETRIC_EPSILON, makePoint.",
@@ -419,7 +419,7 @@
     },
     {
       "id": "PLAN-001",
-      "parent_id": null,
+      "parent_id": "FND-001",
       "phase": "PHASE-00",
       "title": "Implement Kanban Validator",
       "description": "Create scripts/validate-kanban.ts: loads kanban.json, runs all validation checks (unique IDs, no cycles, deps exist, tests for features, milestones valid), reports pass/fail, exits 0/1.",
@@ -791,7 +791,7 @@
     },
     {
       "id": "GEO-008C",
-      "parent_id": null,
+      "parent_id": "GEO-008",
       "phase": "PHASE-02A",
       "title": "Implement Bezier cubic",
       "description": "Add to Bezier.ts: BezierCubic {p0, p1, p2, p3}. evaluateC, derivativeC, splitC, flatnessC, toPointsC, lengthC, tangentAtC, normalAtC.",
@@ -5457,26 +5457,36 @@
       "documented_in": "planning/decisions.md"
     }
   ],
-  "planning_validation": {
-    "version": "3.0",
-    "validation_date": "2026-07-24",
-    "notes": "Run scripts/validate-kanban.ts for actual automated validation.",
-    "checks": {
-      "unique_ids": "NOT_VALIDATED",
-      "no_cycles": "NOT_VALIDATED",
-      "all_deps_exist": "NOT_VALIDATED",
-      "milestones_valid": "NOT_VALIDATED",
-      "critical_acceptance": "NOT_VALIDATED",
-      "all_features_have_tests": "NOT_VALIDATED",
-      "no_forward_refs": "NOT_VALIDATED",
-      "no_shadowing": "NOT_VALIDATED",
-      "dsl_v01_no_input_let": "NOT_VALIDATED",
-      "m1_no_vector_line": "NOT_VALIDATED",
-      "m2a_no_circle_arc_polygon": "NOT_VALIDATED",
-      "offset_decomposed": "NOT_VALIDATED",
-      "intersections_decomposed": "NOT_VALIDATED",
-      "plan001_exists": "NOT_VALIDATED"
-    },
+"planning_validation": {
+        "version": "3.1",
+        "validation_date": "2026-07-24",
+        "notes": "Run scripts/validate-kanban.ts for actual automated validation.",
+        "checks": {
+            "unique_ids": "NOT_VALIDATED",
+            "all_dependency_ids_exist": "NOT_VALIDATED",
+            "no_dependency_cycles": "NOT_VALIDATED",
+            "all_parent_ids_exist_or_null": "NOT_VALIDATED",
+            "all_child_ids_exist": "NOT_VALIDATED",
+            "parent_child_references_are_symmetric": "NOT_VALIDATED",
+            "no_orphan_tasks": "NOT_VALIDATED",
+            "all_milestone_task_ids_exist": "NOT_VALIDATED",
+            "all_critical_tasks_have_acceptance_criteria": "NOT_VALIDATED",
+            "all_features_have_tests": "NOT_VALIDATED",
+            "all_tasks_have_phase_reference": "NOT_VALIDATED",
+            "all_tasks_have_priority": "NOT_VALIDATED",
+            "all_tasks_have_type": "NOT_VALIDATED",
+            "all_tasks_have_status": "NOT_VALIDATED",
+            "all_vertical_slice_refs_valid": "NOT_VALIDATED",
+            "no_task_has_more_than_15_acceptance_criteria": "NOT_VALIDATED",
+            "all_block_ids_exist": "NOT_VALIDATED",
+            "all_blocked_tasks_have_blocking_dependencies": "NOT_VALIDATED",
+            "dsl_v01_no_input_let": "NOT_VALIDATED",
+            "m1_no_vector_line": "NOT_VALIDATED",
+            "m2a_no_circle_arc_polygon": "NOT_VALIDATED",
+            "offset_decomposed": "NOT_VALIDATED",
+            "intersections_decomposed": "NOT_VALIDATED",
+            "plan001_exists": "NOT_VALIDATED"
+        },
     "task_counts": {
       "total": 166,
       "implementation": 67,

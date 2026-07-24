@@ -1,4 +1,4 @@
-# Architecture — SASTRE DSL (V2)
+# Architecture — SASTRE DSL
 
 ## Overview
 

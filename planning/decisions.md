@@ -1,4 +1,4 @@
-# Architectural Decisions — SASTRE DSL (V2)
+# Architectural Decisions — SASTRE DSL
 
 ## D01: Programming Language — TypeScript (strict mode)
 
