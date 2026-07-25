@@ -216,7 +216,7 @@ export function transformPath(t: Transform, path: Path): Path {
         curve: transformBezier(t, seg.curve),
       };
     }
-    throw new Error(`transformPath: unsupported segment kind '${seg.kind}'`);
+    throw new Error('transformPath: unsupported segment kind arc');
   });
   return { startPoint: start, segments, closed: path.closed };
 }

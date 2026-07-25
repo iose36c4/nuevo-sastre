@@ -745,7 +745,7 @@ describe('Transform', () => {
         ],
         closed: false,
       };
-      expect(() => transformPath(identity(), path)).toThrow("transformPath: unsupported segment kind 'arc'");
+      expect(() => transformPath(identity(), path)).toThrow('transformPath: unsupported segment kind arc');
     });
   });
 
