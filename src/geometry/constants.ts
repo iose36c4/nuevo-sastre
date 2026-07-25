@@ -2,6 +2,7 @@ export const GEOMETRIC_EPSILON = 0.001;
 export const INTERSECTION_EPSILON = 0.01;
 export const LENGTH_EPSILON = 1e-10;
 export const SVG_PRECISION = 2;
+export const DETERMINANT_EPSILON = 0.001;
 
 // Bézier-specific numerical tolerances
 export const BEZIER_LENGTH_TOLERANCE = 1e-10;      // Adaptive Simpson integration tolerance (L-space)

@@ -6,3 +6,4 @@ export * from './Line.js';
 export * from './Ray.js';
 export * from './Bezier.js';
 export * from './Path.js';
+export * from './Transform.js';
