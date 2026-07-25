@@ -99,7 +99,12 @@ export function polygonIsConvex(poly: Polygon): boolean {
   return true;
 }
 
-function _pointOnSegment(p: Point2D, a: Point2D, b: Point2D): boolean {
+/**
+ * @internal
+ * Exported for test coverage of degenerate segment handling.
+ * Not part of the public API.
+ */
+export function _pointOnSegment(p: Point2D, a: Point2D, b: Point2D): boolean {
   const eps = GEOMETRIC_EPSILON;
 
   const minX = Math.min(a.x, b.x) - eps;
@@ -120,7 +125,9 @@ function _pointOnSegment(p: Point2D, a: Point2D, b: Point2D): boolean {
   if (Math.abs(cross) > crossTol) return false;
 
   const t = ((p.x - a.x) * dx + (p.y - a.y) * dy) / len2;
-  return t >= -eps && t <= 1 + eps;
+  if (t < -eps) return false;
+  if (t > 1 + eps) return false;
+  return true;
 }
 
 export function polygonContainsPoint(poly: Polygon, point: Point2D): boolean {
