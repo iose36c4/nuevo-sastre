@@ -2,10 +2,20 @@ import { GEOMETRIC_EPSILON } from './constants.js';
 import type { Point2D } from './Point.js';
 import { createPoint, pointsEqual } from './Point.js';
 
-export interface BezierCurve {
-  readonly kind: 'quadratic' | 'cubic';
-  readonly controlPoints: readonly Point2D[];
-}
+export type BezierCurve =
+  | {
+      readonly kind: 'quadratic';
+      readonly p0: Point2D;
+      readonly p1: Point2D;
+      readonly p2: Point2D;
+    }
+  | {
+      readonly kind: 'cubic';
+      readonly p0: Point2D;
+      readonly p1: Point2D;
+      readonly p2: Point2D;
+      readonly p3: Point2D;
+    };
 
 export interface ArcParams {
   readonly center: Point2D;
@@ -26,33 +36,50 @@ export interface Path {
   readonly closed: boolean;
 }
 
-function getLastPoint(path: Path): Point2D | undefined {
-  const segs = path.segments;
-  if (segs.length > 0) {
-    const last = segs[segs.length - 1]!;
-    if (last.kind === 'line') {
-      return (last as { readonly kind: 'line'; readonly from: Point2D; readonly to: Point2D }).to;
-    }
-    if (last.kind === 'bezier') {
-      const b = last as { readonly kind: 'bezier'; readonly curve: BezierCurve };
-      return b.curve.controlPoints[b.curve.controlPoints.length - 1];
-    }
-    if (last.kind === 'arc') {
-      const params = (last as { readonly kind: 'arc'; readonly params: ArcParams }).params;
-      return createPoint(params.center.x + params.radius * Math.cos(params.endAngle), params.center.y + params.radius * Math.sin(params.endAngle));
+function getSegmentStart(seg: PathSegment): Point2D {
+  switch (seg.kind) {
+    case 'line':
+      return seg.from;
+    case 'bezier':
+      return seg.curve.p0;
+    case 'arc': {
+      const { center, radius, startAngle } = seg.params;
+      return createPoint(
+        center.x + radius * Math.cos(startAngle),
+        center.y + radius * Math.sin(startAngle)
+      );
     }
   }
-  // If no segments but has startPoint, that's the last point
+}
+
+function getSegmentEnd(seg: PathSegment): Point2D {
+  switch (seg.kind) {
+    case 'line':
+      return seg.to;
+    case 'bezier':
+      return seg.curve.kind === 'quadratic' ? seg.curve.p2 : seg.curve.p3;
+    case 'arc': {
+      const { center, radius, endAngle } = seg.params;
+      return createPoint(
+        center.x + radius * Math.cos(endAngle),
+        center.y + radius * Math.sin(endAngle)
+      );
+    }
+  }
+}
+
+function getLastPoint(path: Path): Point2D | undefined {
+  if (path.segments.length > 0) {
+    const last = path.segments[path.segments.length - 1]!;
+    return getSegmentEnd(last);
+  }
   return path.startPoint;
 }
 
 function getFirstPoint(path: Path): Point2D | undefined {
   if (path.segments.length > 0) {
     const first = path.segments[0]!;
-    if (first.kind === 'line') {
-      return (first as { readonly kind: 'line'; readonly from: Point2D; readonly to: Point2D }).from;
-    }
-    // For future: bezier/arc first point would be their start
+    return getSegmentStart(first);
   }
   return path.startPoint;
 }
@@ -63,10 +90,8 @@ export function createPath(): Path {
 
 export function pathAddLine(path: Path, to: Point2D): Path {
   if (path.startPoint === undefined) {
-    // First point - just set as start point, no segment yet
     return { ...path, startPoint: to };
   }
-  // Create segment from last point to new point
   const lastPoint = getLastPoint(path);
   if (!lastPoint) throw new Error('Path has no last point');
   const newSeg: PathSegment = { kind: 'line', from: lastPoint, to };
@@ -102,9 +127,7 @@ export function pathGetPoints(path: Path): Point2D[] {
 
   const points: Point2D[] = [path.startPoint];
   for (const seg of path.segments) {
-    if (seg.kind === 'line') {
-      points.push((seg as { readonly kind: 'line'; readonly from: Point2D; readonly to: Point2D }).to);
-    }
+    points.push(getSegmentEnd(seg));
   }
   return points;
 }

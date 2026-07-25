@@ -185,7 +185,6 @@ describe('Path', () => {
       path = pathAddLine(path, createPoint(0, 0));
       path = pathAddLine(path, createPoint(3, 0));
       path = pathAddLine(path, createPoint(3, 4));
-      // L-shape: horizontal 3 + vertical 4 = 7
       expect(pathLength(path)).toBe(7);
     });
 
@@ -194,8 +193,8 @@ describe('Path', () => {
       path = pathAddLine(path, createPoint(0, 0));
       path = pathAddLine(path, createPoint(3, 0));
       path = pathAddLine(path, createPoint(3, 4));
-      path = pathClose(path); // adds segment from (3,4) to (0,0) = length 5
-      expect(pathLength(path)).toBe(12); // 3 + 4 + 5
+      path = pathClose(path);
+      expect(pathLength(path)).toBe(12);
     });
   });
 
@@ -332,7 +331,6 @@ describe('Path', () => {
       path = pathAddLine(path, createPoint(0, 0));
       path = pathAddLine(path, createPoint(10, 0));
       path = pathAddLine(path, createPoint(10, 10));
-      // Total length = 20, t=0.5 -> 10 units = end of first segment
       const p = pathPointAt(path, 0.5);
       expect(p).toEqual(createPoint(10, 0));
     });
@@ -390,14 +388,12 @@ describe('Path', () => {
     });
   });
 
-describe('pathRotate', () => {
+  describe('pathRotate', () => {
     it('rotates points around origin by 90 degrees', () => {
       let path = createPath();
       path = pathAddLine(path, createPoint(1, 0));
       path = pathAddLine(path, createPoint(0, 1));
       const rotated = pathRotate(path, Math.PI / 2);
-      // (1,0) -> (0,1), (0,1) -> (-1,0)
-      // New model: startPoint = (1,0) -> (0,1); segment from (1,0) to (0,1) -> from (0,1) to (-1,0)
       expect(rotated.startPoint!.x).toBeCloseTo(0, 5);
       expect(rotated.startPoint!.y).toBeCloseTo(1, 5);
       expect(rotated.segments[0].from.x).toBeCloseTo(0, 5);
@@ -411,7 +407,6 @@ describe('pathRotate', () => {
       path = pathAddLine(path, createPoint(1, 1));
       path = pathAddLine(path, createPoint(2, 1));
       const rotated = pathRotate(path, Math.PI / 2, createPoint(1, 1));
-      // Rotate around (1,1): (1,1) stays, (2,1) -> (1,2)
       expect(rotated.startPoint).toEqual(createPoint(1, 1));
       expect(rotated.segments[0].to.x).toBeCloseTo(1, 5);
       expect(rotated.segments[0].to.y).toBeCloseTo(2, 5);
@@ -571,13 +566,183 @@ describe('pathRotate', () => {
     it('handles horizontal and vertical segments correctly', () => {
       let path = createPath();
       path = pathAddLine(path, createPoint(0, 0));
-      path = pathAddLine(path, createPoint(10, 0)); // horizontal
-      path = pathAddLine(path, createPoint(10, 10)); // vertical
-      path = pathAddLine(path, createPoint(0, 10)); // horizontal
-      path = pathClose(path); // vertical back to start
+      path = pathAddLine(path, createPoint(10, 0));
+      path = pathAddLine(path, createPoint(10, 10));
+      path = pathAddLine(path, createPoint(0, 10));
+      path = pathClose(path);
       expect(pathLength(path)).toBe(40);
       expect(pathIsEmpty(path)).toBe(false);
       expect(pathSegmentCount(path)).toBe(4);
+    });
+  });
+
+  describe('BezierCurve representation', () => {
+    it('quadratic has p0=start, p1=control, p2=end', () => {
+      const quadratic = {
+        kind: 'quadratic' as const,
+        p0: createPoint(0, 0),
+        p1: createPoint(5, 5),
+        p2: createPoint(10, 0),
+      };
+      expect(quadratic.kind).toBe('quadratic');
+      expect(quadratic.p0).toEqual(createPoint(0, 0));
+      expect(quadratic.p1).toEqual(createPoint(5, 5));
+      expect(quadratic.p2).toEqual(createPoint(10, 0));
+    });
+
+    it('cubic has p0=start, p1=control1, p2=control2, p3=end', () => {
+      const cubic = {
+        kind: 'cubic' as const,
+        p0: createPoint(0, 0),
+        p1: createPoint(3, 3),
+        p2: createPoint(7, 3),
+        p3: createPoint(10, 0),
+      };
+      expect(cubic.kind).toBe('cubic');
+      expect(cubic.p0).toEqual(createPoint(0, 0));
+      expect(cubic.p1).toEqual(createPoint(3, 3));
+      expect(cubic.p2).toEqual(createPoint(7, 3));
+      expect(cubic.p3).toEqual(createPoint(10, 0));
+    });
+  });
+
+  describe('ArcParams representation', () => {
+    it('defines center, radius, startAngle, endAngle, ccw', () => {
+      const arc = {
+        center: createPoint(0, 0),
+        radius: 10,
+        startAngle: 0,
+        endAngle: Math.PI / 2,
+        ccw: true,
+      };
+      expect(arc.center).toEqual(createPoint(0, 0));
+      expect(arc.radius).toBe(10);
+      expect(arc.startAngle).toBe(0);
+      expect(arc.endAngle).toBe(Math.PI / 2);
+      expect(arc.ccw).toBe(true);
+    });
+  });
+
+  describe('endpoint helpers - canonical source of truth', () => {
+    it('getFirstPoint returns startPoint for single point path', () => {
+      let path = createPath();
+      path = pathAddLine(path, createPoint(5, 5));
+      expect(pathFirstPoint(path)).toEqual(createPoint(5, 5));
+    });
+
+    it('getLastPoint returns startPoint for single point path', () => {
+      let path = createPath();
+      path = pathAddLine(path, createPoint(7, 7));
+      expect(pathLastPoint(path)).toEqual(createPoint(7, 7));
+    });
+
+    it('pathEndpoints returns same start/end for single point', () => {
+      let path = createPath();
+      path = pathAddLine(path, createPoint(5, 5));
+      const ep = pathEndpoints(path);
+      expect(ep).not.toBeNull();
+      expect(ep!.start).toEqual(createPoint(5, 5));
+      expect(ep!.end).toEqual(createPoint(5, 5));
+    });
+
+    it('pathPointAt works for point-only path', () => {
+      let path = createPath();
+      path = pathAddLine(path, createPoint(5, 5));
+      expect(pathPointAt(path, 0)).toEqual(createPoint(5, 5));
+      expect(pathPointAt(path, 0.5)).toEqual(createPoint(5, 5));
+      expect(pathPointAt(path, 1)).toEqual(createPoint(5, 5));
+    });
+  });
+
+  describe('point-only path bounding box', () => {
+    it('returns exact zero-area box', () => {
+      let path = createPath();
+      path = pathAddLine(path, createPoint(5, 5));
+      const bbox = pathBoundingBox(path);
+      expect(bbox.min).toEqual(createPoint(5, 5));
+      expect(bbox.max).toEqual(createPoint(5, 5));
+    });
+  });
+
+  describe('point-only path transformations', () => {
+    it('translation works', () => {
+      let path = createPath();
+      path = pathAddLine(path, createPoint(5, 5));
+      const t = pathTranslate(path, 10, 20);
+      expect(t.startPoint).toEqual(createPoint(15, 25));
+    });
+
+    it('rotation works', () => {
+      let path = createPath();
+      path = pathAddLine(path, createPoint(1, 0));
+      const r = pathRotate(path, Math.PI / 2);
+      expect(r.startPoint!.x).toBeCloseTo(0, 5);
+      expect(r.startPoint!.y).toBeCloseTo(1, 5);
+    });
+  });
+
+  describe('point-only path close behavior', () => {
+    it('throws for point-only path', () => {
+      let path = createPath();
+      path = pathAddLine(path, createPoint(5, 5));
+      expect(() => pathClose(path)).toThrow('Cannot close empty path or path without segments');
+    });
+  });
+
+  describe('transformations fail explicitly for unsupported curves', () => {
+    it('pathTranslate throws for bezier', () => {
+      const path: any = {
+        startPoint: createPoint(0, 0),
+        segments: [{ kind: 'bezier', curve: { kind: 'quadratic', p0: createPoint(0,0), p1: createPoint(5,5), p2: createPoint(10,0) } }],
+        closed: false
+      };
+      expect(() => pathTranslate(path, 10, 10)).toThrow('unsupported segment kind bezier');
+    });
+
+    it('pathTranslate throws for arc', () => {
+      const path: any = {
+        startPoint: createPoint(0, 0),
+        segments: [{ kind: 'arc', params: { center: createPoint(0,0), radius: 10, startAngle: 0, endAngle: Math.PI/2, ccw: true } }],
+        closed: false
+      };
+      expect(() => pathTranslate(path, 10, 10)).toThrow('unsupported segment kind arc');
+    });
+
+    it('pathRotate throws for bezier', () => {
+      const path: any = {
+        startPoint: createPoint(0, 0),
+        segments: [{ kind: 'bezier', curve: { kind: 'quadratic', p0: createPoint(0,0), p1: createPoint(5,5), p2: createPoint(10,0) } }],
+        closed: false
+      };
+      expect(() => pathRotate(path, Math.PI/2)).toThrow('unsupported segment kind bezier');
+    });
+
+    it('pathRotate throws for arc', () => {
+      const path: any = {
+        startPoint: createPoint(0, 0),
+        segments: [{ kind: 'arc', params: { center: createPoint(0,0), radius: 10, startAngle: 0, endAngle: Math.PI/2, ccw: true } }],
+        closed: false
+      };
+      expect(() => pathRotate(path, Math.PI/2)).toThrow('unsupported segment kind arc');
+    });
+  });
+
+  describe('point-only path translation/rotation', () => {
+    it('translate point-only path', () => {
+      let path = createPath();
+      path = pathAddLine(path, createPoint(5, 5));
+      const t = pathTranslate(path, 10, 20);
+      expect(t.startPoint).toEqual(createPoint(15, 25));
+      expect(t.segments).toHaveLength(0);
+    });
+
+    it('rotate point-only path', () => {
+      let path = createPath();
+      path = pathAddLine(path, createPoint(1, 0));
+      const r = pathRotate(path, Math.PI / 2);
+      expect(r.startPoint!.x).toBeCloseTo(0, 5);
+      expect(r.startPoint!.y).toBeCloseTo(1, 5);
+      expect(r.segments).toHaveLength(0);
     });
   });
 });
