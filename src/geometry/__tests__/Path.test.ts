@@ -690,15 +690,6 @@ describe('Path', () => {
   });
 
   describe('transformations fail explicitly for unsupported curves', () => {
-    it('pathTranslate throws for bezier', () => {
-      const path: any = {
-        startPoint: createPoint(0, 0),
-        segments: [{ kind: 'bezier', curve: { kind: 'quadratic', p0: createPoint(0,0), p1: createPoint(5,5), p2: createPoint(10,0) } }],
-        closed: false
-      };
-      expect(() => pathTranslate(path, 10, 10)).toThrow('unsupported segment kind bezier');
-    });
-
     it('pathTranslate throws for arc', () => {
       const path: any = {
         startPoint: createPoint(0, 0),
@@ -706,15 +697,6 @@ describe('Path', () => {
         closed: false
       };
       expect(() => pathTranslate(path, 10, 10)).toThrow('unsupported segment kind arc');
-    });
-
-    it('pathRotate throws for bezier', () => {
-      const path: any = {
-        startPoint: createPoint(0, 0),
-        segments: [{ kind: 'bezier', curve: { kind: 'quadratic', p0: createPoint(0,0), p1: createPoint(5,5), p2: createPoint(10,0) } }],
-        closed: false
-      };
-      expect(() => pathRotate(path, Math.PI/2)).toThrow('unsupported segment kind bezier');
     });
 
     it('pathRotate throws for arc', () => {

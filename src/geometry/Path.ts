@@ -1,21 +1,15 @@
 import { GEOMETRIC_EPSILON } from './constants.js';
 import type { Point2D } from './Point.js';
 import { createPoint, pointsEqual } from './Point.js';
-
-export type BezierCurve =
-  | {
-      readonly kind: 'quadratic';
-      readonly p0: Point2D;
-      readonly p1: Point2D;
-      readonly p2: Point2D;
-    }
-  | {
-      readonly kind: 'cubic';
-      readonly p0: Point2D;
-      readonly p1: Point2D;
-      readonly p2: Point2D;
-      readonly p3: Point2D;
-    };
+import type { BezierCurve } from './Bezier.js';
+import {
+  bezierPointAt,
+  bezierLength,
+  bezierBoundingBox,
+  bezierParameterAtLength,
+  createBezierQuadratic,
+  createBezierCubic,
+} from './Bezier.js';
 
 export interface ArcParams {
   /**
@@ -143,11 +137,16 @@ export function pathGetPoints(path: Path): Point2D[] {
 export function pathLength(path: Path): number {
   let total = 0;
   for (const seg of path.segments) {
-    if (seg.kind !== 'line') throw new Error('pathLength: non-line segments not implemented');
-    const { from, to } = seg as { readonly kind: 'line'; readonly from: Point2D; readonly to: Point2D };
-    const dx = to.x - from.x;
-    const dy = to.y - from.y;
-    total += Math.sqrt(dx * dx + dy * dy);
+    if (seg.kind === 'line') {
+      const { from, to } = seg;
+      const dx = to.x - from.x;
+      const dy = to.y - from.y;
+      total += Math.sqrt(dx * dx + dy * dy);
+    } else if (seg.kind === 'bezier') {
+      total += bezierLength(seg.curve);
+    } else {
+      throw new Error(`pathLength: unsupported segment kind ${seg.kind}`);
+    }
   }
   return total;
 }
@@ -189,16 +188,30 @@ export function pathPointAt(path: Path, t: number): Point2D {
   let accumulated = 0;
 
   for (const seg of path.segments) {
-    if (seg.kind !== 'line') throw new Error('pathPointAt: non-line segments not implemented');
-
-    const { from, to } = seg as { readonly kind: 'line'; readonly from: Point2D; readonly to: Point2D };
-    const dx = to.x - from.x;
-    const dy = to.y - from.y;
-    const segLen = Math.sqrt(dx * dx + dy * dy);
+    let segLen: number;
+    if (seg.kind === 'line') {
+      const { from, to } = seg;
+      const dx = to.x - from.x;
+      const dy = to.y - from.y;
+      segLen = Math.sqrt(dx * dx + dy * dy);
+    } else if (seg.kind === 'bezier') {
+      segLen = bezierLength(seg.curve);
+    } else {
+      throw new Error(`pathPointAt: unsupported segment kind ${seg.kind}`);
+    }
 
     if (accumulated + segLen >= targetLength) {
-      const localT = segLen > GEOMETRIC_EPSILON ? (targetLength - accumulated) / segLen : 0;
-      return createPoint(from.x + dx * localT, from.y + dy * localT);
+      const localDist = targetLength - accumulated;
+      if (seg.kind === 'line') {
+        const { from, to } = seg;
+        const dx = to.x - from.x;
+        const dy = to.y - from.y;
+        const localT = segLen > GEOMETRIC_EPSILON ? localDist / segLen : 0;
+        return createPoint(from.x + dx * localT, from.y + dy * localT);
+      } else if (seg.kind === 'bezier') {
+        const localT = bezierParameterAtLength(seg.curve, localDist);
+        return bezierPointAt(seg.curve, localT);
+      }
     }
     accumulated += segLen;
   }
@@ -213,12 +226,34 @@ export function pathTranslate(path: Path, dx: number, dy: number): Path {
   const translatedSegments: PathSegment[] = [];
   for (const seg of path.segments) {
     if (seg.kind === 'line') {
-      const { from, to } = seg as { readonly kind: 'line'; readonly from: Point2D; readonly to: Point2D };
+      const { from, to } = seg;
       translatedSegments.push({
         kind: 'line',
         from: createPoint(from.x + dx, from.y + dy),
         to: createPoint(to.x + dx, to.y + dy),
       });
+    } else if (seg.kind === 'bezier') {
+      const curve = seg.curve;
+      if (curve.kind === 'quadratic') {
+        translatedSegments.push({
+          kind: 'bezier',
+          curve: createBezierQuadratic(
+            createPoint(curve.p0.x + dx, curve.p0.y + dy),
+            createPoint(curve.p1.x + dx, curve.p1.y + dy),
+            createPoint(curve.p2.x + dx, curve.p2.y + dy)
+          ),
+        });
+      } else {
+        translatedSegments.push({
+          kind: 'bezier',
+          curve: createBezierCubic(
+            createPoint(curve.p0.x + dx, curve.p0.y + dy),
+            createPoint(curve.p1.x + dx, curve.p1.y + dy),
+            createPoint(curve.p2.x + dx, curve.p2.y + dy),
+            createPoint(curve.p3.x + dx, curve.p3.y + dy)
+          ),
+        });
+      }
     } else {
       throw new Error(`pathTranslate: unsupported segment kind ${seg.kind}`);
     }
@@ -239,12 +274,34 @@ export function pathRotate(path: Path, angle: number, center: Point2D = { x: 0, 
   const rotatedSegments: PathSegment[] = [];
   for (const seg of path.segments) {
     if (seg.kind === 'line') {
-      const { from, to } = seg as { readonly kind: 'line'; readonly from: Point2D; readonly to: Point2D };
+      const { from, to } = seg;
       rotatedSegments.push({
         kind: 'line',
         from: rotatePoint(from),
         to: rotatePoint(to),
       });
+    } else if (seg.kind === 'bezier') {
+      const curve = seg.curve;
+      if (curve.kind === 'quadratic') {
+        rotatedSegments.push({
+          kind: 'bezier',
+          curve: createBezierQuadratic(
+            rotatePoint(curve.p0),
+            rotatePoint(curve.p1),
+            rotatePoint(curve.p2)
+          ),
+        });
+      } else {
+        rotatedSegments.push({
+          kind: 'bezier',
+          curve: createBezierCubic(
+            rotatePoint(curve.p0),
+            rotatePoint(curve.p1),
+            rotatePoint(curve.p2),
+            rotatePoint(curve.p3)
+          ),
+        });
+      }
     } else {
       throw new Error(`pathRotate: unsupported segment kind ${seg.kind}`);
     }
@@ -255,25 +312,56 @@ export function pathRotate(path: Path, angle: number, center: Point2D = { x: 0, 
 export function pathBoundingBox(path: Path): { min: Point2D; max: Point2D } {
   if (pathIsEmpty(path)) throw new Error('Cannot compute bounding box of empty path');
 
-  // Check for unsupported curve types
+  let minX = Infinity;
+  let minY = Infinity;
+  let maxX = -Infinity;
+  let maxY = -Infinity;
+
+  const updateBBox = (pt: Point2D) => {
+    if (pt.x < minX) minX = pt.x;
+    if (pt.x > maxX) maxX = pt.x;
+    if (pt.y < minY) minY = pt.y;
+    if (pt.y > maxY) maxY = pt.y;
+  };
+
+  if (path.startPoint) {
+    updateBBox(path.startPoint);
+  }
+
   for (const seg of path.segments) {
-    if (seg.kind !== 'line') {
-      throw new Error(`pathBoundingBox: unsupported segment kind ${seg.kind}`);
+    if (seg.kind === 'line') {
+      updateBBox(seg.to);
+    } else if (seg.kind === 'bezier') {
+      const bbox = bezierBoundingBox(seg.curve);
+      updateBBox(bbox.min);
+      updateBBox(bbox.max);
+    } else if (seg.kind === 'arc') {
+      // For arc, add endpoints and potential extrema
+      const { center, radius, startAngle, endAngle, ccw } = seg.params;
+      const start = createPoint(center.x + radius * Math.cos(startAngle), center.y + radius * Math.sin(startAngle));
+      const end = createPoint(center.x + radius * Math.cos(endAngle), center.y + radius * Math.sin(endAngle));
+      updateBBox(start);
+      updateBBox(end);
+      
+      // Check for extrema at cardinal angles (0, PI/2, PI, 3PI/2)
+      const angles = [0, Math.PI / 2, Math.PI, 3 * Math.PI / 2];
+      for (const angle of angles) {
+        if (ccw) {
+          if ((startAngle <= angle && angle <= endAngle) || (startAngle > endAngle && (angle >= startAngle || angle <= endAngle))) {
+            updateBBox(createPoint(center.x + radius * Math.cos(angle), center.y + radius * Math.sin(angle)));
+          }
+        } else {
+          if ((endAngle <= angle && angle <= startAngle) || (endAngle > startAngle && (angle >= endAngle || angle <= startAngle))) {
+            updateBBox(createPoint(center.x + radius * Math.cos(angle), center.y + radius * Math.sin(angle)));
+          }
+        }
+      }
     }
   }
 
-  const points = pathGetPoints(path);
-  const firstPoint = points[0]!;
-  let minX = firstPoint.x;
-  let maxX = firstPoint.x;
-  let minY = firstPoint.y;
-  let maxY = firstPoint.y;
-
-  for (const p of points) {
-    if (p.x < minX) minX = p.x;
-    if (p.x > maxX) maxX = p.x;
-    if (p.y < minY) minY = p.y;
-    if (p.y > maxY) maxY = p.y;
+  if (minX === Infinity) {
+    // Path has no points (should not happen since pathIsEmpty check passed)
+    return { min: createPoint(0, 0), max: createPoint(0, 0) };
   }
 
   return { min: createPoint(minX, minY), max: createPoint(maxX, maxY) };

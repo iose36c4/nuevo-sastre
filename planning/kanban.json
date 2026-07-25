@@ -6502,7 +6502,7 @@
       "phase": "PHASE-11",
       "title": "A04: Bezier Curve Primitive",
       "description": "Implement Bezier.ts. Quadratic and cubic Bezier. evaluate(t), subdivide(t), flatten(tolerance), controlPoints, boundingBox.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-GEO",
@@ -6517,7 +6517,12 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "agent_id": "agent-1784970852776",
+      "started_at": "2026-07-25T09:14:12.776Z",
+      "evidence": [
+        "Implemented Bezier Curve Primitive (quadratic & cubic) with exact bounding boxes, adaptive Simpson arc-length integration, Newton-Raphson arc-length inversion, Path integration (length, pointAt, translate, rotate, boundingBox), all tests passing"
+      ]
     },
     {
       "id": "TASK-020",
