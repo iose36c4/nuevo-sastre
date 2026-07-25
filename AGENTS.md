@@ -42,20 +42,30 @@ src/
 ├── cli/
 │   ├── index.ts                  # Commander.js entry point
 │   └── commands/kanban.ts        # 19 CLI subcommands + getEngine() wiring
-└── kanban/engine/                # Core engine (11 files total)
-    ├── types.ts                  # Domain types, enums, state machine
-    ├── loader.ts                 # Singleton JSON loader with cache
-    ├── repository.ts             # Map-based data access layer
-    ├── queries.ts                # Read-only operations (CQRS query side)
-    ├── mutations.ts              # Write operations (CQRS mutation side)
-    ├── persistence.ts            # File writes with pre-write validation
-    ├── history.ts                # Append-only NDJSON audit log
-    ├── context.ts                # Multi-level task context builder (1-5)
-    ├── dependency-graph.ts       # Cycle detection, topological sort
-    └── json-schemas.ts           # DTO/serialization layer
+├── kanban/engine/                # Core engine (11 files total)
+│   ├── types.ts                  # Domain types, enums, state machine
+│   ├── loader.ts                 # Singleton JSON loader with cache
+│   ├── repository.ts             # Map-based data access layer
+│   ├── queries.ts                # Read-only operations (CQRS query side)
+│   ├── mutations.ts              # Write operations (CQRS mutation side)
+│   ├── persistence.ts            # File writes with pre-write validation
+│   ├── history.ts                # Append-only NDJSON audit log
+│   ├── context.ts                # Multi-level task context builder (1-5)
+│   ├── dependency-graph.ts       # Cycle detection, topological sort
+│   └── json-schemas.ts           # DTO/serialization layer
+└── geometry/                     # Geometry primitives (clothing-pattern DSL)
+    ├── index.ts                  # Public exports
+    ├── constants.ts              # EPSILON, tolerance constants
+    ├── Point.ts                  # 2D point type & ops
+    ├── Vector.ts                 # 2D vector type & ops
+    ├── Segment.ts                # Line segment primitive
+    ├── Line.ts                   # Infinite line primitive
+    ├── Ray.ts                    # Ray primitive
+    └── Path.ts                   # Composite path (segments + curves)
 
 tests/
 ├── unit/kanban/                  # 10 unit test files + fixtures.ts
+├── unit/kanban/fixtures.ts       # Shared test builders (makeTask, etc.)
 └── integration/                  # 4 integration tests (engine API, CLI, E2E, validation)
 
 planning/
@@ -118,6 +128,7 @@ npm run kanban -- validate --json                 # check kanban.json integrity
 ## Testing
 
 - Unit tests: `tests/unit/kanban/` — one file per engine module
+- Geometry tests: `src/geometry/__tests__/` — co-located with source (Point, Vector, Segment, Line, Ray, Path)
 - Integration tests: `tests/integration/` — engine workflow, CLI via execSync, E2E agent workflow
 - Shared fixtures: `tests/unit/kanban/fixtures.ts` (`makeTask`, `makeKanbanData`, `buildModel`)
 - Run a single test file: `npx vitest --run tests/unit/kanban/mutations.test.ts`
