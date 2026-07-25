@@ -6446,7 +6446,7 @@
       "phase": "PHASE-11",
       "title": "A02: Segment + Line + Ray Primitives",
       "description": "Implement Segment.ts, Line.ts, Ray.ts. Segment from two points with length, midpoint, pointAt(t), direction vector. Line from two points or point+direction. Ray from point+direction. Conversions.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-GEO",
@@ -6461,7 +6461,12 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "agent_id": "agent-1784962243318",
+      "started_at": "2026-07-25T06:50:43.318Z",
+      "evidence": [
+        "Implemented A02: Segment + Line + Ray Primitives. Created src/geometry/Segment.ts (createSegment, segmentLength, segmentMidpoint, segmentPointAt, segmentDirection, segmentReverse, isDegenerate, segmentToLine), src/geometry/Line.ts (createLine, lineFromTwoPoints, lineFromPointDirection, linePointAt, lineEvaluateX, lineEvaluateY, lineContainsPoint, isVertical, isHorizontal, lineToNormalForm, lineFromSegment), src/geometry/Ray.ts (createRay, rayFromPoints, rayPointAt, rayContainsPoint, rayToLine). Created tests: Segment.test.ts (26 tests), Line.test.ts (32 tests), Ray.test.ts (20 tests). Fixed TypeScript imports with proper type-only imports. All validations pass: npm run typecheck (clean), npm run lint (clean), npm test (344 tests pass), npm run build (clean)."
+      ]
     },
     {
       "id": "TASK-018",
