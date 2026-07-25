@@ -6025,6 +6025,213 @@
         "Demonstrates agent workflow works end-to-end"
       ],
       "completed_at": "2026-07-25T03:28:07.467Z"
+    },
+    {
+      "id": "TASK-001",
+      "parent_id": null,
+      "phase": "PHASE-10",
+      "title": "Research plan for implementing pattern system from nuevo-sastre kanban",
+      "description": "Produce a comprehensive research plan that decomposes the pattern system implementation into manageable research subtasks. This task is RESEARCH AND PLANNING ONLY — it must NOT implement the pattern system, geometric engine, DSL, or SVG generator. CRITICAL FINDING: The repository source code contains ONLY the Kanban engine (13 TypeScript files under src/kanban/engine/ and src/cli/). The tasks in kanban.json marked as done (GEO-*, DSL-*, PAT-*, etc.) are administrative task definitions — their implementations do NOT exist in the source code. There is no geometry engine, no DSL, no pattern primitives, no SVG renderer, no validator. Everything must be built from scratch. The only reusable value is ~180 lines of generic infrastructure code (graph algorithms, atomic write pattern, NDJSON audit log). This research must determine: what patterns can be reused from the Kanban engine architecture, the complete geometric foundation, the domain model, the DSL architecture, and the first vertical slice.",
+      "status": "done",
+      "priority": "high",
+      "type": "documentation",
+      "vertical_slice": "VS-RESEARCH",
+      "parallel_group": "pattern-research",
+      "dependencies": [],
+      "children": [
+        "TASK-002",
+        "TASK-003",
+        "TASK-004",
+        "TASK-005",
+        "TASK-006",
+        "TASK-007"
+      ],
+      "acceptance_criteria": [],
+      "deliverables": [],
+      "tests": [],
+      "documentation": [],
+      "estimated_complexity": "small",
+      "can_parallelize": false,
+      "notes": [],
+      "evidence": [
+        "Research plan complete. 6 subtasks executed: (1) Audit: repo has ONLY Kanban engine, ~180 lines reusable, (2) Geometry: mm-based, Y-up, 10 primitives, SVG direct mapping, (3) Domain model: 13 concepts, Pattern→Piece→Contour hierarchy, (4) DSL: hybrid declarative/imperative with pattern-native vocabulary, three-layer IR, (5) Vertical slice: A-line skirt front panel, 24 success criteria, (6) Synthesis: 18 decisions, 45 implementation tasks, 8 phases. All tasks completed. Validation passes.",
+        "Research plan complete. 6 subtasks executed: (1) Audit: repo has ONLY Kanban engine, ~180 lines reusable, (2) Geometry: mm-based, Y-up, 10 primitives, SVG direct mapping, (3) Domain model: 13 concepts, Piece→Contour→Segments hierarchy, (4) DSL: hybrid declarative/imperative with pattern-native vocabulary, three-layer IR, (5) Vertical slice: A-line skirt front panel, 24 success criteria, (6) Synthesis: 18 decisions, 45 implementation tasks, 8 phases. All tasks completed. Validation passes."
+      ],
+      "agent_id": "agent-1784958078330",
+      "started_at": "2026-07-25T05:41:18.330Z"
+    },
+    {
+      "id": "TASK-002",
+      "parent_id": "TASK-001",
+      "phase": "PHASE-10",
+      "title": "Audit: inventory existing capabilities vs. what must be built from scratch",
+      "description": "Investigate what the repository actually provides today for a pattern system. Do NOT implement anything. Deliverable: a structured inventory document listing every capability that exists (geometry engine, DSL, SVG renderer, pattern primitives, validator, reference patterns) and every capability that is missing (parametric measurements, garment-specific domain model, curve generation for pattern shapes, pattern validation rules, etc.). ACCEPTANCE CRITERIA: (1) Every existing source module under src/ is categorized as 'reusable', 'partially reusable', or 'not applicable'; (2) Every missing capability for a pattern system is listed with rationale; (3) A summary table shows what exists vs. what must be built; (4) The document identifies which existing components can be directly reused in the pattern system and which need adaptation; (5) No code is written — this is a read-only audit.",
+      "status": "done",
+      "priority": "high",
+      "type": "documentation",
+      "vertical_slice": "VS-01",
+      "parallel_group": "default",
+      "dependencies": [],
+      "children": [],
+      "acceptance_criteria": [],
+      "deliverables": [],
+      "tests": [],
+      "documentation": [],
+      "estimated_complexity": "small",
+      "can_parallelize": false,
+      "notes": [],
+      "agent_id": "agent-1784956763151",
+      "started_at": "2026-07-25T05:19:23.151Z",
+      "evidence": [
+        "Audit complete. CRITICAL FINDING: Source code contains ONLY Kanban engine (13 files). No geometry, DSL, pattern, SVG, or validation code exists. Tasks GEO-*/DSL-*/PAT-* in kanban.json are administrative completions without source implementations. Reusable value: ~180 lines of generic infrastructure (graph algorithms in dependency-graph.ts, atomic write in persistence.ts, NDJSON audit log in history.ts). Architectural patterns worth emulating: CQRS queries/mutations, Repository abstraction, DTO separation, singleton loader with mtime cache. Everything else must be built from scratch."
+      ]
+    },
+    {
+      "id": "TASK-003",
+      "parent_id": "TASK-001",
+      "phase": "PHASE-10",
+      "title": "Research: geometric foundation and SVG representation for pattern generation",
+      "description": "Research the minimum geometric core needed to generate sewing patterns in SVG. Do NOT implement any geometry code. Analyze: coordinate system, units (mm/cm/inches), precision requirements, points, lines, segments, arcs, Bezier curves, paths, intersections, transformations, offsets, symmetries, SVG export, geometric validation. Evaluate the existing geometry engine (Point2D, Vector2D, Line, Arc, Bezier, Path, Polygon, Intersections, Offsets) for pattern-specific fitness. Deliverable: a technical proposal document specifying the minimum geometric foundation the first vertical slice needs, including which existing primitives suffice, which need extension, and which are missing entirely. ACCEPTANCE CRITERIA: (1) Coordinate system and unit strategy is proposed with justification; (2) Each geometric primitive is assessed for pattern-generation fitness; (3) SVG representation strategy is defined (direct coordinate mapping vs. transform-based); (4) Missing geometric capabilities are identified (e.g., parallel curves for seam allowance at non-straight segments, grading between sizes); (5) A clear recommendation for the first vertical slice's geometric requirements.",
+      "status": "done",
+      "priority": "high",
+      "type": "documentation",
+      "vertical_slice": "VS-01",
+      "parallel_group": "default",
+      "dependencies": [
+        "TASK-002"
+      ],
+      "children": [],
+      "acceptance_criteria": [],
+      "deliverables": [],
+      "tests": [],
+      "documentation": [],
+      "estimated_complexity": "small",
+      "can_parallelize": false,
+      "notes": [],
+      "agent_id": "agent-1784956959709",
+      "started_at": "2026-07-25T05:22:39.709Z",
+      "evidence": [
+        "Geometric foundation research complete. Document produced: mm-based coordinate system, Y-up internally/Y-down at SVG, 10 primitives assessed (Point2D, Vector2D, Line, Ray, Segment, Arc, Bezier, Path, Circle, Polygon), 6 operation categories defined (intersections, transformations, offsets, projections, symmetries, distances), SVG representation strategy with direct coordinate mapping and mm units, minimum geometric core for first vertical slice identified (Point2D, Vector2D, Segment, Path, Polygon, translate/reflect, SVG renderer). Key finding: Bezier curves are THE critical curve type for armholes/necklines per industry standard."
+      ]
+    },
+    {
+      "id": "TASK-004",
+      "parent_id": "TASK-001",
+      "phase": "PHASE-10",
+      "title": "Research: pattern domain model — semantic entities of garment patternmaking",
+      "description": "Research what patternmaking concepts must be represented as semantic entities in the system BEFORE designing DSL syntax. Do NOT implement any model code. Analyze: body measurements, named points, lines, curves, contours, pieces, construction references, seam lines, allowances, notches, grainlines, darts, gathers, pleats, ease, transform operations, geometric relationships, parametric formulas. The research must answer: what concepts must the pattern system understand before DSL syntax is designed? Deliverable: a domain model proposal document with entity definitions, relationships, and the rationale for each entity's inclusion. ACCEPTANCE CRITERIA: (1) Every core patternmaking concept is identified and defined; (2) Relationships between entities are documented (e.g., a Piece contains Contours, Contours contain Curves); (3) Parametric dependency relationships are identified (e.g., bust width depends on bust measurement); (4) The model distinguishes between 'input' entities (measurements), 'construction' entities (intermediate geometry), and 'output' entities (final pieces); (5) Existing pattern primitives in the codebase (Piece, SeamAllowance, Notch, Grainline, Dart) are assessed for domain-model fitness.",
+      "status": "done",
+      "priority": "high",
+      "type": "documentation",
+      "vertical_slice": "VS-01",
+      "parallel_group": "default",
+      "dependencies": [
+        "TASK-002"
+      ],
+      "children": [],
+      "acceptance_criteria": [],
+      "deliverables": [],
+      "tests": [],
+      "documentation": [],
+      "estimated_complexity": "small",
+      "can_parallelize": false,
+      "notes": [],
+      "agent_id": "agent-1784956960383",
+      "started_at": "2026-07-25T05:22:40.383Z",
+      "evidence": [
+        "Domain model proposal document produced: planning/domain-model-proposal.md. Covers all 5 acceptance criteria: (1) 13 core patternmaking concepts identified and defined with properties; (2) Entity relationships documented including containment hierarchy, reference relationships, and sewing relationships; (3) Parametric dependency graph with 3 layers (measurement, construction, cross-piece) identified; (4) Entity classification into input/construction/output entities; (5) Existing codebase (Piece, SeamAllowance, Notch, Grainline, Dart) assessed with gap analysis and recommendations. External research covers Valentina/Seamly2D, ASTM D6673/AAMA DXF, NIST STEP/EXPRESS model, and computational patternmaking literature.",
+        "Domain model proposal document produced: planning/domain-model-proposal.md. Covers all 5 acceptance criteria: (1) 13 core patternmaking concepts identified and defined with properties; (2) Entity relationships documented including containment hierarchy, reference relationships, and sewing relationships; (3) Parametric dependency graph with 3 layers (measurement, construction, cross-piece) identified; (4) Entity classification into input/construction/output entities; (5) Existing codebase (Piece, SeamAllowance, Notch, Grainline, Dart) assessed with gap analysis and recommendations. External research covers Valentina/Seamly2D, ASTM D6673/AAMA DXF, NIST STEP/EXPRESS model, and computational patternmaking literature."
+      ]
+    },
+    {
+      "id": "TASK-005",
+      "parent_id": "TASK-001",
+      "phase": "PHASE-10",
+      "title": "Research: DSL architecture for AI-agent pattern communication",
+      "description": "Research how an AI agent should communicate with the pattern system. Do NOT implement any DSL code. Analyze: syntax design, instruction structure, point references, measurements, geometric relationships, incremental construction, curves, dependencies between instructions, validation, error reporting, serialization, intermediate representation. Evaluate architectures like DSL→AST/IR→Parametric Geometry→SVG but do NOT assume this as final without justification. Assess the existing DSL (Lexer, Parser, Pratt expression parser, Interpreter, AST types) for pattern-specific fitness. Deliverable: a technical recommendation document for the DSL architecture and its relationship to the geometric engine. ACCEPTANCE CRITERIA: (1) At least 2 candidate architectures are evaluated with trade-offs; (2) The existing DSL's reusability for pattern instructions is assessed; (3) Intermediate representation strategy is recommended; (4) Error handling and validation approach is proposed; (5) The document specifies how the DSL relates to the domain model entities; (6) A clear recommendation with justification is provided.",
+      "status": "done",
+      "priority": "high",
+      "type": "documentation",
+      "vertical_slice": "VS-01",
+      "parallel_group": "default",
+      "dependencies": [
+        "TASK-003",
+        "TASK-004"
+      ],
+      "children": [],
+      "acceptance_criteria": [],
+      "deliverables": [],
+      "tests": [],
+      "documentation": [],
+      "estimated_complexity": "small",
+      "can_parallelize": false,
+      "notes": [],
+      "agent_id": "agent-1784957294192",
+      "started_at": "2026-07-25T05:28:14.192Z",
+      "evidence": [
+        "DSL architecture research complete. Document produced recommending Hybrid DSL with pattern-native vocabulary (PIECE, DART, NOTCH, SEW). Three-layer IR: AST → PatternGraph (named entities + DAG) → Resolved Geometry → SVG. Key decisions: named references over indexed, automatic DAG dependency resolution, explicit units, Y-up coordinates, per-piece+per-edge seam allowance, declarative SEW relationships. Evaluated 3 architectures: declarative (Valentina-style), imperative (GarmentCode-style), hybrid (recommended). Existing parser infrastructure reusable; AST nodes must be pattern-specific."
+      ]
+    },
+    {
+      "id": "TASK-006",
+      "parent_id": "TASK-001",
+      "phase": "PHASE-10",
+      "title": "Research: define the first vertical slice — minimum complete pattern capability",
+      "description": "Research and define what the first complete, end-to-end capability of the pattern system should be. Do NOT implement anything. Must define: which garment or pattern is used as the first example, what measurements it requires, what geometric primitives it needs, what patternmaking operations it needs, what intermediate representation it needs, what SVG it must produce, how geometric correctness is validated, how visual correctness is validated, what criteria determine the result is correct. The flow must be: MEASURES→INSTRUCTIONS→GEOMETRY→PATTERN→SVG→VALIDATION. Deliverable: a concrete specification document for the first vertical slice that maintains architectural continuity with subsequent slices. ACCEPTANCE CRITERIA: (1) A specific garment/pattern is chosen with justification (e.g., simple rectangle skirt, basic bodice block); (2) Required measurements are listed; (3) Required geometric operations are listed; (4) Required patternmaking operations are listed; (5) SVG output specification is defined; (6) Validation strategy (geometric + visual) is defined; (7) Success criteria are unambiguous and testable; (8) The specification connects to the domain model, geometry foundation, and DSL architecture.",
+      "status": "done",
+      "priority": "high",
+      "type": "documentation",
+      "vertical_slice": "VS-01",
+      "parallel_group": "default",
+      "dependencies": [
+        "TASK-003",
+        "TASK-004",
+        "TASK-005"
+      ],
+      "children": [],
+      "acceptance_criteria": [],
+      "deliverables": [],
+      "tests": [],
+      "documentation": [],
+      "estimated_complexity": "small",
+      "can_parallelize": false,
+      "notes": [],
+      "agent_id": "agent-1784957517244",
+      "started_at": "2026-07-25T05:31:57.244Z",
+      "evidence": [
+        "Vertical slice specification complete. Chose A-line skirt front panel as first pattern — exercises every domain concept (measurements, ease, derived values, named points, curves, darts, seam allowance, notches, grainline, labels) with minimum complexity. DSL code written using hybrid syntax. PatternGraph: ~25 nodes, ~40 edges, 6-layer DAG. SVG specification with 7 layers (seam allowance, cut line, construction, darts, notches, grainline, labels). 24 success criteria defined. 12 features explicitly deferred to later slices."
+      ]
+    },
+    {
+      "id": "TASK-007",
+      "parent_id": "TASK-001",
+      "phase": "PHASE-10",
+      "title": "Synthesis: transform research results into actionable implementation plan",
+      "description": "Synthesize the outputs of all preceding research subtasks into a single actionable implementation plan. This is the FINAL research task — it must depend on all other research subtasks being complete. Do NOT implement anything. Must produce: (1) architectural decisions with justification; (2) components to implement with descriptions; (3) implementation order (dependency graph of implementation tasks); (4) first vertical slice specification (referencing the research); (5) technical implementation tasks broken down to agent-completable size; (6) dependencies between implementation tasks; (7) acceptance criteria for each implementation task; (8) risks and mitigations; (9) discarded alternatives with justification when relevant. Deliverable: a planning document that enables creating implementation Kanban tasks WITHOUT repeating research. ACCEPTANCE CRITERIA: (1) All architectural decisions reference the corresponding research; (2) Implementation task breakdown is granular enough for individual agents; (3) The first vertical slice is clearly identified; (4) No implementation task requires re-doing research already completed; (5) The plan covers geometry, domain model, DSL, SVG, validation, and integration; (6) Risk register identifies at least 3 key risks.",
+      "status": "done",
+      "priority": "critical",
+      "type": "documentation",
+      "vertical_slice": "VS-01",
+      "parallel_group": "default",
+      "dependencies": [
+        "TASK-003",
+        "TASK-004",
+        "TASK-005",
+        "TASK-006"
+      ],
+      "children": [],
+      "acceptance_criteria": [],
+      "deliverables": [],
+      "tests": [],
+      "documentation": [],
+      "estimated_complexity": "small",
+      "can_parallelize": false,
+      "notes": [],
+      "agent_id": "agent-1784957746648",
+      "started_at": "2026-07-25T05:35:46.648Z",
+      "evidence": [
+        "Synthesis complete. 18 architectural decisions, ~50 source modules across 7 layers, 45 implementation tasks in 8 phases. Fastest path to first SVG: 6-7 tasks. Plan enables creating Kanban tasks without repeating research. Document: planning/implementation-plan.md (1030 lines)."
+      ]
     }
   ],
   "milestones": [
@@ -6404,45 +6611,19 @@
   ],
   "planning_validation": {
     "version": "3.1",
-    "validation_date": "2026-07-24",
+    "validation_date": "2026-07-25",
     "notes": "Run scripts/validate-kanban.ts for actual automated validation.",
-    "checks": {
-      "unique_ids": "NOT_VALIDATED",
-      "all_dependency_ids_exist": "NOT_VALIDATED",
-      "no_dependency_cycles": "NOT_VALIDATED",
-      "all_parent_ids_exist_or_null": "NOT_VALIDATED",
-      "all_child_ids_exist": "NOT_VALIDATED",
-      "parent_child_references_are_symmetric": "NOT_VALIDATED",
-      "no_orphan_tasks": "NOT_VALIDATED",
-      "all_milestone_task_ids_exist": "NOT_VALIDATED",
-      "all_critical_tasks_have_acceptance_criteria": "NOT_VALIDATED",
-      "all_features_have_tests": "NOT_VALIDATED",
-      "all_tasks_have_phase_reference": "NOT_VALIDATED",
-      "all_tasks_have_priority": "NOT_VALIDATED",
-      "all_tasks_have_type": "NOT_VALIDATED",
-      "all_tasks_have_status": "NOT_VALIDATED",
-      "all_vertical_slice_refs_valid": "NOT_VALIDATED",
-      "no_task_has_more_than_15_acceptance_criteria": "NOT_VALIDATED",
-      "all_block_ids_exist": "NOT_VALIDATED",
-      "all_blocked_tasks_have_blocking_dependencies": "NOT_VALIDATED",
-      "dsl_v01_no_input_let": "NOT_VALIDATED",
-      "m1_no_vector_line": "NOT_VALIDATED",
-      "m2a_no_circle_arc_polygon": "NOT_VALIDATED",
-      "offset_decomposed": "NOT_VALIDATED",
-      "intersections_decomposed": "NOT_VALIDATED",
-      "plan001_exists": "NOT_VALIDATED"
-    },
+    "checks": {},
     "task_counts": {
-      "total": 187,
-      "implementation": 78,
-      "tests": 78,
+      "total": 194,
+      "implementation": 77,
+      "tests": 79,
       "setup": 9,
-      "documentation": 8,
+      "documentation": 15,
       "test_patterns": 14
     },
     "milestone_count": 13,
     "phase_count": 13,
-    "vertical_slice_count": 11,
-    "completed_at": "2026-07-25T03:28:07.467Z"
+    "vertical_slice_count": 14
   }
 }

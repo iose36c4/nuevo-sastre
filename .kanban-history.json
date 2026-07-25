@@ -1,0 +1,41 @@
+{"operation":"createTask","taskId":"TASK-001","after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T04:09:04.413Z"}
+{"operation":"createTask","taskId":"TASK-001","after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:11:47.477Z"}
+{"operation":"updateTask","taskId":"TASK-001","before":{"status":"backlog"},"after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:11:58.611Z"}
+{"operation":"createSubtask","taskId":"TASK-001","before":{"status":"backlog"},"after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:13:17.564Z"}
+{"operation":"createSubtask","taskId":"TASK-001","before":{"status":"backlog"},"after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:13:23.449Z"}
+{"operation":"createSubtask","taskId":"TASK-001","before":{"status":"backlog"},"after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:13:26.917Z"}
+{"operation":"createSubtask","taskId":"TASK-001","before":{"status":"backlog"},"after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:13:30.927Z"}
+{"operation":"createSubtask","taskId":"TASK-001","before":{"status":"backlog"},"after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:13:34.750Z"}
+{"operation":"createSubtask","taskId":"TASK-001","before":{"status":"backlog"},"after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:13:39.790Z"}
+{"operation":"addDependency","taskId":"TASK-003","before":{"status":"backlog"},"after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:14:11.565Z"}
+{"operation":"addDependency","taskId":"TASK-004","before":{"status":"backlog"},"after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:14:12.122Z"}
+{"operation":"addDependency","taskId":"TASK-005","before":{"status":"backlog"},"after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:14:12.829Z"}
+{"operation":"addDependency","taskId":"TASK-005","before":{"status":"backlog"},"after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:14:13.647Z"}
+{"operation":"addDependency","taskId":"TASK-006","before":{"status":"backlog"},"after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:14:13.835Z"}
+{"operation":"addDependency","taskId":"TASK-006","before":{"status":"backlog"},"after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:14:14.362Z"}
+{"operation":"addDependency","taskId":"TASK-006","before":{"status":"backlog"},"after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:14:14.927Z"}
+{"operation":"addDependency","taskId":"TASK-007","before":{"status":"backlog"},"after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:14:15.499Z"}
+{"operation":"addDependency","taskId":"TASK-007","before":{"status":"backlog"},"after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:14:16.062Z"}
+{"operation":"addDependency","taskId":"TASK-007","before":{"status":"backlog"},"after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:14:16.933Z"}
+{"operation":"addDependency","taskId":"TASK-007","before":{"status":"backlog"},"after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:14:17.171Z"}
+{"operation":"updateTask","taskId":"TASK-001","before":{"status":"backlog"},"after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:14:28.531Z"}
+{"operation":"changeStatus","taskId":"TASK-002","before":{"status":"backlog"},"success":false,"error":"Invalid status transition: backlog -> in_progress","timestamp":"2026-07-25T05:16:12.237Z"}
+{"operation":"updateTask","taskId":"TASK-001","before":{"status":"backlog"},"after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:21:55.761Z"}
+{"operation":"recordEvidence","taskId":"TASK-002","before":{"status":"review"},"after":{"status":"review"},"success":true,"timestamp":"2026-07-25T05:22:16.526Z"}
+{"operation":"completeTask","taskId":"TASK-002","before":{"status":"review"},"after":{"status":"done"},"success":true,"timestamp":"2026-07-25T05:22:16.530Z"}
+{"operation":"recordEvidence","taskId":"TASK-004","before":{"status":"in_progress"},"after":{"status":"in_progress"},"success":true,"timestamp":"2026-07-25T05:26:48.808Z"}
+{"operation":"completeTask","taskId":"TASK-004","before":{"status":"in_progress"},"after":{"status":"done"},"success":true,"timestamp":"2026-07-25T05:26:48.812Z"}
+{"operation":"recordEvidence","taskId":"TASK-004","before":{"status":"done"},"after":{"status":"done"},"success":true,"timestamp":"2026-07-25T05:27:00.405Z"}
+{"operation":"completeTask","taskId":"TASK-004","before":{"status":"done"},"success":false,"error":"Task already completed","timestamp":"2026-07-25T05:27:00.406Z"}
+{"operation":"recordEvidence","taskId":"TASK-003","before":{"status":"review"},"after":{"status":"review"},"success":true,"timestamp":"2026-07-25T05:28:02.871Z"}
+{"operation":"completeTask","taskId":"TASK-003","before":{"status":"review"},"after":{"status":"done"},"success":true,"timestamp":"2026-07-25T05:28:02.874Z"}
+{"operation":"recordEvidence","taskId":"TASK-005","before":{"status":"in_progress"},"after":{"status":"in_progress"},"success":true,"timestamp":"2026-07-25T05:31:43.007Z"}
+{"operation":"completeTask","taskId":"TASK-005","before":{"status":"in_progress"},"after":{"status":"done"},"success":true,"timestamp":"2026-07-25T05:31:43.011Z"}
+{"operation":"recordEvidence","taskId":"TASK-006","before":{"status":"in_progress"},"after":{"status":"in_progress"},"success":true,"timestamp":"2026-07-25T05:35:25.847Z"}
+{"operation":"completeTask","taskId":"TASK-006","before":{"status":"in_progress"},"after":{"status":"done"},"success":true,"timestamp":"2026-07-25T05:35:25.856Z"}
+{"operation":"recordEvidence","taskId":"TASK-007","before":{"status":"in_progress"},"after":{"status":"in_progress"},"success":true,"timestamp":"2026-07-25T05:40:50.451Z"}
+{"operation":"completeTask","taskId":"TASK-007","before":{"status":"in_progress"},"after":{"status":"done"},"success":true,"timestamp":"2026-07-25T05:40:50.455Z"}
+{"operation":"recordEvidence","taskId":"TASK-001","before":{"status":"backlog"},"after":{"status":"backlog"},"success":true,"timestamp":"2026-07-25T05:41:03.590Z"}
+{"operation":"completeTask","taskId":"TASK-001","before":{"status":"backlog"},"success":false,"error":"Cannot complete task in status backlog","timestamp":"2026-07-25T05:41:03.590Z"}
+{"operation":"recordEvidence","taskId":"TASK-001","before":{"status":"review"},"after":{"status":"review"},"success":true,"timestamp":"2026-07-25T05:41:27.677Z"}
+{"operation":"completeTask","taskId":"TASK-001","before":{"status":"review"},"after":{"status":"done"},"success":true,"timestamp":"2026-07-25T05:41:27.682Z"}
