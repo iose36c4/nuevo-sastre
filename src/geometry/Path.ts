@@ -21,74 +21,66 @@ export type PathSegment =
   | { readonly kind: 'arc'; readonly params: ArcParams };
 
 export interface Path {
+  readonly startPoint: Point2D | undefined;
   readonly segments: readonly PathSegment[];
   readonly closed: boolean;
 }
 
-function isLineSegment(seg: PathSegment): seg is { readonly kind: 'line'; readonly from: Point2D; readonly to: Point2D } {
-  return seg.kind === 'line';
-}
-
-function isVirtualSegment(seg: PathSegment): seg is { readonly kind: 'line'; readonly from: Point2D; readonly to: Point2D } {
-  return isLineSegment(seg) && pointsEqual(seg.from, seg.to, GEOMETRIC_EPSILON);
-}
-
 function getLastPoint(path: Path): Point2D | undefined {
   const segs = path.segments;
-  if (segs.length === 0) return undefined;
-  const last = segs[segs.length - 1]!;
-  
-  if (last.kind === 'line') {
-    return (last as { readonly kind: 'line'; readonly from: Point2D; readonly to: Point2D }).to;
+  if (segs.length > 0) {
+    const last = segs[segs.length - 1]!;
+    if (last.kind === 'line') {
+      return (last as { readonly kind: 'line'; readonly from: Point2D; readonly to: Point2D }).to;
+    }
+    if (last.kind === 'bezier') {
+      const b = last as { readonly kind: 'bezier'; readonly curve: BezierCurve };
+      return b.curve.controlPoints[b.curve.controlPoints.length - 1];
+    }
+    if (last.kind === 'arc') {
+      const params = (last as { readonly kind: 'arc'; readonly params: ArcParams }).params;
+      return createPoint(params.center.x + params.radius * Math.cos(params.endAngle), params.center.y + params.radius * Math.sin(params.endAngle));
+    }
   }
-  if (last.kind === 'bezier') {
-    const b = last as { readonly kind: 'bezier'; readonly curve: BezierCurve };
-    return b.curve.controlPoints[b.curve.controlPoints.length - 1];
-  }
-  if (last.kind === 'arc') {
-    const params = (last as { readonly kind: 'arc'; readonly params: ArcParams }).params;
-    return createPoint(params.center.x + params.radius * Math.cos(params.endAngle), params.center.y + params.radius * Math.sin(params.endAngle));
-  }
-  return undefined;
+  // If no segments but has startPoint, that's the last point
+  return path.startPoint;
 }
 
 function getFirstPoint(path: Path): Point2D | undefined {
-  const segs = path.segments;
-  if (segs.length === 0) return undefined;
-  const first = segs[0]!;
-  if (first.kind === 'line') {
-    return (first as { readonly kind: 'line'; readonly from: Point2D; readonly to: Point2D }).from;
+  if (path.segments.length > 0) {
+    const first = path.segments[0]!;
+    if (first.kind === 'line') {
+      return (first as { readonly kind: 'line'; readonly from: Point2D; readonly to: Point2D }).from;
+    }
+    // For future: bezier/arc first point would be their start
   }
-  return undefined;
+  return path.startPoint;
 }
 
 export function createPath(): Path {
-  return { segments: [], closed: false };
+  return { startPoint: undefined, segments: [], closed: false };
 }
 
 export function pathAddLine(path: Path, to: Point2D): Path {
-  const segs = path.segments;
-  if (segs.length === 0) {
-    const virtualSeg: PathSegment = { kind: 'line', from: to, to };
-    return { segments: [virtualSeg], closed: false };
+  if (path.startPoint === undefined) {
+    // First point - just set as start point, no segment yet
+    return { ...path, startPoint: to };
   }
-
-  const lastSeg = segs[segs.length - 1]!;
-  
-  if (isVirtualSegment(lastSeg)) {
-    const newSeg: PathSegment = { kind: 'line', from: lastSeg.from, to };
-    const newSegments = [...segs.slice(0, -1), newSeg];
-    return { segments: newSegments, closed: false };
-  }
-
+  // Create segment from last point to new point
   const lastPoint = getLastPoint(path);
   if (!lastPoint) throw new Error('Path has no last point');
   const newSeg: PathSegment = { kind: 'line', from: lastPoint, to };
-  return { segments: [...segs, newSeg], closed: false };
+  return {
+    ...path,
+    segments: [...path.segments, newSeg],
+    closed: false
+  };
 }
 
 export function pathClose(path: Path): Path {
-  if (path.segments.length === 0) throw new Error('Cannot close empty path');
+  if (path.startPoint === undefined || path.segments.length === 0) {
+    throw new Error('Cannot close empty path or path without segments');
+  }
   if (path.closed) return path;
 
   const firstPoint = getFirstPoint(path);
@@ -102,20 +94,13 @@ export function pathClose(path: Path): Path {
   }
 
   const closingSeg: PathSegment = { kind: 'line', from: lastPoint, to: firstPoint };
-  return { segments: [...path.segments, closingSeg], closed: true };
+  return { startPoint: path.startPoint, segments: [...path.segments, closingSeg], closed: true };
 }
 
 export function pathGetPoints(path: Path): Point2D[] {
-  if (path.segments.length === 0) return [];
+  if (path.startPoint === undefined) return [];
 
-  if (path.segments.length === 1 && isVirtualSegment(path.segments[0]!)) {
-    return [path.segments[0]!.from];
-  }
-
-  const points: Point2D[] = [];
-  const firstPoint = getFirstPoint(path);
-  if (firstPoint) points.push(firstPoint);
-
+  const points: Point2D[] = [path.startPoint];
   for (const seg of path.segments) {
     if (seg.kind === 'line') {
       points.push((seg as { readonly kind: 'line'; readonly from: Point2D; readonly to: Point2D }).to);
@@ -128,7 +113,6 @@ export function pathLength(path: Path): number {
   let total = 0;
   for (const seg of path.segments) {
     if (seg.kind !== 'line') throw new Error('pathLength: non-line segments not implemented');
-    if (isVirtualSegment(seg)) continue;
     const { from, to } = seg as { readonly kind: 'line'; readonly from: Point2D; readonly to: Point2D };
     const dx = to.x - from.x;
     const dy = to.y - from.y;
@@ -138,12 +122,10 @@ export function pathLength(path: Path): number {
 }
 
 export function pathIsEmpty(path: Path): boolean {
-  return path.segments.length === 0;
+  return path.startPoint === undefined && path.segments.length === 0;
 }
 
 export function pathSegmentCount(path: Path): number {
-  if (path.segments.length === 0) return 0;
-  if (path.segments.length === 1 && isVirtualSegment(path.segments[0]!)) return 0;
   return path.segments.length;
 }
 
@@ -177,7 +159,6 @@ export function pathPointAt(path: Path, t: number): Point2D {
 
   for (const seg of path.segments) {
     if (seg.kind !== 'line') throw new Error('pathPointAt: non-line segments not implemented');
-    if (isVirtualSegment(seg)) continue;
 
     const { from, to } = seg as { readonly kind: 'line'; readonly from: Point2D; readonly to: Point2D };
     const dx = to.x - from.x;
@@ -195,6 +176,9 @@ export function pathPointAt(path: Path, t: number): Point2D {
 }
 
 export function pathTranslate(path: Path, dx: number, dy: number): Path {
+  const translatedStart = path.startPoint
+    ? createPoint(path.startPoint.x + dx, path.startPoint.y + dy)
+    : undefined;
   const translatedSegments: PathSegment[] = [];
   for (const seg of path.segments) {
     if (seg.kind === 'line') {
@@ -205,10 +189,10 @@ export function pathTranslate(path: Path, dx: number, dy: number): Path {
         to: createPoint(to.x + dx, to.y + dy),
       });
     } else {
-      translatedSegments.push(seg);
+      throw new Error(`pathTranslate: unsupported segment kind ${seg.kind}`);
     }
   }
-  return { segments: translatedSegments, closed: path.closed };
+  return { startPoint: translatedStart, segments: translatedSegments, closed: path.closed };
 }
 
 export function pathRotate(path: Path, angle: number, center: Point2D = { x: 0, y: 0 }): Path {
@@ -220,6 +204,7 @@ export function pathRotate(path: Path, angle: number, center: Point2D = { x: 0, 
     return createPoint(center.x + dx * cos - dy * sin, center.y + dx * sin + dy * cos);
   };
 
+  const rotatedStart = path.startPoint ? rotatePoint(path.startPoint) : undefined;
   const rotatedSegments: PathSegment[] = [];
   for (const seg of path.segments) {
     if (seg.kind === 'line') {
@@ -230,10 +215,10 @@ export function pathRotate(path: Path, angle: number, center: Point2D = { x: 0, 
         to: rotatePoint(to),
       });
     } else {
-      rotatedSegments.push(seg);
+      throw new Error(`pathRotate: unsupported segment kind ${seg.kind}`);
     }
   }
-  return { segments: rotatedSegments, closed: path.closed };
+  return { startPoint: rotatedStart, segments: rotatedSegments, closed: path.closed };
 }
 
 export function pathBoundingBox(path: Path): { min: Point2D; max: Point2D } {

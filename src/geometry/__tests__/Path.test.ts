@@ -23,20 +23,18 @@ describe('Path', () => {
     it('creates an empty path', () => {
       const path = createPath();
       expect(path.segments).toEqual([]);
+      expect(path.startPoint).toBeUndefined();
       expect(path.closed).toBe(false);
     });
   });
 
   describe('pathAddLine', () => {
-    it('adds first point without creating segment (virtual segment)', () => {
+    it('adds first point as startPoint (no segment)', () => {
       const path = createPath();
       const p1 = createPoint(0, 0);
       const newPath = pathAddLine(path, p1);
-      // First point creates a virtual segment (from p1 to p1)
-      expect(newPath.segments).toHaveLength(1);
-      expect(newPath.segments[0].kind).toBe('line');
-      expect(newPath.segments[0].from).toEqual(p1);
-      expect(newPath.segments[0].to).toEqual(p1);
+      expect(newPath.startPoint).toEqual(p1);
+      expect(newPath.segments).toHaveLength(0);
     });
 
     it('creates segment on second point', () => {
@@ -103,15 +101,13 @@ describe('Path', () => {
 
     it('throws for empty path', () => {
       const path = createPath();
-      expect(() => pathClose(path)).toThrow('Cannot close empty path');
+      expect(() => pathClose(path)).toThrow('Cannot close empty path or path without segments');
     });
 
-    it('closes path with single virtual segment (marks as closed)', () => {
+    it('throws for path with startPoint but no segments', () => {
       let path = createPath();
       path = pathAddLine(path, createPoint(0, 0));
-      const closed = pathClose(path);
-      expect(closed.closed).toBe(true);
-      expect(closed.segments).toHaveLength(1);
+      expect(() => pathClose(path)).toThrow('Cannot close empty path or path without segments');
     });
   });
 
@@ -121,12 +117,10 @@ describe('Path', () => {
       expect(pathGetPoints(path)).toEqual([]);
     });
 
-    it('returns single point for single virtual segment path', () => {
+    it('returns single point for path with only startPoint', () => {
       let path = createPath();
       path = pathAddLine(path, createPoint(5, 5));
-      const points = pathGetPoints(path);
-      expect(points).toHaveLength(1);
-      expect(points[0]).toEqual(createPoint(5, 5));
+      expect(pathGetPoints(path)).toEqual([createPoint(5, 5)]);
     });
 
     it('returns all points in order for simple path', () => {
@@ -210,7 +204,7 @@ describe('Path', () => {
       expect(pathIsEmpty(createPath())).toBe(true);
     });
 
-    it('returns false for path with virtual segment', () => {
+    it('returns false for path with only startPoint', () => {
       let path = createPath();
       path = pathAddLine(path, createPoint(0, 0));
       expect(pathIsEmpty(path)).toBe(false);
@@ -229,7 +223,7 @@ describe('Path', () => {
       expect(pathSegmentCount(createPath())).toBe(0);
     });
 
-    it('returns 0 for single point path (virtual segment not counted)', () => {
+    it('returns 0 for single point path', () => {
       let path = createPath();
       path = pathAddLine(path, createPoint(0, 0));
       expect(pathSegmentCount(path)).toBe(0);
@@ -273,7 +267,7 @@ describe('Path', () => {
       expect(pathFirstPoint(path)).toEqual(createPoint(5, 5));
     });
 
-    it('returns first point for single point path', () => {
+    it('returns startPoint for single point path', () => {
       let path = createPath();
       path = pathAddLine(path, createPoint(3, 3));
       expect(pathFirstPoint(path)).toEqual(createPoint(3, 3));
@@ -292,7 +286,7 @@ describe('Path', () => {
       expect(pathLastPoint(path)).toEqual(createPoint(10, 10));
     });
 
-    it('returns same point for single point path', () => {
+    it('returns startPoint for single point path', () => {
       let path = createPath();
       path = pathAddLine(path, createPoint(7, 7));
       expect(pathLastPoint(path)).toEqual(createPoint(7, 7));
@@ -369,13 +363,14 @@ describe('Path', () => {
       path = pathAddLine(path, createPoint(4, 6));
       path = pathAddLine(path, createPoint(7, 2));
       const translated = pathTranslate(path, 10, 20);
+      expect(translated.startPoint).toEqual(createPoint(11, 22));
       expect(translated.segments[0].from).toEqual(createPoint(11, 22));
       expect(translated.segments[0].to).toEqual(createPoint(14, 26));
       expect(translated.segments[1].from).toEqual(createPoint(14, 26));
       expect(translated.segments[1].to).toEqual(createPoint(17, 22));
     });
 
-    it('preserves isClosed state', () => {
+    it('preserves closed state', () => {
       let path = createPath();
       path = pathAddLine(path, createPoint(0, 0));
       path = pathAddLine(path, createPoint(10, 0));
@@ -389,19 +384,22 @@ describe('Path', () => {
       let path = createPath();
       path = pathAddLine(path, createPoint(0, 0));
       path = pathAddLine(path, createPoint(10, 10));
-      const originalFirst = path.segments[0].from;
+      const originalStart = path.startPoint;
       pathTranslate(path, 5, 5);
-      expect(path.segments[0].from).toEqual(originalFirst);
+      expect(path.startPoint).toEqual(originalStart);
     });
   });
 
-  describe('pathRotate', () => {
+describe('pathRotate', () => {
     it('rotates points around origin by 90 degrees', () => {
       let path = createPath();
       path = pathAddLine(path, createPoint(1, 0));
       path = pathAddLine(path, createPoint(0, 1));
       const rotated = pathRotate(path, Math.PI / 2);
       // (1,0) -> (0,1), (0,1) -> (-1,0)
+      // New model: startPoint = (1,0) -> (0,1); segment from (1,0) to (0,1) -> from (0,1) to (-1,0)
+      expect(rotated.startPoint!.x).toBeCloseTo(0, 5);
+      expect(rotated.startPoint!.y).toBeCloseTo(1, 5);
       expect(rotated.segments[0].from.x).toBeCloseTo(0, 5);
       expect(rotated.segments[0].from.y).toBeCloseTo(1, 5);
       expect(rotated.segments[0].to.x).toBeCloseTo(-1, 5);
@@ -414,12 +412,12 @@ describe('Path', () => {
       path = pathAddLine(path, createPoint(2, 1));
       const rotated = pathRotate(path, Math.PI / 2, createPoint(1, 1));
       // Rotate around (1,1): (1,1) stays, (2,1) -> (1,2)
-      expect(rotated.segments[0].from).toEqual(createPoint(1, 1));
+      expect(rotated.startPoint).toEqual(createPoint(1, 1));
       expect(rotated.segments[0].to.x).toBeCloseTo(1, 5);
       expect(rotated.segments[0].to.y).toBeCloseTo(2, 5);
     });
 
-    it('preserves isClosed state', () => {
+    it('preserves closed state', () => {
       let path = createPath();
       path = pathAddLine(path, createPoint(0, 0));
       path = pathAddLine(path, createPoint(10, 0));
@@ -433,9 +431,9 @@ describe('Path', () => {
       let path = createPath();
       path = pathAddLine(path, createPoint(1, 0));
       path = pathAddLine(path, createPoint(0, 1));
-      const originalFirst = path.segments[0].from;
+      const originalStart = path.startPoint;
       pathRotate(path, Math.PI / 2);
-      expect(path.segments[0].from).toEqual(originalFirst);
+      expect(path.startPoint).toEqual(originalStart);
     });
   });
 
@@ -566,7 +564,7 @@ describe('Path', () => {
       path = pathAddLine(path, createPoint(0, 0));
       path = pathAddLine(path, createPoint(0, 0));
       path = pathAddLine(path, createPoint(10, 0));
-      expect(pathSegmentCount(path)).toBe(1);
+      expect(pathSegmentCount(path)).toBe(2);
       expect(pathLength(path)).toBe(10);
     });
 
