@@ -33,7 +33,7 @@
       "title": "Foundations + Kanban Validator",
       "description": "Project setup + Kanban validator",
       "order": 0,
-      "status": "backlog",
+      "status": "done",
       "vertical_slice": "VS-01",
       "blocks": [
         "PHASE-01"
@@ -44,7 +44,7 @@
       "title": "First SVG — Rectangle",
       "description": "Point, Segment (inline vector math), SVG Renderer, Export",
       "order": 1,
-      "status": "backlog",
+      "status": "done",
       "vertical_slice": "VS-02",
       "blocks": [
         "PHASE-02A",
@@ -57,7 +57,7 @@
       "title": "Curved SVG",
       "description": "Bezier cubic, Path, SVG curves",
       "order": 2,
-      "status": "backlog",
+      "status": "done",
       "vertical_slice": "VS-03",
       "blocks": [
         "PHASE-02C",
@@ -70,7 +70,7 @@
       "title": "Extended Geometry",
       "description": "Vector, Line, Circle, Arc, Polygon, Transform, Measure (parallel to 02A)",
       "order": 3,
-      "status": "backlog",
+      "status": "done",
       "vertical_slice": "VS-03b",
       "blocks": [
         "PHASE-02C"
@@ -81,7 +81,7 @@
       "title": "Intersections",
       "description": "All intersection types decomposed, projections, tangents",
       "order": 4,
-      "status": "backlog",
+      "status": "done",
       "vertical_slice": "VS-03c",
       "blocks": [
         "PHASE-06"
@@ -92,7 +92,7 @@
       "title": "DSL v0.1 Minimal",
       "description": "Lexer, Parser (no Pratt), Interpreter (no units), Model, Registry — no INPUT, no LET",
       "order": 5,
-      "status": "backlog",
+      "status": "done",
       "vertical_slice": "VS-04",
       "blocks": [
         "PHASE-04"
@@ -103,7 +103,7 @@
       "title": "DSL v0.2 Parametric",
       "description": "INPUT, LET, Pratt, Units, Point methods",
       "order": 6,
-      "status": "backlog",
+      "status": "done",
       "vertical_slice": "VS-05",
       "blocks": [
         "PHASE-06"
@@ -114,7 +114,7 @@
       "title": "Pattern Piece",
       "description": "Piece model, PatternRenderer (parallel to DSL)",
       "order": 7,
-      "status": "backlog",
+      "status": "done",
       "vertical_slice": "VS-06",
       "blocks": [
         "PHASE-06"
@@ -125,7 +125,7 @@
       "title": "Pattern Operations",
       "description": "Offset (decomposed), SeamAllowance, Notch, Grainline, Dart",
       "order": 8,
-      "status": "backlog",
+      "status": "done",
       "vertical_slice": "VS-07",
       "blocks": [
         "PHASE-07"
@@ -136,7 +136,7 @@
       "title": "CLI + Validation",
       "description": "CLI commands, validators",
       "order": 9,
-      "status": "backlog",
+      "status": "done",
       "vertical_slice": "VS-08",
       "blocks": [
         "PHASE-08",
@@ -148,7 +148,7 @@
       "title": "Boxer Patterns",
       "description": "Progressive reference patterns",
       "order": 10,
-      "status": "backlog",
+      "status": "done",
       "vertical_slice": "VS-09",
       "blocks": [
         "PHASE-09"
@@ -159,7 +159,7 @@
       "title": "Integration Tests + Docs",
       "description": "End-to-end tests, property-based tests, documentation",
       "order": 11,
-      "status": "backlog",
+      "status": "done",
       "vertical_slice": "VS-10",
       "blocks": []
     },
@@ -168,7 +168,7 @@
       "title": "AI Kanban Operations",
       "description": "Kanban Engine, CLI, Query API, Mutation API, Context Builder, OpenCode Skill for AI agents",
       "order": 12,
-      "status": "backlog",
+      "status": "done",
       "vertical_slice": "VS-KANBAN",
       "blocks": []
     }
@@ -180,7 +180,7 @@
       "phase": "PHASE-00",
       "title": "Initialize TypeScript project",
       "description": "Create package.json with dependencies: typescript, vitest, eslint, @typescript-eslint/*, svgo. Configure tsconfig.json with strict mode, ESM modules, target ES2022.",
-      "status": "backlog",
+      "status": "done",
       "priority": "critical",
       "type": "setup",
       "vertical_slice": "VS-01",
@@ -211,7 +211,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "FND-002",
@@ -219,7 +220,7 @@
       "phase": "PHASE-00",
       "title": "Configure ESLint",
       "description": "Configure ESLint with @typescript-eslint/recommended and strict rules. Create .eslintrc.json.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "setup",
       "vertical_slice": "VS-01",
@@ -240,7 +241,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "FND-003",
@@ -248,7 +250,7 @@
       "phase": "PHASE-00",
       "title": "Configure Vitest",
       "description": "Configure Vitest with vitest.config.ts. Set up test paths and coverage configuration.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "setup",
       "vertical_slice": "VS-01",
@@ -269,7 +271,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "FND-004",
@@ -277,7 +280,7 @@
       "phase": "PHASE-00",
       "title": "Create directory structure",
       "description": "Create src/ tree: geometry/, model/, dsl/, svg/, pattern/, cli/, validation/. Create index.ts in each module.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "setup",
       "vertical_slice": "VS-01",
@@ -304,7 +307,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "FND-005",
@@ -312,7 +316,7 @@
       "phase": "PHASE-00",
       "title": "Configure npm scripts",
       "description": "Create scripts: build, test, lint, typecheck, dev, clean, validate:kanban.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "setup",
       "vertical_slice": "VS-01",
@@ -334,7 +338,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "FND-006",
@@ -342,7 +347,7 @@
       "phase": "PHASE-00",
       "title": "Create README.md",
       "description": "README with: name, description, prerequisites, installation, structure, conventions.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "setup",
       "vertical_slice": "VS-01",
@@ -367,7 +372,8 @@
       ],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "FND-007",
@@ -375,7 +381,7 @@
       "phase": "PHASE-00",
       "title": "Create .gitignore",
       "description": "Configure .gitignore: node_modules, dist, coverage, .env, editor files, OS files.",
-      "status": "backlog",
+      "status": "done",
       "priority": "low",
       "type": "setup",
       "vertical_slice": "VS-01",
@@ -394,7 +400,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "FND-008",
@@ -402,7 +409,7 @@
       "phase": "PHASE-00",
       "title": "Create testing utilities",
       "description": "Create src/geometry/__tests__/helpers.ts: assertPointsEqual, assertSegmentsEqual, GEOMETRIC_EPSILON, makePoint.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "setup",
       "vertical_slice": "VS-01",
@@ -424,7 +431,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PLAN-001",
@@ -432,7 +440,7 @@
       "phase": "PHASE-00",
       "title": "Implement Kanban Validator",
       "description": "Create scripts/validate-kanban.ts: loads kanban.json, runs all validation checks (unique IDs, no cycles, deps exist, tests for features, milestones valid), reports pass/fail, exits 0/1.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "setup",
       "vertical_slice": "VS-01",
@@ -463,7 +471,8 @@
       "can_parallelize": false,
       "notes": [
         "Must be runnable via npm run validate:kanban"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PLAN-001T",
@@ -471,7 +480,7 @@
       "phase": "PHASE-00",
       "title": "Tests for Kanban Validator",
       "description": "Test validator with valid/invalid kanban data.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-01",
@@ -488,7 +497,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-001",
@@ -496,7 +506,7 @@
       "phase": "PHASE-01",
       "title": "Implement Point2D",
       "description": "Create src/geometry/Point.ts: Point2D {x, y}, makePoint, equals, add, subtract, distanceTo, midpoint, toString. Y-up.",
-      "status": "backlog",
+      "status": "done",
       "priority": "critical",
       "type": "feature",
       "vertical_slice": "VS-02",
@@ -523,7 +533,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-001T",
@@ -531,7 +542,7 @@
       "phase": "PHASE-01",
       "title": "Tests for Point2D",
       "description": "Unit tests for all Point2D functions.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-02",
@@ -549,7 +560,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-004",
@@ -557,7 +569,7 @@
       "phase": "PHASE-01",
       "title": "Implement Segment",
       "description": "Create src/geometry/Segment.ts: Segment {from, to}. Functions: makeSegment, length, midpoint, direction, normal, boundingBox, pointAt, project, containsPoint. Vector math inline from Point2D.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-02",
@@ -585,7 +597,8 @@
       "can_parallelize": false,
       "notes": [
         "Vector math for direction/normal computed inline"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-004T",
@@ -593,7 +606,7 @@
       "phase": "PHASE-01",
       "title": "Tests for Segment",
       "description": "Unit tests: construction, length, midpoint, direction, normal, pointAt, project, containsPoint.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-02",
@@ -610,7 +623,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-SVG-001",
@@ -618,7 +632,7 @@
       "phase": "PHASE-01",
       "title": "Implement SVG Renderer (direct geometry)",
       "description": "Create src/svg/Renderer.ts: renderGeometry(shapes) renders Point2D[], Segment[] to SVG. Y-down: svgY = viewBoxHeight - internalY.",
-      "status": "backlog",
+      "status": "done",
       "priority": "critical",
       "type": "feature",
       "vertical_slice": "VS-02",
@@ -647,7 +661,8 @@
       "can_parallelize": false,
       "notes": [
         "SVG does NOT depend on Model"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-SVG-001T",
@@ -655,7 +670,7 @@
       "phase": "PHASE-01",
       "title": "Tests for SVG Renderer - first rectangle",
       "description": "4 segments forming rectangle, render SVG, verify <line> elements, viewBox, Y-flip.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-02",
@@ -678,7 +693,8 @@
       "can_parallelize": false,
       "notes": [
         "First visual verification milestone"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "SVG-EXP-001",
@@ -686,7 +702,7 @@
       "phase": "PHASE-01",
       "title": "Implement SVG Export",
       "description": "Create src/svg/Export.ts: exportSVG(svgString, outputPath) with optional SVGO optimization. UTF-8.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "feature",
       "vertical_slice": "VS-02",
@@ -712,7 +728,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "SVG-EXP-001T",
@@ -720,7 +737,7 @@
       "phase": "PHASE-01",
       "title": "Tests for SVG Export",
       "description": "Test export creates valid SVG file.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-02",
@@ -737,7 +754,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-008",
@@ -745,7 +763,7 @@
       "phase": "PHASE-02A",
       "title": "Implement Bezier quadratic",
       "description": "Add to src/geometry/Bezier.ts: BezierQuadratic {p0, p1, p2}. evaluateQ, derivativeQ, splitQ, flatnessQ, toPointsQ.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-03",
@@ -771,7 +789,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-008T",
@@ -779,7 +798,7 @@
       "phase": "PHASE-02A",
       "title": "Tests for Bezier quadratic",
       "description": "Tests for quadratic Bezier: evaluation, splitting, flatness.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-03",
@@ -796,7 +815,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-008C",
@@ -804,7 +824,7 @@
       "phase": "PHASE-02A",
       "title": "Implement Bezier cubic",
       "description": "Add to Bezier.ts: BezierCubic {p0, p1, p2, p3}. evaluateC, derivativeC, splitC, flatnessC, toPointsC, lengthC, tangentAtC, normalAtC.",
-      "status": "backlog",
+      "status": "done",
       "priority": "critical",
       "type": "feature",
       "vertical_slice": "VS-03",
@@ -831,7 +851,8 @@
       "can_parallelize": false,
       "notes": [
         "Most critical curve type"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-008CT",
@@ -839,7 +860,7 @@
       "phase": "PHASE-02A",
       "title": "Tests for Bezier cubic",
       "description": "Exhaustive tests: evaluation, derivative, splitting, flatness, length, tangent, normal.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-03",
@@ -856,7 +877,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-011",
@@ -864,7 +886,7 @@
       "phase": "PHASE-02A",
       "title": "Implement Path",
       "description": "Create src/geometry/Path.ts: Path {segments: PathSegment[], closed}. PathSegment = line | bezier. makePath, addSegment, toPoints, boundingBox, length.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-03",
@@ -890,7 +912,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-011T",
@@ -898,7 +921,7 @@
       "phase": "PHASE-02A",
       "title": "Tests for Path",
       "description": "Tests: construction, toPoints, boundingBox, length for mixed paths.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-03",
@@ -915,7 +938,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-SVG-002",
@@ -923,7 +947,7 @@
       "phase": "PHASE-02A",
       "title": "Add Bezier/Path rendering to SVG",
       "description": "Extend Renderer.ts: render Path as <path> with M/L/C/Z commands.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-03",
@@ -950,7 +974,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-SVG-002T",
@@ -958,7 +983,7 @@
       "phase": "PHASE-02A",
       "title": "Tests for curved SVG rendering",
       "description": "Render Bezier path to SVG, verify <path> with C commands.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-03",
@@ -975,7 +1000,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-002",
@@ -983,7 +1009,7 @@
       "phase": "PHASE-02B",
       "title": "Implement Vector2D",
       "description": "Create src/geometry/Vector.ts: Vector2D {x, y}. makeVector, fromPoints, length, normalize, dot, cross, add, subtract, scale, perpendicular, angle, rotate.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-03b",
@@ -1009,7 +1035,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-002T",
@@ -1017,7 +1044,7 @@
       "phase": "PHASE-02B",
       "title": "Tests for Vector2D",
       "description": "Unit tests for all Vector2D functions.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-03b",
@@ -1034,7 +1061,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-003",
@@ -1042,7 +1070,7 @@
       "phase": "PHASE-02B",
       "title": "Implement Line (infinite)",
       "description": "Create src/geometry/Line.ts: implicit ax+by+c=0. fromTwoPoints, distanceToPoint, closestPoint, containsPoint.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-03b",
@@ -1067,7 +1095,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-003T",
@@ -1075,7 +1104,7 @@
       "phase": "PHASE-02B",
       "title": "Tests for Line",
       "description": "Tests: construction, distance, closestPoint, containsPoint.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-03b",
@@ -1092,7 +1121,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-005",
@@ -1100,7 +1130,7 @@
       "phase": "PHASE-02B",
       "title": "Implement Ray",
       "description": "Create src/geometry/Ray.ts: Ray {origin, direction}. makeRay, fromTwoPoints, intersectSegment, pointAt.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "feature",
       "vertical_slice": "VS-03b",
@@ -1125,7 +1155,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-005T",
@@ -1133,7 +1164,7 @@
       "phase": "PHASE-02B",
       "title": "Tests for Ray",
       "description": "Tests: construction, intersection, pointAt.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-03b",
@@ -1150,7 +1181,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-006",
@@ -1158,7 +1190,7 @@
       "phase": "PHASE-02B",
       "title": "Implement Circle",
       "description": "Create src/geometry/Circle.ts: Circle {center, radius}. makeCircle, area, circumference, containsPoint, intersectLine, intersectCircle, tangentAt.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "feature",
       "vertical_slice": "VS-03b",
@@ -1183,7 +1215,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-006T",
@@ -1191,7 +1224,7 @@
       "phase": "PHASE-02B",
       "title": "Tests for Circle",
       "description": "Tests: construction, area, intersects, tangent.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-03b",
@@ -1208,7 +1241,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-007",
@@ -1216,7 +1250,7 @@
       "phase": "PHASE-02B",
       "title": "Implement Arc",
       "description": "Create src/geometry/Arc.ts: Arc {center, radius, startAngle, endAngle, ccw}. makeArc, fromThreePoints, pointAt, length, toBezier.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "feature",
       "vertical_slice": "VS-03b",
@@ -1241,7 +1275,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-007T",
@@ -1249,7 +1284,7 @@
       "phase": "PHASE-02B",
       "title": "Tests for Arc",
       "description": "Tests: construction from 3 points, length, toBezier.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-03b",
@@ -1266,7 +1301,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-012",
@@ -1274,7 +1310,7 @@
       "phase": "PHASE-02B",
       "title": "Implement Polygon",
       "description": "Create src/geometry/Polygon.ts: Polygon {vertices, edges}. makePolygon, area, centroid, containsPoint (ray casting), perimeter, isConvex.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-03b",
@@ -1299,7 +1335,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-012T",
@@ -1307,7 +1344,7 @@
       "phase": "PHASE-02B",
       "title": "Tests for Polygon",
       "description": "Tests: area, centroid, containsPoint, isConvex.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-03b",
@@ -1324,7 +1361,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-013",
@@ -1332,7 +1370,7 @@
       "phase": "PHASE-02B",
       "title": "Implement Transformations",
       "description": "Create src/geometry/Transform.ts: rotate, translate, scale, reflect on Point2D[] and Path.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-03b",
@@ -1358,7 +1396,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-013T",
@@ -1366,7 +1405,7 @@
       "phase": "PHASE-02B",
       "title": "Tests for Transformations",
       "description": "Tests: each transform type, compositions.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-03b",
@@ -1383,7 +1422,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-017",
@@ -1391,7 +1431,7 @@
       "phase": "PHASE-02B",
       "title": "Implement Measure",
       "description": "Create src/geometry/Measure.ts: distance, angle, angleBetween, area, arcLength, pathLength, boundingBox.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "feature",
       "vertical_slice": "VS-03b",
@@ -1420,7 +1460,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-017T",
@@ -1428,7 +1469,7 @@
       "phase": "PHASE-02B",
       "title": "Tests for Measure",
       "description": "Tests: each measurement function.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-03b",
@@ -1445,7 +1486,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "INTER-001",
@@ -1453,7 +1495,7 @@
       "phase": "PHASE-02C",
       "title": "Intersection Result Model",
       "description": "Create src/geometry/Intersection.ts: IntersectionResult {points: Point2D[], type: 'none'|'single'|'multiple'}.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-03c",
@@ -1477,7 +1519,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "INTER-001T",
@@ -1485,7 +1528,7 @@
       "phase": "PHASE-02C",
       "title": "Tests for Intersection Result Model",
       "description": "Tests: result types construction.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-03c",
@@ -1502,7 +1545,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "INTER-002",
@@ -1510,7 +1554,7 @@
       "phase": "PHASE-02C",
       "title": "Line-Line Intersection",
       "description": "Add to Intersection.ts: intersectLines(l1, l2) returns IntersectionResult. INTERSECTION_EPSILON=0.01mm.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-03c",
@@ -1534,7 +1578,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "INTER-002T",
@@ -1542,7 +1587,7 @@
       "phase": "PHASE-02C",
       "title": "Tests for Line-Line Intersection",
       "description": "Tests: parallel, non-parallel, vertical, horizontal.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-03c",
@@ -1559,7 +1604,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "INTER-003",
@@ -1567,7 +1613,7 @@
       "phase": "PHASE-02C",
       "title": "Segment-Segment Intersection",
       "description": "Add to Intersection.ts: intersectSegments(s1, s2). Handle colinear, parallel, endpoint cases.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-03c",
@@ -1591,7 +1637,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "INTER-003T",
@@ -1599,7 +1646,7 @@
       "phase": "PHASE-02C",
       "title": "Tests for Segment-Segment Intersection",
       "description": "Tests: crossing, touching, colinear, no intersection.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-03c",
@@ -1616,7 +1663,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "INTER-004",
@@ -1624,7 +1672,7 @@
       "phase": "PHASE-02C",
       "title": "Line-Segment Intersection",
       "description": "Add to Intersection.ts: intersectLineSegment(line, seg).",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-03c",
@@ -1648,7 +1696,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "INTER-004T",
@@ -1656,7 +1705,7 @@
       "phase": "PHASE-02C",
       "title": "Tests for Line-Segment Intersection",
       "description": "Tests: crossing, parallel, no intersection.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-03c",
@@ -1673,7 +1722,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "INTER-005",
@@ -1681,7 +1731,7 @@
       "phase": "PHASE-02C",
       "title": "Line-Circle Intersection",
       "description": "Add to Intersection.ts: intersectLineCircle(line, circle).",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "feature",
       "vertical_slice": "VS-03c",
@@ -1705,7 +1755,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "INTER-005T",
@@ -1713,7 +1764,7 @@
       "phase": "PHASE-02C",
       "title": "Tests for Line-Circle Intersection",
       "description": "Tests: 2 points, tangent, no intersection.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-03c",
@@ -1730,7 +1781,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "INTER-006",
@@ -1738,7 +1790,7 @@
       "phase": "PHASE-02C",
       "title": "Circle-Circle Intersection",
       "description": "Add to Intersection.ts: intersectCircleCircle(c1, c2).",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "feature",
       "vertical_slice": "VS-03c",
@@ -1761,7 +1813,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "INTER-006T",
@@ -1769,7 +1822,7 @@
       "phase": "PHASE-02C",
       "title": "Tests for Circle-Circle Intersection",
       "description": "Tests: 2 points, tangent, separate, coincident.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-03c",
@@ -1786,7 +1839,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "INTER-007",
@@ -1794,7 +1848,7 @@
       "phase": "PHASE-02C",
       "title": "Line-Bezier Intersection",
       "description": "Add to Intersection.ts: intersectLineBezier(line, curve). Use subdivision with bounding-box pruning.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "feature",
       "vertical_slice": "VS-03c",
@@ -1818,7 +1872,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "INTER-007T",
@@ -1826,7 +1881,7 @@
       "phase": "PHASE-02C",
       "title": "Tests for Line-Bezier Intersection",
       "description": "Tests: tangent, crossing, no intersection.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-03c",
@@ -1843,7 +1898,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "INTER-008",
@@ -1851,7 +1907,7 @@
       "phase": "PHASE-02C",
       "title": "Bezier-Bezier Intersection",
       "description": "Add to Intersection.ts: intersectBezierBezier(c1, c2). Subdivision with bounding-box pruning.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "feature",
       "vertical_slice": "VS-03c",
@@ -1874,7 +1930,8 @@
       "documentation": [],
       "estimated_complexity": "hard",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "INTER-008T",
@@ -1882,7 +1939,7 @@
       "phase": "PHASE-02C",
       "title": "Tests for Bezier-Bezier Intersection",
       "description": "Tests: 0, 1, 2+ intersections.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-03c",
@@ -1899,7 +1956,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-015",
@@ -1907,7 +1965,7 @@
       "phase": "PHASE-02C",
       "title": "Projections and tangents",
       "description": "Add to geometry: projectPointOnPath, tangentAtPoint, normalAtPoint for Path/Segment/Bezier.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "feature",
       "vertical_slice": "VS-03c",
@@ -1933,7 +1991,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "GEO-015T",
@@ -1941,7 +2000,7 @@
       "phase": "PHASE-02C",
       "title": "Tests for Projections and tangents",
       "description": "Tests: projection on line, bezier; tangent/normal consistency.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-03c",
@@ -1958,7 +2017,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-001",
@@ -1966,7 +2026,7 @@
       "phase": "PHASE-03",
       "title": "Define Token types",
       "description": "Create src/dsl/Token.ts: TokenType enum and Token {type, value, span}. v0.1 keywords ONLY: POINT, LINE, CURVE, PATH, CUT, END, EXPORT.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-04",
@@ -1996,7 +2056,8 @@
       "can_parallelize": false,
       "notes": [
         "v0.1 ONLY - INPUT and LET are v0.2 features"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-001T",
@@ -2004,7 +2065,7 @@
       "phase": "PHASE-03",
       "title": "Tests for Token types",
       "description": "Tests: token types, span, v0.1 keyword list.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-04",
@@ -2021,7 +2082,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-007",
@@ -2029,7 +2091,7 @@
       "phase": "PHASE-03",
       "title": "Implement DSL error types",
       "description": "Create src/dsl/Errors.ts: LexerError, ParseError, RuntimeError, ReferenceError. Each with message, span, suggestion.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-04",
@@ -2054,7 +2116,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-007T",
@@ -2062,7 +2125,7 @@
       "phase": "PHASE-03",
       "title": "Tests for DSL error types",
       "description": "Tests: each error type construction.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-04",
@@ -2079,7 +2142,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-002",
@@ -2087,7 +2151,7 @@
       "phase": "PHASE-03",
       "title": "Implement Lexer",
       "description": "Create src/dsl/Lexer.ts: tokenize(source) -> Token[]. Handle whitespace, numbers, identifiers, keywords, operators, comments, newlines.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-04",
@@ -2115,7 +2179,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-002T",
@@ -2123,7 +2188,7 @@
       "phase": "PHASE-03",
       "title": "Tests for Lexer",
       "description": "Exhaustive tests: tokens, comments, errors, positions.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-04",
@@ -2140,7 +2205,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-003",
@@ -2148,7 +2214,7 @@
       "phase": "PHASE-03",
       "title": "Define AST types",
       "description": "Create src/dsl/AST.ts: Program, PointDecl, LineDecl, CurveDecl, PathDecl, CutDecl, ExportDecl, NumberLiteral, Identifier. Every node with kind and span.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-04",
@@ -2173,7 +2239,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-003T",
@@ -2181,7 +2248,7 @@
       "phase": "PHASE-03",
       "title": "Tests for AST types",
       "description": "Tests: AST node construction, exhaustive checking.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-04",
@@ -2198,7 +2265,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-004",
@@ -2206,7 +2274,7 @@
       "phase": "PHASE-03",
       "title": "Implement Parser (recursive descent)",
       "description": "Create src/dsl/Parser.ts: parse(tokens) -> Program. Handle POINT, LINE, CURVE, PATH, CUT, END, EXPORT. Error recovery (panic mode).",
-      "status": "backlog",
+      "status": "done",
       "priority": "critical",
       "type": "feature",
       "vertical_slice": "VS-04",
@@ -2236,7 +2304,8 @@
       "can_parallelize": false,
       "notes": [
         "Core DSL component — no expression parsing in v0.1"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-004T",
@@ -2244,7 +2313,7 @@
       "phase": "PHASE-03",
       "title": "Tests for Parser",
       "description": "Tests: each declaration type, syntax errors, error recovery.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-04",
@@ -2261,7 +2330,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "MDL-001",
@@ -2269,7 +2339,7 @@
       "phase": "PHASE-03",
       "title": "Implement GeometryEntity base",
       "description": "Create src/model/Entity.ts: GeometryEntity {id, kind, dependencies, span?}. EntityKind = 'point' | 'line' | 'curve' | 'path'.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-04",
@@ -2294,7 +2364,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "MDL-001T",
@@ -2302,7 +2373,7 @@
       "phase": "PHASE-03",
       "title": "Tests for GeometryEntity base",
       "description": "Tests: entity construction.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-04",
@@ -2319,7 +2390,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "MDL-002",
@@ -2327,7 +2399,7 @@
       "phase": "PHASE-03",
       "title": "Implement PointEntity",
       "description": "Create src/model/PointEntity.ts: PointEntity extends GeometryEntity {kind: 'point', position: Point2D}.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-04",
@@ -2353,7 +2425,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "MDL-002T",
@@ -2361,7 +2434,7 @@
       "phase": "PHASE-03",
       "title": "Tests for PointEntity",
       "description": "Tests: entity construction, dependencies.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-04",
@@ -2378,7 +2451,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "MDL-003",
@@ -2386,7 +2460,7 @@
       "phase": "PHASE-03",
       "title": "Implement CurveEntity",
       "description": "Create src/model/CurveEntity.ts: LineEntity, BezierEntity — each referencing named points.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-04",
@@ -2413,7 +2487,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "MDL-003T",
@@ -2421,7 +2496,7 @@
       "phase": "PHASE-03",
       "title": "Tests for CurveEntity",
       "description": "Tests: entity construction, dependencies.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-04",
@@ -2438,7 +2513,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "MDL-004",
@@ -2446,7 +2522,7 @@
       "phase": "PHASE-03",
       "title": "Implement PathEntity",
       "description": "Create src/model/PathEntity.ts: PathEntity {name, segments: (LineRef | CurveRef)[], closed}.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-04",
@@ -2472,7 +2548,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "MDL-004T",
@@ -2480,7 +2557,7 @@
       "phase": "PHASE-03",
       "title": "Tests for PathEntity",
       "description": "Tests: entity construction, dependencies.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-04",
@@ -2497,7 +2574,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "MDL-005",
@@ -2505,7 +2583,7 @@
       "phase": "PHASE-03",
       "title": "Implement Registry and DAG",
       "description": "Create src/model/Registry.ts: append-only name->entity store with topological sort, cycle detection, missing ref detection.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-04",
@@ -2533,7 +2611,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "MDL-005T",
@@ -2541,7 +2620,7 @@
       "phase": "PHASE-03",
       "title": "Tests for Registry and DAG",
       "description": "Tests: add, get, resolve, cycle detection, missing refs.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-04",
@@ -2558,7 +2637,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-006",
@@ -2566,7 +2646,7 @@
       "phase": "PHASE-03",
       "title": "Implement Interpreter",
       "description": "Create src/dsl/Interpreter.ts: execute(ast, registry) -> void. Walk AST, create entities in Registry. v0.1: numbers are raw mm values (no units, no expressions).",
-      "status": "backlog",
+      "status": "done",
       "priority": "critical",
       "type": "feature",
       "vertical_slice": "VS-04",
@@ -2597,7 +2677,8 @@
       "can_parallelize": false,
       "notes": [
         "v0.1 interpreter: no unit parsing, no expression evaluation, raw numbers = mm"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-006T",
@@ -2605,7 +2686,7 @@
       "phase": "PHASE-03",
       "title": "Tests for Interpreter",
       "description": "Tests: each declaration type, missing references, circular deps.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-04",
@@ -2622,7 +2703,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-SVG-001",
@@ -2630,7 +2712,7 @@
       "phase": "PHASE-03",
       "title": "Implement ModelRenderer (Registry -> SVG)",
       "description": "Create src/svg/ModelRenderer.ts: renderFromRegistry(registry) -> SVG string. Topological order rendering.",
-      "status": "backlog",
+      "status": "done",
       "priority": "critical",
       "type": "feature",
       "vertical_slice": "VS-04",
@@ -2658,7 +2740,8 @@
       "documentation": [],
       "estimated_complexity": "hard",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-SVG-001T",
@@ -2666,7 +2749,7 @@
       "phase": "PHASE-03",
       "title": "Integration test: DSL -> Geometry -> SVG",
       "description": "End-to-end: parse DSL -> execute -> render -> valid SVG.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-04",
@@ -2687,7 +2770,8 @@
       "can_parallelize": false,
       "notes": [
         "First end-to-end verification"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-005",
@@ -2695,7 +2779,7 @@
       "phase": "PHASE-04",
       "title": "Implement Pratt expression parser",
       "description": "Create src/dsl/Pratt.ts: expression parser with precedence, parenthesized expressions, number literals, identifiers, binary ops, unary minus.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-05",
@@ -2724,7 +2808,8 @@
       "can_parallelize": false,
       "notes": [
         "Moved from PHASE-03 — this is v0.2"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-005T",
@@ -2732,7 +2817,7 @@
       "phase": "PHASE-04",
       "title": "Tests for Pratt expression parser",
       "description": "Tests: precedence, parens, unary minus, identifiers.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-05",
@@ -2749,7 +2834,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-008",
@@ -2757,7 +2843,7 @@
       "phase": "PHASE-04",
       "title": "Implement unit parsing",
       "description": "Create src/dsl/Units.ts: parseUnit(value, unit) -> mm. Conversions: cm->mm (*10), in->mm (*25.4), mm->mm (*1).",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-05",
@@ -2785,7 +2871,8 @@
       "can_parallelize": false,
       "notes": [
         "Moved from PHASE-03 — this is v0.2"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-008T",
@@ -2793,7 +2880,7 @@
       "phase": "PHASE-04",
       "title": "Tests for unit parsing",
       "description": "Tests: each conversion, invalid unit.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-05",
@@ -2810,7 +2897,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-009",
@@ -2818,7 +2906,7 @@
       "phase": "PHASE-04",
       "title": "Implement INPUT declarations",
       "description": "Add to parser/interpreter: INPUT name = value { constraints }. Allow external parameters with validation.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-05",
@@ -2843,7 +2931,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-009T",
@@ -2851,7 +2940,7 @@
       "phase": "PHASE-04",
       "title": "Tests for INPUT declarations",
       "description": "Tests: parsing, constraints, runtime values.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-05",
@@ -2868,7 +2957,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-010",
@@ -2876,7 +2966,7 @@
       "phase": "PHASE-04",
       "title": "Implement LET bindings",
       "description": "Add to parser/interpreter: LET name = expression. Reference INPUTs and other LETs.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-05",
@@ -2900,7 +2990,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-010T",
@@ -2908,7 +2999,7 @@
       "phase": "PHASE-04",
       "title": "Tests for LET bindings",
       "description": "Tests: parsing, expression evaluation, reference chain.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-05",
@@ -2925,7 +3016,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-011",
@@ -2933,7 +3025,7 @@
       "phase": "PHASE-04",
       "title": "Implement point methods (.UP, .DOWN, .LEFT, .RIGHT)",
       "description": "Add to parser: point.METHOD(args). Methods: UP(dy), DOWN(dy), LEFT(dx), RIGHT(dx), TOWARD(point, dist), ROTATE(angle, center).",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-05",
@@ -2958,7 +3050,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-011T",
@@ -2966,7 +3059,7 @@
       "phase": "PHASE-04",
       "title": "Tests for point methods",
       "description": "Tests: each method, chaining.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-05",
@@ -2983,7 +3076,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-SVG-002",
@@ -2991,7 +3085,7 @@
       "phase": "PHASE-04",
       "title": "Parametric DSL -> SVG integration test",
       "description": "Integration test: DSL with INPUT + LET + point methods -> SVG. Changing INPUT changes SVG.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-05",
@@ -3017,7 +3111,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DSL-SVG-002T",
@@ -3025,7 +3120,7 @@
       "phase": "PHASE-04",
       "title": "Parametric DSL -> SVG integration tests",
       "description": "Tests: INPUT changes SVG, LET correctness.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-05",
@@ -3042,7 +3137,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-001",
@@ -3050,7 +3146,7 @@
       "phase": "PHASE-05",
       "title": "Define Piece model",
       "description": "Create src/pattern/Piece.ts: Piece {name, contour: Path, constructionLines, grainline?, notches, labels, seamAllowanceWidth}.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-06",
@@ -3081,7 +3177,8 @@
       "can_parallelize": true,
       "notes": [
         "Does NOT depend on DSL — can run in parallel with PHASE-03/04"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-001T",
@@ -3089,7 +3186,7 @@
       "phase": "PHASE-05",
       "title": "Tests for Piece model",
       "description": "Tests: construction, contour, fields.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-06",
@@ -3106,7 +3203,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-SVG-001",
@@ -3114,7 +3212,7 @@
       "phase": "PHASE-05",
       "title": "Render Piece to SVG",
       "description": "Create src/svg/PatternRenderer.ts: renderPiece(piece) -> SVG group with contour, construction lines, notches, grainline, labels.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-06",
@@ -3142,7 +3240,8 @@
       "can_parallelize": false,
       "notes": [
         "Depends on direct SVG renderer, NOT ModelRenderer"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-SVG-001T",
@@ -3150,7 +3249,7 @@
       "phase": "PHASE-05",
       "title": "Test: pattern piece SVG rendering",
       "description": "Create Piece, render SVG, verify elements.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-06",
@@ -3170,7 +3269,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "OFFSET-001",
@@ -3178,7 +3278,7 @@
       "phase": "PHASE-06",
       "title": "Offset: Research and straight segments",
       "description": "Create src/geometry/Offset.ts: offsetSegment(seg, distance) -> Segment. Exact parallel offset for straight segments.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-07",
@@ -3205,7 +3305,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "OFFSET-001T",
@@ -3213,7 +3314,7 @@
       "phase": "PHASE-06",
       "title": "Tests for straight segment offset",
       "description": "Tests: horizontal, vertical, diagonal segment offset.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-07",
@@ -3230,7 +3331,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "OFFSET-002",
@@ -3238,7 +3340,7 @@
       "phase": "PHASE-06",
       "title": "Offset: Polylines",
       "description": "Offset polyline (path of line segments): offset each segment, join at vertices.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-07",
@@ -3261,7 +3363,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "OFFSET-002T",
@@ -3269,7 +3372,7 @@
       "phase": "PHASE-06",
       "title": "Tests for polyline offset",
       "description": "Tests: rectangle offset, triangle offset.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-07",
@@ -3286,7 +3389,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "OFFSET-003",
@@ -3294,7 +3398,7 @@
       "phase": "PHASE-06",
       "title": "Offset: Bezier curves",
       "description": "Offset Bezier curves: sample-then-fit with adaptive sampling. Compute normals, displace, fit new Bezier.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-07",
@@ -3320,7 +3424,8 @@
       "can_parallelize": false,
       "notes": [
         "Needs validation per D15"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "OFFSET-003T",
@@ -3328,7 +3433,7 @@
       "phase": "PHASE-06",
       "title": "Tests for Bezier curve offset",
       "description": "Tests: gentle curve, tight curve, accuracy check.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-07",
@@ -3345,7 +3450,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "OFFSET-004",
@@ -3353,7 +3459,7 @@
       "phase": "PHASE-06",
       "title": "Offset: Joins",
       "description": "Corner treatment: miter, round, bevel joins between offset segments.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-07",
@@ -3377,7 +3483,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "OFFSET-004T",
@@ -3385,7 +3492,7 @@
       "phase": "PHASE-06",
       "title": "Tests for offset joins",
       "description": "Tests: each join type.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-07",
@@ -3402,7 +3509,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "OFFSET-005",
@@ -3410,7 +3518,7 @@
       "phase": "PHASE-06",
       "title": "Offset: Self-intersection validation",
       "description": "Detect and report self-intersections in offset paths.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-07",
@@ -3434,7 +3542,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "OFFSET-005T",
@@ -3442,7 +3551,7 @@
       "phase": "PHASE-06",
       "title": "Tests for offset self-intersection",
       "description": "Tests: convex path (no self-int), concave path (self-int).",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-07",
@@ -3459,7 +3568,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "OFFSET-006",
@@ -3467,7 +3577,7 @@
       "phase": "PHASE-06",
       "title": "Offset: Path integration",
       "description": "Compose all offset types into offsetPath(path, distance) API.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-07",
@@ -3494,7 +3604,8 @@
       "documentation": [],
       "estimated_complexity": "hard",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "OFFSET-006T",
@@ -3502,7 +3613,7 @@
       "phase": "PHASE-06",
       "title": "Tests for offsetPath integration",
       "description": "Tests: path with lines + curves, validation.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-07",
@@ -3519,7 +3630,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-002",
@@ -3527,7 +3639,7 @@
       "phase": "PHASE-06",
       "title": "Implement SeamAllowance",
       "description": "Create src/pattern/SeamAllowance.ts: addSeamAllowance(piece, width) -> new Piece with offset contour.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-07",
@@ -3554,7 +3666,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-002T",
@@ -3562,7 +3675,7 @@
       "phase": "PHASE-06",
       "title": "Tests for SeamAllowance",
       "description": "Tests: rectangular piece SA, curved piece SA.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-07",
@@ -3579,7 +3692,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-003",
@@ -3587,7 +3701,7 @@
       "phase": "PHASE-06",
       "title": "Implement Notch and Grainline",
       "description": "Create src/pattern/Notch.ts and src/pattern/Grainline.ts.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "feature",
       "vertical_slice": "VS-07",
@@ -3614,7 +3728,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-003T",
@@ -3622,7 +3737,7 @@
       "phase": "PHASE-06",
       "title": "Tests for Notch and Grainline",
       "description": "Tests: notch construction, grainline direction.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-07",
@@ -3639,7 +3754,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-005",
@@ -3647,7 +3763,7 @@
       "phase": "PHASE-06",
       "title": "Implement Dart",
       "description": "Create src/pattern/Dart.ts: createDart(apex, leg1, leg2) -> Dart. Include rotation around apex.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "feature",
       "vertical_slice": "VS-07",
@@ -3674,7 +3790,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-005T",
@@ -3682,7 +3799,7 @@
       "phase": "PHASE-06",
       "title": "Tests for Dart",
       "description": "Tests: construction, rotation.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-07",
@@ -3699,7 +3816,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-SVG-002",
@@ -3707,7 +3825,7 @@
       "phase": "PHASE-06",
       "title": "Render piece with seam allowance, notches, grainline",
       "description": "Extend PatternRenderer to render Piece with seam allowance, notch marks, grainline arrow.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-07",
@@ -3733,7 +3851,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-SVG-002T",
@@ -3741,7 +3860,7 @@
       "phase": "PHASE-06",
       "title": "Test: piece with seam allowance SVG",
       "description": "Create Piece with SA, notches, grainline -> render -> verify.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-07",
@@ -3761,7 +3880,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "CLI-001",
@@ -3769,7 +3889,7 @@
       "phase": "PHASE-07",
       "title": "Implement CLI base",
       "description": "Create src/cli/index.ts: process.argv parsing. Commands: build, validate, inspect.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-08",
@@ -3795,7 +3915,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "CLI-001T",
@@ -3803,7 +3924,7 @@
       "phase": "PHASE-07",
       "title": "Tests for CLI base",
       "description": "Tests: command parsing, error handling.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-08",
@@ -3820,7 +3941,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "CLI-002",
@@ -3828,7 +3950,7 @@
       "phase": "PHASE-07",
       "title": "Implement build command",
       "description": "sastre build <file.sastre>: parse -> execute -> render -> write SVG.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-08",
@@ -3852,7 +3974,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "CLI-002T",
@@ -3860,7 +3983,7 @@
       "phase": "PHASE-07",
       "title": "Tests for build command",
       "description": "Tests: successful build, error cases.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-08",
@@ -3877,7 +4000,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "VAL-001",
@@ -3885,7 +4009,7 @@
       "phase": "PHASE-07",
       "title": "Implement ReferenceValidator",
       "description": "Create src/validation/ReferenceValidator.ts: validateReferences(registry) -> ValidationResult.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-08",
@@ -3910,7 +4034,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "VAL-001T",
@@ -3918,7 +4043,7 @@
       "phase": "PHASE-07",
       "title": "Tests for ReferenceValidator",
       "description": "Tests: valid refs, undefined refs, circular deps.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-08",
@@ -3935,7 +4060,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "VAL-002",
@@ -3943,7 +4069,7 @@
       "phase": "PHASE-07",
       "title": "Implement GeometryValidator",
       "description": "Create src/validation/GeometryValidator.ts: validateDegenerate, validateCurves.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "feature",
       "vertical_slice": "VS-08",
@@ -3970,7 +4096,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "VAL-002T",
@@ -3978,7 +4105,7 @@
       "phase": "PHASE-07",
       "title": "Tests for GeometryValidator",
       "description": "Tests: degenerate cases.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-08",
@@ -3995,7 +4122,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "VAL-003",
@@ -4003,7 +4131,7 @@
       "phase": "PHASE-07",
       "title": "Implement PathValidator",
       "description": "Create src/validation/PathValidator.ts: validateClosure, validateSelfIntersection.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "feature",
       "vertical_slice": "VS-08",
@@ -4028,7 +4156,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "VAL-003T",
@@ -4036,7 +4165,7 @@
       "phase": "PHASE-07",
       "title": "Tests for PathValidator",
       "description": "Tests: closed path, open path, self-intersecting path.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-08",
@@ -4053,7 +4182,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "CLI-003",
@@ -4061,7 +4191,7 @@
       "phase": "PHASE-07",
       "title": "Implement validate command",
       "description": "sastre validate <file.sastre>: parse -> execute -> run validators -> report.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-08",
@@ -4088,7 +4218,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "CLI-003T",
@@ -4096,7 +4227,7 @@
       "phase": "PHASE-07",
       "title": "Tests for validate command",
       "description": "Tests: valid file, file with errors.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-08",
@@ -4113,7 +4244,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "CLI-004",
@@ -4121,7 +4253,7 @@
       "phase": "PHASE-07",
       "title": "Implement inspect command",
       "description": "sastre inspect <file.sastre>: parse -> execute -> list entities, types, values, dependencies.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "feature",
       "vertical_slice": "VS-08",
@@ -4145,7 +4277,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "CLI-004T",
@@ -4153,7 +4286,7 @@
       "phase": "PHASE-07",
       "title": "Tests for inspect command",
       "description": "Tests: entity listing, dependency display.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-08",
@@ -4170,7 +4303,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "CLI-INS-001",
@@ -4178,7 +4312,7 @@
       "phase": "PHASE-07",
       "title": "Implement inspect subcommands",
       "description": "Add to CLI: inspect point/curve/path/bbox/deps <name>.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "feature",
       "vertical_slice": "VS-08",
@@ -4202,7 +4336,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "CLI-INS-001T",
@@ -4210,7 +4345,7 @@
       "phase": "PHASE-07",
       "title": "Tests for inspect subcommands",
       "description": "Tests: each subcommand.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-08",
@@ -4227,7 +4362,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-010",
@@ -4235,7 +4371,7 @@
       "phase": "PHASE-08",
       "title": "Reference pattern: Rectangle",
       "description": "Create tests/patterns/rectangle.sastre: 200x300mm. Validate: 4 points, 4 lines, area = 60000mm2.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test_pattern",
       "vertical_slice": "VS-09",
@@ -4264,7 +4400,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-010T",
@@ -4272,7 +4409,7 @@
       "phase": "PHASE-08",
       "title": "Tests for rectangle pattern",
       "description": "Tests: parse, geometry, SVG output.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test_pattern",
       "vertical_slice": "VS-09",
@@ -4289,7 +4426,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-011",
@@ -4297,7 +4435,7 @@
       "phase": "PHASE-08",
       "title": "Reference pattern: Polygon",
       "description": "Create tests/patterns/polygon.sastre: 5+ sided shape. Validate vertices, area, perimeter.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test_pattern",
       "vertical_slice": "VS-09",
@@ -4323,7 +4461,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-011T",
@@ -4331,7 +4470,7 @@
       "phase": "PHASE-08",
       "title": "Tests for polygon pattern",
       "description": "Tests: parse, geometry.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test_pattern",
       "vertical_slice": "VS-09",
@@ -4348,7 +4487,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-012",
@@ -4356,7 +4496,7 @@
       "phase": "PHASE-08",
       "title": "Reference pattern: Curved shape",
       "description": "Create tests/patterns/curved.sastre: shape with Bezier curve.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test_pattern",
       "vertical_slice": "VS-09",
@@ -4381,7 +4521,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-012T",
@@ -4389,7 +4530,7 @@
       "phase": "PHASE-08",
       "title": "Tests for curved pattern",
       "description": "Tests: parse, curve evaluation.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test_pattern",
       "vertical_slice": "VS-09",
@@ -4406,7 +4547,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-013",
@@ -4414,7 +4556,7 @@
       "phase": "PHASE-08",
       "title": "Reference pattern: Simple piece",
       "description": "Create tests/patterns/simple_piece.sastre: basic piece with seam allowance.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test_pattern",
       "vertical_slice": "VS-09",
@@ -4441,7 +4583,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-013T",
@@ -4449,7 +4592,7 @@
       "phase": "PHASE-08",
       "title": "Tests for simple piece pattern",
       "description": "Tests: parse, piece, SA.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test_pattern",
       "vertical_slice": "VS-09",
@@ -4466,7 +4609,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-014",
@@ -4474,7 +4618,7 @@
       "phase": "PHASE-08",
       "title": "Reference pattern: Boxer front",
       "description": "Create tests/patterns/boxer_front.sastre: front piece with INPUTs, crotch curve.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test_pattern",
       "vertical_slice": "VS-09",
@@ -4500,7 +4644,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-014T",
@@ -4508,7 +4653,7 @@
       "phase": "PHASE-08",
       "title": "Tests for boxer front pattern",
       "description": "Tests: parse, measurements, curve.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test_pattern",
       "vertical_slice": "VS-09",
@@ -4525,7 +4670,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-015",
@@ -4533,7 +4679,7 @@
       "phase": "PHASE-08",
       "title": "Reference pattern: Boxer back",
       "description": "Create tests/patterns/boxer_back.sastre: back piece with deeper crotch curve.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test_pattern",
       "vertical_slice": "VS-09",
@@ -4558,7 +4704,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-015T",
@@ -4566,7 +4713,7 @@
       "phase": "PHASE-08",
       "title": "Tests for boxer back pattern",
       "description": "Tests: parse, dimensions.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test_pattern",
       "vertical_slice": "VS-09",
@@ -4583,7 +4730,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-016",
@@ -4591,7 +4739,7 @@
       "phase": "PHASE-08",
       "title": "Reference pattern: Boxer complete",
       "description": "Create tests/patterns/boxer_complete.sastre: all pieces (front, back, waistband, fly).",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test_pattern",
       "vertical_slice": "VS-09",
@@ -4620,7 +4768,8 @@
       "can_parallelize": false,
       "notes": [
         "Final integration test"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "PAT-016T",
@@ -4628,7 +4777,7 @@
       "phase": "PHASE-08",
       "title": "Tests for complete boxer pattern",
       "description": "Tests: all pieces, consistency.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test_pattern",
       "vertical_slice": "VS-09",
@@ -4645,7 +4794,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "TST-001",
@@ -4653,7 +4803,7 @@
       "phase": "PHASE-09",
       "title": "Integration tests: Geometry -> SVG",
       "description": "Tests creating geometry directly and verifying SVG output.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-10",
@@ -4677,7 +4827,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "TST-001T",
@@ -4685,7 +4836,7 @@
       "phase": "PHASE-09",
       "title": "Tests for geometry -> SVG integration",
       "description": "Tests: each geometry type to SVG.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-10",
@@ -4702,7 +4853,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "TST-002",
@@ -4710,7 +4862,7 @@
       "phase": "PHASE-09",
       "title": "Integration tests: DSL -> Geometry",
       "description": "Tests parsing DSL and verifying geometry entities.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-10",
@@ -4733,7 +4885,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "TST-002T",
@@ -4741,7 +4894,7 @@
       "phase": "PHASE-09",
       "title": "Tests for DSL -> Geometry integration",
       "description": "Tests: each declaration to entity.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-10",
@@ -4758,7 +4911,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "TST-003",
@@ -4766,7 +4920,7 @@
       "phase": "PHASE-09",
       "title": "Integration tests: DSL -> SVG end-to-end",
       "description": "Tests: DSL code -> full pipeline -> SVG result.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-10",
@@ -4791,7 +4945,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "TST-003T",
@@ -4799,7 +4954,7 @@
       "phase": "PHASE-09",
       "title": "Tests for DSL -> SVG end-to-end",
       "description": "Tests: full pipeline.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-10",
@@ -4816,7 +4971,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "TST-004",
@@ -4824,7 +4980,7 @@
       "phase": "PHASE-09",
       "title": "Property-based tests for geometry",
       "description": "Use fast-check: offset preserves distance, rotation preserves lengths, Bezier endpoints.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "feature",
       "vertical_slice": "VS-10",
@@ -4849,7 +5005,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "TST-004T",
@@ -4857,7 +5014,7 @@
       "phase": "PHASE-09",
       "title": "Tests for property-based tests",
       "description": "Tests: property test setup and execution.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-10",
@@ -4874,7 +5031,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DOC-001",
@@ -4882,7 +5040,7 @@
       "phase": "PHASE-09",
       "title": "Document architecture",
       "description": "Create docs/architecture.md with module diagrams, data flow, key algorithms.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "documentation",
       "vertical_slice": "VS-10",
@@ -4909,7 +5067,8 @@
       ],
       "estimated_complexity": "medium",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DOC-001T",
@@ -4917,7 +5076,7 @@
       "phase": "PHASE-09",
       "title": "Tests for architecture docs",
       "description": "Tests: doc exists and is readable.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "documentation",
       "vertical_slice": "VS-10",
@@ -4934,7 +5093,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DOC-002",
@@ -4942,7 +5102,7 @@
       "phase": "PHASE-09",
       "title": "Document DSL syntax",
       "description": "Create docs/syntax.md: EBNF grammar, examples, token table.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "documentation",
       "vertical_slice": "VS-10",
@@ -4969,7 +5129,8 @@
       ],
       "estimated_complexity": "medium",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DOC-002T",
@@ -4977,7 +5138,7 @@
       "phase": "PHASE-09",
       "title": "Tests for DSL syntax docs",
       "description": "Tests: doc exists, all commands documented.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "documentation",
       "vertical_slice": "VS-10",
@@ -4994,7 +5155,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DOC-003",
@@ -5002,7 +5164,7 @@
       "phase": "PHASE-09",
       "title": "Document geometry",
       "description": "Create docs/geometry.md: primitive descriptions, algorithms, tolerances.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "documentation",
       "vertical_slice": "VS-10",
@@ -5029,7 +5191,8 @@
       ],
       "estimated_complexity": "medium",
       "can_parallelize": true,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DOC-003T",
@@ -5037,7 +5200,7 @@
       "phase": "PHASE-09",
       "title": "Tests for geometry docs",
       "description": "Tests: doc exists, all types covered.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "documentation",
       "vertical_slice": "VS-10",
@@ -5054,7 +5217,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DOC-004",
@@ -5062,7 +5226,7 @@
       "phase": "PHASE-09",
       "title": "Document agent guide",
       "description": "Create docs/agent-guide.md: project structure, how to run tasks, code conventions.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "documentation",
       "vertical_slice": "VS-10",
@@ -5092,7 +5256,8 @@
       ],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.466Z"
     },
     {
       "id": "DOC-004T",
@@ -5100,7 +5265,7 @@
       "phase": "PHASE-09",
       "title": "Tests for agent guide",
       "description": "Tests: guide exists, covers all sections.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "documentation",
       "vertical_slice": "VS-10",
@@ -5117,7 +5282,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     },
     {
       "id": "KANBAN-001",
@@ -5125,7 +5291,7 @@
       "phase": "PHASE-KANBAN",
       "title": "Kanban Engine Core — Loader, Model, Repository",
       "description": "Create src/kanban/engine/core.ts: KanbanLoader (loads/parses kanban.json), KanbanModel (in-memory representation with Task, Phase, Milestone, Decision types), KanbanRepository (CRUD operations, query interface). Pure TypeScript, no CLI dependencies.",
-      "status": "backlog",
+      "status": "done",
       "priority": "critical",
       "type": "feature",
       "vertical_slice": "VS-KANBAN",
@@ -5156,7 +5322,8 @@
       "notes": [
         "Foundation for all other KANBAN tasks",
         "Must handle 5500+ line kanban.json efficiently"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     },
     {
       "id": "KANBAN-001T",
@@ -5164,7 +5331,7 @@
       "phase": "PHASE-KANBAN",
       "title": "Tests for Kanban Engine Core",
       "description": "Unit tests for Loader, Model, Repository.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-KANBAN",
@@ -5184,7 +5351,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     },
     {
       "id": "KANBAN-002",
@@ -5192,7 +5360,7 @@
       "phase": "PHASE-KANBAN",
       "title": "Loader and Persistence — Atomic Write, Validation, Caching",
       "description": "Create src/kanban/engine/persistence.ts: KanbanPersistence (atomic write with temp file + rename), validateBeforeWrite (runs all validation checks), KanbanCache (in-memory cache with invalidation on write). Implements safe write pattern: load -> parse -> validate -> mutate in memory -> validate -> write atomically -> verify.",
-      "status": "backlog",
+      "status": "done",
       "priority": "critical",
       "type": "feature",
       "vertical_slice": "VS-KANBAN",
@@ -5223,7 +5391,8 @@
       "notes": [
         "Critical for data integrity",
         "Uses PLAN-001 validator logic"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     },
     {
       "id": "KANBAN-002T",
@@ -5231,7 +5400,7 @@
       "phase": "PHASE-KANBAN",
       "title": "Tests for Loader and Persistence",
       "description": "Tests: atomic write, validation, cache, corruption handling.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-KANBAN",
@@ -5252,7 +5421,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     },
     {
       "id": "KANBAN-003",
@@ -5260,7 +5430,7 @@
       "phase": "PHASE-KANBAN",
       "title": "Query API — getTask, getReadyTasks, getBlockedTasks, getTaskContext, getDependencies, getDependents, getChildren, getParent, getTree, getNextTasks, searchTasks",
       "description": "Create src/kanban/engine/queries.ts: Query API returning minimal data for agents. Each query loads only what's needed. getTask(id) returns single task. getReadyTasks() returns tasks with status!=done, not blocked, all deps done. getBlockedTasks() returns blocked tasks with reason. getTaskContext(id) returns task + parent + direct deps + dependents + tests + acceptance criteria + relevant decisions + recommended action. getDependencies(id) returns direct dependency tasks. getDependents(id) returns tasks depending on id. getChildren(id) returns child tasks. getParent(id) returns parent task. getTree(id) returns full subtree. getNextTasks() returns ready tasks sorted by priority. searchTasks(query) searches title/description.",
-      "status": "backlog",
+      "status": "done",
       "priority": "critical",
       "type": "feature",
       "vertical_slice": "VS-KANBAN",
@@ -5291,7 +5461,8 @@
       "notes": [
         "Core agent interface — must be token-efficient",
         "Context size target: < 2000 chars for typical task"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     },
     {
       "id": "KANBAN-003T",
@@ -5299,7 +5470,7 @@
       "phase": "PHASE-KANBAN",
       "title": "Tests for Query API",
       "description": "Tests for all query functions with various kanban states.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-KANBAN",
@@ -5320,7 +5491,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     },
     {
       "id": "KANBAN-004",
@@ -5328,7 +5500,7 @@
       "phase": "PHASE-KANBAN",
       "title": "Context Builder — Progressive Context Levels",
       "description": "Create src/kanban/engine/context.ts: ContextBuilder with progressive levels. Level 1: task only. Level 2: task + parent + direct deps. Level 3: + dependents + tests. Level 4: + relevant decisions (from decisions.md). Level 5: + architecture.md sections. buildContext(taskId, level?) defaults to level 3. Returns JSON optimized for agent consumption. Includes recommended_action: 'start' | 'block' | 'wait' | 'complete' | 'split'.",
-      "status": "backlog",
+      "status": "done",
       "priority": "critical",
       "type": "feature",
       "vertical_slice": "VS-KANBAN",
@@ -5358,7 +5530,8 @@
       "notes": [
         "Most important command for agent workflow",
         "Must demonstrate context reduction vs full kanban.json"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     },
     {
       "id": "KANBAN-004T",
@@ -5366,7 +5539,7 @@
       "phase": "PHASE-KANBAN",
       "title": "Tests for Context Builder",
       "description": "Tests: each level returns expected data, size limits, recommended_action logic.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-KANBAN",
@@ -5386,7 +5559,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     },
     {
       "id": "KANBAN-005",
@@ -5394,7 +5568,7 @@
       "phase": "PHASE-KANBAN",
       "title": "Dependency Graph — Cycle Detection, Topological Sort, Block Detection",
       "description": "Create src/kanban/engine/dependency-graph.ts: DependencyGraph builds adjacency lists from task dependencies. detectCycles() returns cycle paths. topologicalSort() returns valid execution order. getBlockedTasks() returns tasks with incomplete dependencies. getUnblockedBy(taskId) returns tasks that would be unblocked if taskId completes. validateGraph() runs all checks. Used by queries and mutations.",
-      "status": "backlog",
+      "status": "done",
       "priority": "critical",
       "type": "feature",
       "vertical_slice": "VS-KANBAN",
@@ -5424,7 +5598,8 @@
       "notes": [
         "Core for ready/next/blocked calculations",
         "Must handle 160+ tasks efficiently"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     },
     {
       "id": "KANBAN-005T",
@@ -5432,7 +5607,7 @@
       "phase": "PHASE-KANBAN",
       "title": "Tests for Dependency Graph",
       "description": "Tests: cycle detection, topological sort, blocked/unblocked prediction.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-KANBAN",
@@ -5453,7 +5628,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     },
     {
       "id": "KANBAN-006",
@@ -5461,7 +5637,7 @@
       "phase": "PHASE-KANBAN",
       "title": "Mutation API — createTask, createSubtask, updateTask, changeStatus, addDependency, removeDependency, blockTask, unblockTask, addAcceptanceCriteria, addTest, recordEvidence, completeTask",
       "description": "Create src/kanban/engine/mutations.ts: All mutations follow load->validate->apply->validate->persist pattern. createTask: generates unique ID (prefix + number), validates parent exists, adds to parent.children. createSubtask: same, sets parent_id. updateTask: partial update with validation. changeStatus: validates transition (todo->ready->in_progress->review->done, blocked transitions). addDependency: validates both exist, no self-dep, no cycle. removeDependency: updates both sides. blockTask: sets status=blocked, blocked_reason. unblockTask: validates unblock condition, sets status=ready/todo. addAcceptanceCriteria: appends to array. addTest: appends test ID. recordEvidence: adds to evidence array. completeTask: validates criteria met, tests exist, deps done, then status=done.",
-      "status": "backlog",
+      "status": "done",
       "priority": "critical",
       "type": "feature",
       "vertical_slice": "VS-KANBAN",
@@ -5494,7 +5670,8 @@
       "notes": [
         "Must never leave kanban.json invalid",
         "All mutations validated by PLAN-001 rules"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     },
     {
       "id": "KANBAN-006T",
@@ -5502,7 +5679,7 @@
       "phase": "PHASE-KANBAN",
       "title": "Tests for Mutation API",
       "description": "Tests: each mutation type, valid/invalid transitions, cycle prevention, parent-child symmetry, completion validation.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-KANBAN",
@@ -5524,7 +5701,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     },
     {
       "id": "KANBAN-007",
@@ -5532,7 +5710,7 @@
       "phase": "PHASE-KANBAN",
       "title": "CLI — sastre kanban commands",
       "description": "Create src/cli/commands/kanban.ts with all commands: ready, next, show <id>, context <id>, deps <id>, dependents <id>, tree <id>, search <query>, start <id>, complete <id>, block <id> --reason, unblock <id>, add, add-child <parent>, add-dependency <task> <dep>, remove-dependency <task> <dep>, update <id>, validate. All query commands support --json flag for agent output. Uses Kanban Engine (queries, mutations, context). Integrates with existing CLI structure.",
-      "status": "backlog",
+      "status": "done",
       "priority": "critical",
       "type": "feature",
       "vertical_slice": "VS-KANBAN",
@@ -5569,7 +5747,8 @@
       "notes": [
         "Primary interface for agents and humans",
         "JSON output must be machine-parseable"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     },
     {
       "id": "KANBAN-007T",
@@ -5577,7 +5756,7 @@
       "phase": "PHASE-KANBAN",
       "title": "Tests for CLI",
       "description": "Integration tests for each CLI command, JSON output validation.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-KANBAN",
@@ -5598,7 +5777,8 @@
       "documentation": [],
       "estimated_complexity": "medium",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     },
     {
       "id": "KANBAN-008",
@@ -5606,7 +5786,7 @@
       "phase": "PHASE-KANBAN",
       "title": "JSON Agent Interface — Compact Schemas for All Query Commands",
       "description": "Define and implement strict JSON output schemas in src/kanban/engine/json-schemas.ts. ReadyTaskSchema: {id, title, status, priority, vertical_slice}. ContextSchema: {task, parent?, dependencies[], dependents[], tests[], acceptance_criteria[], relevant_decisions[], recommended_action}. TreeSchema: recursive {task, children[]}. DependencySchema: {id, title, status}. All schemas exclude verbose fields (description, notes, deliverables, documentation, estimated_complexity). Used by CLI --json flag.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-KANBAN",
@@ -5637,7 +5817,8 @@
       "notes": [
         "Critical for agent token efficiency",
         "Schemas must be stable"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     },
     {
       "id": "KANBAN-008T",
@@ -5645,7 +5826,7 @@
       "phase": "PHASE-KANBAN",
       "title": "Tests for JSON Agent Interface",
       "description": "Tests: schema compliance, size limits, field exclusion.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-KANBAN",
@@ -5665,7 +5846,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     },
     {
       "id": "KANBAN-009",
@@ -5673,7 +5855,7 @@
       "phase": "PHASE-KANBAN",
       "title": "Audit History — Mutation Log",
       "description": "Create src/kanban/engine/history.ts: KanbanHistory records every mutation. Entry: {timestamp, operation, taskId, agentId?, before?, after?, success}. Stored in .kanban-history.json (append-only). queryHistory(taskId?) returns entries. CLI: kanban history <taskId?> --json. Used for debugging and multi-agent coordination.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "type": "feature",
       "vertical_slice": "VS-KANBAN",
@@ -5703,7 +5885,8 @@
       "notes": [
         "Enables multi-agent coordination",
         "Useful for debugging"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     },
     {
       "id": "KANBAN-009T",
@@ -5711,7 +5894,7 @@
       "phase": "PHASE-KANBAN",
       "title": "Tests for Audit History",
       "description": "Tests: history recorded, query works, format correct.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-KANBAN",
@@ -5731,7 +5914,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     },
     {
       "id": "KANBAN-010",
@@ -5739,7 +5923,7 @@
       "phase": "PHASE-KANBAN",
       "title": "OpenCode Skill — Agent Protocol for Kanban Operations",
       "description": "Create .opencode/skill/kanban.md: Complete skill document teaching agents how to use the Kanban system. Covers: when to consult kanban (before starting work), never read kanban.json directly, discovery commands (ready, next), context command (context <id>), task lifecycle (start, complete, block, unblock), creating work (add, add-child), managing dependencies (add-dependency, remove-dependency), multi-agent protocol (task ownership via agent_id in start, detecting in-progress tasks), error handling (validation errors, conflicts), context progression (levels 1-5). Includes examples for complete agent workflow.",
-      "status": "backlog",
+      "status": "done",
       "priority": "critical",
       "type": "feature",
       "vertical_slice": "VS-KANBAN",
@@ -5770,7 +5954,8 @@
       "notes": [
         "This IS the agent interface — must be comprehensive",
         "Skill should not duplicate engine logic"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     },
     {
       "id": "KANBAN-010T",
@@ -5778,7 +5963,7 @@
       "phase": "PHASE-KANBAN",
       "title": "Tests for OpenCode Skill",
       "description": "Verification: skill document exists, covers all commands, workflow example works.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "test",
       "vertical_slice": "VS-KANBAN",
@@ -5798,7 +5983,8 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     },
     {
       "id": "KANBAN-011",
@@ -5806,7 +5992,7 @@
       "phase": "PHASE-KANBAN",
       "title": "Integration Tests — Full Agent Workflow",
       "description": "Create tests/integration/kanban-workflow.test.ts: End-to-end test simulating agent workflow. 1) sastre kanban ready --json -> pick task. 2) sastre kanban context <id> --json -> get context. 3) sastre kanban start <id> -> mark in_progress. 4) sastre kanban add-child <id> -> create subtask. 5) sastre kanban add-dependency <new> <existing> -> link. 6) sastre kanban complete <id> -> validate and complete. 7) sastre kanban ready --json -> verify new tasks unblocked. All steps use CLI, verify JSON output, verify kanban.json mutations.",
-      "status": "backlog",
+      "status": "done",
       "priority": "critical",
       "type": "test",
       "vertical_slice": "VS-KANBAN",
@@ -5837,7 +6023,8 @@
       "notes": [
         "Ultimate validation of the entire system",
         "Demonstrates agent workflow works end-to-end"
-      ]
+      ],
+      "completed_at": "2026-07-25T03:28:07.467Z"
     }
   ],
   "milestones": [
@@ -6215,36 +6402,36 @@
       "documented_in": "planning/decisions.md"
     }
   ],
-"planning_validation": {
-        "version": "3.1",
-        "validation_date": "2026-07-24",
-        "notes": "Run scripts/validate-kanban.ts for actual automated validation.",
-        "checks": {
-            "unique_ids": "NOT_VALIDATED",
-            "all_dependency_ids_exist": "NOT_VALIDATED",
-            "no_dependency_cycles": "NOT_VALIDATED",
-            "all_parent_ids_exist_or_null": "NOT_VALIDATED",
-            "all_child_ids_exist": "NOT_VALIDATED",
-            "parent_child_references_are_symmetric": "NOT_VALIDATED",
-            "no_orphan_tasks": "NOT_VALIDATED",
-            "all_milestone_task_ids_exist": "NOT_VALIDATED",
-            "all_critical_tasks_have_acceptance_criteria": "NOT_VALIDATED",
-            "all_features_have_tests": "NOT_VALIDATED",
-            "all_tasks_have_phase_reference": "NOT_VALIDATED",
-            "all_tasks_have_priority": "NOT_VALIDATED",
-            "all_tasks_have_type": "NOT_VALIDATED",
-            "all_tasks_have_status": "NOT_VALIDATED",
-            "all_vertical_slice_refs_valid": "NOT_VALIDATED",
-            "no_task_has_more_than_15_acceptance_criteria": "NOT_VALIDATED",
-            "all_block_ids_exist": "NOT_VALIDATED",
-            "all_blocked_tasks_have_blocking_dependencies": "NOT_VALIDATED",
-            "dsl_v01_no_input_let": "NOT_VALIDATED",
-            "m1_no_vector_line": "NOT_VALIDATED",
-            "m2a_no_circle_arc_polygon": "NOT_VALIDATED",
-            "offset_decomposed": "NOT_VALIDATED",
-            "intersections_decomposed": "NOT_VALIDATED",
-            "plan001_exists": "NOT_VALIDATED"
-        },
+  "planning_validation": {
+    "version": "3.1",
+    "validation_date": "2026-07-24",
+    "notes": "Run scripts/validate-kanban.ts for actual automated validation.",
+    "checks": {
+      "unique_ids": "NOT_VALIDATED",
+      "all_dependency_ids_exist": "NOT_VALIDATED",
+      "no_dependency_cycles": "NOT_VALIDATED",
+      "all_parent_ids_exist_or_null": "NOT_VALIDATED",
+      "all_child_ids_exist": "NOT_VALIDATED",
+      "parent_child_references_are_symmetric": "NOT_VALIDATED",
+      "no_orphan_tasks": "NOT_VALIDATED",
+      "all_milestone_task_ids_exist": "NOT_VALIDATED",
+      "all_critical_tasks_have_acceptance_criteria": "NOT_VALIDATED",
+      "all_features_have_tests": "NOT_VALIDATED",
+      "all_tasks_have_phase_reference": "NOT_VALIDATED",
+      "all_tasks_have_priority": "NOT_VALIDATED",
+      "all_tasks_have_type": "NOT_VALIDATED",
+      "all_tasks_have_status": "NOT_VALIDATED",
+      "all_vertical_slice_refs_valid": "NOT_VALIDATED",
+      "no_task_has_more_than_15_acceptance_criteria": "NOT_VALIDATED",
+      "all_block_ids_exist": "NOT_VALIDATED",
+      "all_blocked_tasks_have_blocking_dependencies": "NOT_VALIDATED",
+      "dsl_v01_no_input_let": "NOT_VALIDATED",
+      "m1_no_vector_line": "NOT_VALIDATED",
+      "m2a_no_circle_arc_polygon": "NOT_VALIDATED",
+      "offset_decomposed": "NOT_VALIDATED",
+      "intersections_decomposed": "NOT_VALIDATED",
+      "plan001_exists": "NOT_VALIDATED"
+    },
     "task_counts": {
       "total": 187,
       "implementation": 78,
@@ -6255,6 +6442,7 @@
     },
     "milestone_count": 13,
     "phase_count": 13,
-    "vertical_slice_count": 11
+    "vertical_slice_count": 11,
+    "completed_at": "2026-07-25T03:28:07.467Z"
   }
 }
