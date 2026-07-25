@@ -141,7 +141,7 @@ describe('Complete Kanban Workflow (Engine API)', () => {
     expect(r1.success).toBe(false);
     expect(r1.error).toContain('self-dependency');
 
-    const r2 = mutations.addDependency(mainTaskId, 'FND-001');
+    const r2 = mutations.addDependency('FND-001', 'FND-002');
     expect(r2.success).toBe(false);
     expect(r2.error).toContain('cycle');
 

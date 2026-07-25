@@ -53,15 +53,46 @@ function getEngine() {
     historyPath: resolve(process.cwd(), '.kanban-history.json'),
     validateBeforeWrite: true
   });
+  const history = new KanbanHistory(resolve(process.cwd(), '.kanban-history.json'));
+  const contextBuilder = new ContextBuilder(repo);
   const mutations = createMutations(repo, model, (m) => {
     persistence.write(m);
     cache.invalidate();
     loader.invalidateCache();
   });
-  const contextBuilder = new ContextBuilder(repo);
-  const history = new KanbanHistory();
 
-  return { loader, model, repo, queries, mutations, contextBuilder, history, cache, persistence };
+  const wrappedMutations: Record<string, (...args: any[]) => any> = {};
+  for (const [key, fn] of Object.entries(mutations)) {
+    if (typeof fn !== 'function') continue;
+    wrappedMutations[key] = (...args: any[]) => {
+      const taskId = typeof args[0] === 'string' ? args[0] : args[0]?.id || args[0]?.parentId || 'unknown';
+      const beforeTask = typeof taskId === 'string' ? repo.getTask(taskId) : undefined;
+      const before = beforeTask ? { status: beforeTask.status } : undefined;
+      try {
+        const result = (fn as Function)(...args);
+        history.record({
+          operation: key,
+          taskId: typeof args[0] === 'string' ? args[0] : result?.taskId || 'unknown',
+          before,
+          after: result?.success ? { status: repo.getTask(typeof args[0] === 'string' ? args[0] : result?.taskId)?.status } : undefined,
+          success: result?.success ?? true,
+          error: result?.error
+        });
+        return result;
+      } catch (e) {
+        history.record({
+          operation: key,
+          taskId: typeof args[0] === 'string' ? args[0] : 'unknown',
+          before,
+          success: false,
+          error: e instanceof Error ? e.message : String(e)
+        });
+        throw e;
+      }
+    };
+  }
+
+  return { loader, model, repo, queries, mutations: wrappedMutations as any, contextBuilder, history, cache, persistence };
 }
 
 function outputJson(data: any): void {

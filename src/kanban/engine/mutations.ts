@@ -91,11 +91,6 @@ export function createMutations(
 
         const testGraph = new Map(model.dependencyGraph);
         testGraph.set(id, [...(input.dependencies || [])]);
-        for (const depId of input.dependencies || []) {
-          const deps = testGraph.get(depId) || [];
-          deps.push(id);
-          testGraph.set(depId, deps);
-        }
 
         const cycles = detectCycles(testGraph);
         if (cycles.length > 0) {
@@ -230,9 +225,6 @@ export function createMutations(
 
       const testGraph = new Map(model.dependencyGraph);
       testGraph.set(taskId, [...task.dependencies, dependencyId]);
-      const deps = testGraph.get(dependencyId) || [];
-      deps.push(taskId);
-      testGraph.set(dependencyId, deps);
 
       const cycles = detectCycles(testGraph);
       if (cycles.length > 0) {
@@ -283,8 +275,12 @@ export function createMutations(
         return { success: false, error: 'Cannot block completed or cancelled task' };
       }
 
+      const oldStatus = task.status;
       task.status = 'blocked';
       task.blocked_reason = reason;
+
+      const oldStatusTasks = model.taskByStatus.get(oldStatus) || [];
+      model.taskByStatus.set(oldStatus, oldStatusTasks.filter(id => id !== taskId));
 
       const blockedTasks = model.taskByStatus.get('blocked') || [];
       blockedTasks.push(taskId);
@@ -413,9 +409,10 @@ export function createMutations(
       for (const childId of task.children) {
         const child = repo.getTask(childId);
         if (child && child.status !== 'done' && child.status !== 'cancelled') {
+          const childOldStatus = child.status;
           child.status = 'cancelled';
-          const childOldStatusTasks = model.taskByStatus.get(child.status) || [];
-          model.taskByStatus.set(child.status, childOldStatusTasks.filter(id => id !== childId));
+          const childOldStatusTasks = model.taskByStatus.get(childOldStatus) || [];
+          model.taskByStatus.set(childOldStatus, childOldStatusTasks.filter(id => id !== childId));
           const cancelledTasks = model.taskByStatus.get('cancelled') || [];
           cancelledTasks.push(childId);
           model.taskByStatus.set('cancelled', cancelledTasks);

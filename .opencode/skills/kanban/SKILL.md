@@ -1,4 +1,7 @@
-# Kanban CLI Skill
+---
+name: kanban
+description: Use when working with the project task board. Interacts with the Kanban system via CLI commands for task management, context retrieval, and workflow automation. Triggers on keywords like task, kanban, ready, start, complete, block, context, deps, history.
+---
 
 Use this skill when working with the project task board. It teaches you how to interact with the Kanban system via CLI commands.
 
@@ -34,7 +37,7 @@ This returns everything you need to work: the task definition, parent, dependenc
 sastre kanban start <id>
 ```
 
-Sets status to `in_progress`. Only one agent should start a task at a time.
+Sets status to `in_progress`. The task must be in `ready` status first. Only one agent should start a task at a time.
 
 ### 4. Break down large tasks (optional)
 

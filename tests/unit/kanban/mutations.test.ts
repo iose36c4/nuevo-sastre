@@ -106,10 +106,10 @@ describe('changeStatus', () => {
 });
 
 describe('addDependency', () => {
-  it('detects cycle when adding dep', () => {
+  it('allows non-cycle dep between unrelated tasks', () => {
     const result = mutations.addDependency('T-004', 'T-001');
-    expect(result.success).toBe(false);
-    expect(result.error).toContain('cycle');
+    expect(result.success).toBe(true);
+    expect(model.dependencyGraph.get('T-004')).toContain('T-001');
   });
 
   it('detects self-dep', () => {
