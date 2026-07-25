@@ -18,6 +18,14 @@ export type BezierCurve =
     };
 
 export interface ArcParams {
+  /**
+   * Arc parameters in standard mathematical convention.
+   * - Angles are in radians.
+   * - 0 radians points along the positive X axis.
+   * - ccw === true means counter-clockwise sweep from startAngle toward endAngle.
+   * - ccw === false means clockwise sweep from startAngle toward endAngle.
+   * - startAngle === endAngle represents a zero-length arc (not a full circle).
+   */
   readonly center: Point2D;
   readonly radius: number;
   readonly startAngle: number;
@@ -109,7 +117,7 @@ export function pathClose(path: Path): Path {
   if (path.closed) return path;
 
   const firstPoint = getFirstPoint(path);
-  if (!firstPoint) throw new Error('Cannot close path with non-line first segment');
+  if (!firstPoint) throw new Error('Cannot close path: no first point');
 
   const lastPoint = getLastPoint(path);
   if (!lastPoint) throw new Error('Path has no last point');
@@ -246,6 +254,13 @@ export function pathRotate(path: Path, angle: number, center: Point2D = { x: 0, 
 
 export function pathBoundingBox(path: Path): { min: Point2D; max: Point2D } {
   if (pathIsEmpty(path)) throw new Error('Cannot compute bounding box of empty path');
+
+  // Check for unsupported curve types
+  for (const seg of path.segments) {
+    if (seg.kind !== 'line') {
+      throw new Error(`pathBoundingBox: unsupported segment kind ${seg.kind}`);
+    }
+  }
 
   const points = pathGetPoints(path);
   const firstPoint = points[0]!;
