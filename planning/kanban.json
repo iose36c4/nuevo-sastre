@@ -6474,7 +6474,7 @@
       "phase": "PHASE-11",
       "title": "A03: Path Primitive",
       "description": "Implement Path.ts. Ordered chain of PathSegment (line | bezier | arc). Closed flag. Functions: createPath, pathLength, boundingBox, pointAt, isClosed, endpoints. Only line kind needed for first slice.",
-      "status": "backlog",
+      "status": "done",
       "priority": "high",
       "type": "feature",
       "vertical_slice": "VS-GEO",
@@ -6489,7 +6489,12 @@
       "documentation": [],
       "estimated_complexity": "small",
       "can_parallelize": false,
-      "notes": []
+      "notes": [],
+      "agent_id": "agent-1784966056029",
+      "started_at": "2026-07-25T07:54:16.029Z",
+      "evidence": [
+        "Implemented Path primitive (A03) with discriminated union PathSegment (line|bezier|arc), Path interface with segments[] and closed flag. Added pathAddLine, pathClose, pathLength, pathBoundingBox, pathPointAt, pathIsClosed, pathEndpoints, pathGetPoints, pathSegmentCount, pathIsEmpty, pathFirstPoint, pathLastPoint, pathTranslate, pathRotate. Created 66 comprehensive tests. All validations pass: typecheck, lint, test (410), build."
+      ]
     },
     {
       "id": "TASK-019",

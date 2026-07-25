@@ -41,7 +41,7 @@ Always run at least `build + test + lint` before considering a change complete.
 src/
 ├── cli/
 │   ├── index.ts                  # Commander.js entry point
-│   └── commands/kanban.ts        # 18 CLI subcommands + getEngine() wiring
+│   └── commands/kanban.ts        # 19 CLI subcommands + getEngine() wiring
 └── kanban/engine/                # Core engine (11 files total)
     ├── types.ts                  # Domain types, enums, state machine
     ├── loader.ts                 # Singleton JSON loader with cache
@@ -122,6 +122,7 @@ npm run kanban -- validate --json                 # check kanban.json integrity
 - Shared fixtures: `tests/unit/kanban/fixtures.ts` (`makeTask`, `makeKanbanData`, `buildModel`)
 - Run a single test file: `npx vitest --run tests/unit/kanban/mutations.test.ts`
 - Integration tests use `execSync` against the built `dist/cli/index.js` — **build first**
+- `vitest.config.ts` includes `src/**/*.test.ts` in patterns but actual tests live in `tests/`
 
 ## Lint
 
@@ -168,3 +169,14 @@ Valid transitions enforced by `STATUS_TRANSITIONS` in `src/kanban/engine/types.t
 - The `@` path alias only works in Vitest, not in the main `tsc` compilation
 - `kanban.json` is ~6400 lines — never read it fully; use CLI queries instead
 - Do not manually edit `.kanban-history.json` to fix normal operations — use the CLI/API
+
+## CI / GitHub Actions
+
+Workflow in `.github/workflows/ci.yml` runs on push/PR to `master`:
+1. `npm ci`
+2. `npm run build`
+3. `npm test`
+4. `npm run lint`
+5. `npx tsx scripts/validate-kanban.ts`
+
+Node 22 is used in CI.

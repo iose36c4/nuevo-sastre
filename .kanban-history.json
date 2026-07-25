@@ -92,3 +92,9 @@
 {"operation":"changeStatus","taskId":"TASK-017","before":{"status":"ready"},"after":{"status":"in_progress"},"success":true,"timestamp":"2026-07-25T06:50:43.322Z"}
 {"operation":"recordEvidence","taskId":"TASK-017","before":{"status":"in_progress"},"after":{"status":"in_progress"},"success":true,"timestamp":"2026-07-25T07:00:12.688Z"}
 {"operation":"completeTask","taskId":"TASK-017","before":{"status":"in_progress"},"after":{"status":"done"},"success":true,"timestamp":"2026-07-25T07:00:12.691Z"}
+{"operation":"changeStatus","taskId":"TASK-018","before":{"status":"backlog"},"success":false,"error":"Invalid status transition: backlog -> in_progress","timestamp":"2026-07-25T07:50:39.396Z"}
+{"operation":"changeStatus","taskId":"TASK-018","before":{"status":"backlog"},"success":false,"error":"Invalid status transition: backlog -> in_progress","timestamp":"2026-07-25T07:52:00.406Z"}
+{"operation":"unblockTask","taskId":"TASK-018","before":{"status":"backlog"},"success":false,"error":"Task is not blocked","timestamp":"2026-07-25T07:53:10.323Z"}
+{"operation":"changeStatus","taskId":"TASK-018","before":{"status":"ready"},"after":{"status":"in_progress"},"success":true,"timestamp":"2026-07-25T07:54:16.033Z"}
+{"operation":"recordEvidence","taskId":"TASK-018","before":{"status":"in_progress"},"after":{"status":"in_progress"},"success":true,"timestamp":"2026-07-25T07:54:20.934Z"}
+{"operation":"completeTask","taskId":"TASK-018","before":{"status":"in_progress"},"after":{"status":"done"},"success":true,"timestamp":"2026-07-25T07:54:20.937Z"}
